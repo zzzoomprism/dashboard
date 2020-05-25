@@ -44,7 +44,7 @@ const CryptoPrice = props => {
       <Grid item xs={12} sm={6} md={3}>
         <Card>
           <CardContent>
-            <Typography variant="overline">$9589</Typography>
+            <Typography variant="overline">$10523</Typography>
           </CardContent>
         </Card>
       </Grid>

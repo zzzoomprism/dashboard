@@ -6,6 +6,7 @@ import lightGreen from "@material-ui/core/colors/lightGreen";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import SideBarDrawer from "./containers/SideBarDrawer";
 import Content from "./components/Content";
+import yellow from "@material-ui/core/colors/yellow";
 
 const theme = createMuiTheme({
   palette: {
@@ -14,6 +15,12 @@ const theme = createMuiTheme({
       main: lightGreen.A400,
       dark: lightGreen.A700
     },
+    secondary: {
+      light: blueGrey[200],
+      main: blueGrey[500],
+      dark: blueGrey[900],
+    },
+    inherit: yellow,
     background: {
       paper: blueGrey[900],
       default: blueGrey[800]
@@ -23,7 +30,6 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
-  console.log(theme);
   return (
     <ThemeProvider theme={theme}>
       <Fragment>

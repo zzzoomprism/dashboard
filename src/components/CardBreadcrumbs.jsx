@@ -10,9 +10,9 @@ const CardBreadcrumbs = props => {
   return (
     <Card>
       <CardContent>
-        <Grid xs={12} container>
+        <Grid container>
           <Grid item xs={6}>
-            <Typography variant="h6">
+            <Typography variant="h1">
               <Box
                 fontWeight="fontWeightBold"
                 color="textSecondary"

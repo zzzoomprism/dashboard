@@ -6,7 +6,8 @@ import lightGreen from "@material-ui/core/colors/lightGreen";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import SideBarDrawer from "./containers/SideBarDrawer";
 import Content from "./components/Content";
-import yellow from "@material-ui/core/colors/yellow";
+import Footer from "./components/Pages/Footer";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -20,14 +21,39 @@ const theme = createMuiTheme({
       main: blueGrey[500],
       dark: blueGrey[900],
     },
-    inherit: yellow,
     background: {
+      default: blueGrey[800],
       paper: blueGrey[900],
-      default: blueGrey[800]
     },
-    type: "dark"
-  }
+    type: "dark",
+  },
+  typography: {
+    h1:{
+      fontSize: 25,
+    },
+    h2:{
+      fontSize: 23,
+    },
+    h3:{
+      fontSize: 20,
+    },
+    h4:{
+      fontSize: 17,
+    },
+    h5: {
+      fontSize: 14,
+    },
+    h6:{
+      fontSize: 12,
+    },
+    button:{
+      fontWeight: 700
+    },
+    fontSize: 14
+  },
 });
+
+console.log(theme);
 
 const App = () => {
   return (
@@ -37,6 +63,7 @@ const App = () => {
         <AppBarNavigation />
         <SideBarDrawer />
         <Content />
+        <Footer/>
       </Fragment>
     </ThemeProvider>
   );

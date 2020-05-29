@@ -25,11 +25,11 @@ const PortfolioBalance = (props) => {
             <CardContent>
                 <Grid container>
                 <Grid item xs={12} sm={12} md={6}>
-                    <Typography variant={"h5"}>
+                    <Typography variant={"h4"}>
                         Your Portfolio Balance
                     </Typography>
                     <Typography component="div">
-                        <Box display={"inline"} fontSize={"h5.fontSize"}>
+                        <Box display={"inline"} fontSize={"h3.fontSize"}>
                             $1.123
                         </Box>
                         <Badge badgeContent={<ArrowDropUpIcon/>} color={"default"} >

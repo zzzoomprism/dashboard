@@ -2,7 +2,9 @@ import React, { Fragment } from "react";
 import CardBreadcrumbs from "../../../CardBreadcrumbs";
 import CryptoPrice from "./CryptoPrice";
 import PortfolioBalance from "./PortfolioBalance";
-import SendMoneyTo from "./SendMonetyTo";
+import SendMoneyTo from "./SendMoneyTo/SendMonetyTo";
+import CurrencyCalculator from "./CurrencyCalculator/CurrencyCalculator";
+import CurrencyNews from "./CurrencyNews/CurrencyNews";
 
 const Crypto = props => {
   return (
@@ -11,6 +13,8 @@ const Crypto = props => {
       <CryptoPrice />
       <PortfolioBalance/>
       <SendMoneyTo/>
+      <CurrencyCalculator/>
+      <CurrencyNews/>
     </Fragment>
   );
 };

@@ -8,14 +8,16 @@ import Hidden from '@material-ui/core/Hidden';
 const drawerWidth = 270;
 
 const useStyles = makeStyles(theme => ({
-  drawer: {
-    width: drawerWidth,
-    border: "none",
-    transition: theme.transitions,
-  },
-  overline: {
-    paddingLeft: 10
-  },
+      drawer: {
+        width: drawerWidth,
+        transition: theme.transitions,
+      },
+      overline: {
+        paddingLeft: 10
+      },
+    paperAnchorDockedLeft: {
+      border: "none !important",
+    }
 }));
 
 const SideBarDrawer = props => {
@@ -24,11 +26,11 @@ const SideBarDrawer = props => {
     <nav>
         <Hidden smUp implementation="css">
             <Drawer
+                classes={{
+                    paperAnchorDockedLeft: classes.paperAnchorDockedLeft
+                }}
                 variant="temporary"
                 anchor={'left'}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
                 ModalProps={{
                     keepMounted: true, // Better open performance on mobile.
                 }}
@@ -41,13 +43,11 @@ const SideBarDrawer = props => {
             </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
-            <Drawer
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
+            <Drawer  classes={{
+                paperAnchorDockedLeft: classes.paperAnchorDockedLeft
+            }}
                 variant="permanent"
-                open
-            >
+                open >
                 <List className={classes.drawer}>
                     <DashboardMenu />
                 </List>

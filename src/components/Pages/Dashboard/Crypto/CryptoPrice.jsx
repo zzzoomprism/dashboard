@@ -46,7 +46,7 @@ const CryptoPrice = props => {
         <Card>
           <CardContent className={classes.cardContent}>
               <Typography component="div" className={classes.graphStatistics}>
-                  <Box display={"inline"} fontSize={"h5.fontSize"}>
+                  <Box display={"inline"} fontSize={"h3.fontSize"}>
                      $9.845
                   </Box>
                   <Badge badgeContent={<ArrowDropUpIcon/>} color={"default"} >
@@ -87,7 +87,7 @@ const CryptoPrice = props => {
         <Card>
           <CardContent className={classes.cardContent}>
               <Typography component="div" className={classes.graphStatistics}>
-                  <Box display={"inline"} fontSize={"h5.fontSize"}>
+                  <Box display={"inline"} fontSize={"h3.fontSize"}>
                       $7.546
                   </Box>
                   <Badge badgeContent={<ArrowDropDownIcon/>} color={"default"} >
@@ -128,7 +128,7 @@ const CryptoPrice = props => {
         <Card>
           <CardContent className={classes.cardContent}>
               <Typography component="div" className={classes.graphStatistics}>
-                  <Box display={"inline"} fontSize={"h5.fontSize"}>
+                  <Box display={"inline"} fontSize={"h3.fontSize"}>
                       $1.123
                   </Box>
                   <Badge badgeContent={<ArrowDropUpIcon/>} color={"default"} >
@@ -168,7 +168,7 @@ const CryptoPrice = props => {
         <Card>
             <CardContent className={classes.cardContent}>
                 <Typography component="div" className={classes.graphStatistics}>
-                    <Box display={"inline"} fontSize={"h5.fontSize"}>
+                    <Box display={"inline"} fontSize={"h3.fontSize"}>
                         $1.123
                     </Box>
                     <Badge badgeContent={<ArrowDropUpIcon/>} color={"default"} >

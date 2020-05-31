@@ -5,17 +5,17 @@ import PortfolioBalance from "./PortfolioBalance";
 import SendMoneyTo from "./SendMoneyTo/SendMonetyTo";
 import CurrencyCalculator from "./CurrencyCalculator/CurrencyCalculator";
 import CurrencyNews from "./CurrencyNews/CurrencyNews";
-
+import Box from "@material-ui/core/Box"
 const Crypto = props => {
   return (
-    <Fragment>
+    <Box p={3}>
       <CardBreadcrumbs />
       <CryptoPrice />
       <PortfolioBalance/>
       <SendMoneyTo/>
       <CurrencyCalculator/>
       <CurrencyNews/>
-    </Fragment>
+    </Box>
   );
 };
 

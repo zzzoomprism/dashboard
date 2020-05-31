@@ -7,6 +7,7 @@ import blueGrey from "@material-ui/core/colors/blueGrey";
 import SideBarDrawer from "./containers/SideBarDrawer";
 import Content from "./components/Content";
 import Footer from "./components/Pages/Footer";
+import {HashRouter} from "react-router-dom";
 
 
 const theme = createMuiTheme({
@@ -59,11 +60,13 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
+        <HashRouter>
         <CssBaseline />
         <AppBarNavigation />
         <SideBarDrawer />
         <Content />
         <Footer/>
+        </HashRouter>
       </Fragment>
     </ThemeProvider>
   );

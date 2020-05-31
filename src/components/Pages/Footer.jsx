@@ -12,7 +12,7 @@ const useStyle = makeStyles((theme)=>({
         color: "white",
         padding: theme.spacing(4),
         float: "right",
-        [theme.breakpoints.up('sm')]:{
+        [theme.breakpoints.up('md')]:{
             width: "calc(100% - 270px)",
         },
         border: "none"

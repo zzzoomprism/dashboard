@@ -24,7 +24,7 @@ const SideBarDrawer = props => {
   const classes = useStyles();
   return (
     <nav>
-        <Hidden smUp implementation="css">
+        <Hidden mdUp implementation="css">
             <Drawer
                 classes={{
                     paperAnchorDockedLeft: classes.paperAnchorDockedLeft
@@ -37,18 +37,18 @@ const SideBarDrawer = props => {
                 open={props.sidebar_open}
                 onClose={props.sidebarToggle}
             >
-                <List className={classes.drawer}>
+                <List className={classes.drawer} disablePadding={true}>
                     <DashboardMenu />
                 </List>
             </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden smDown implementation="css">
             <Drawer  classes={{
                 paperAnchorDockedLeft: classes.paperAnchorDockedLeft
             }}
                 variant="permanent"
                 open >
-                <List className={classes.drawer}>
+                <List className={classes.drawer} disablePadding={true}>
                     <DashboardMenu />
                 </List>
             </Drawer>

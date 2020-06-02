@@ -1,13 +1,16 @@
 import React, {Fragment} from "react";
 import Grid from "@material-ui/core/Grid";
-import ProfileAppBar from "./ProfileAppBar";
 import AboutCard from "./AboutCard";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 import Contact from "./Contact";
 import Biography from "./Biography";
 import Friends from "./Friends";
+import ProfileAppBarContainer from "../../../../containers/Pages/Socials/ProfileAppBarContainer";
+
+import {withAuthRedirect} from "./../../../../hoc/AuthRedirect";
+import {connect} from "react-redux";
+import {compose} from "redux";
+
 
 const useStyle = makeStyles(theme => ({
     paper: {
@@ -28,29 +31,29 @@ const useStyle = makeStyles(theme => ({
     }
 }));
 
-const Profile = (props) => {
+const Profile = () => {
     const classes = useStyle();
     return <Fragment>
-        <ProfileAppBar/>
-        <Grid container className={classes.paper}>
+        <ProfileAppBarContainer/>
+            <Grid container className={classes.paper}>
+                    <Grid item xs={12} sm={12} md={7}>
+                        <AboutCard/>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={5}>
+                        <Contact/>
+                    </Grid>
+            </Grid>
+            <Grid container className={classes.secondPaperBlock}>
                 <Grid item xs={12} sm={12} md={7}>
-                    <AboutCard/>
+                    <Biography/>
                 </Grid>
-                <Grid item xs={12} sm={12} md={5}>
-                    <Contact/>
+                <Grid item xs={12} sm={12} md={5} className={classes.friendsComponent}>
+                    <Friends/>
                 </Grid>
-        </Grid>
-        <Grid container className={classes.secondPaperBlock}>
-            <Grid item xs={12} sm={12} md={7}>
-                <Biography/>
             </Grid>
-            <Grid item xs={12} sm={12} md={5} className={classes.friendsComponent}>
-                <Friends/>
-            </Grid>
-        </Grid>
-
-    </Fragment>
+        </Fragment>
 };
 
 
-export default Profile;
+
+export default compose(withAuthRedirect)(Profile);

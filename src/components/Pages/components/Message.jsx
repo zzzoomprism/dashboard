@@ -1,0 +1,54 @@
+import React, {useState} from "react";
+import MenuItem from "@material-ui/core/MenuItem";
+import Badge from "@material-ui/core/Badge";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Menu from "@material-ui/core/Menu";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyle = makeStyles((theme) => ({
+    menu:{
+        marginTop: theme.spacing(4),
+    }}));
+
+const Message = (props) => {
+
+    const classes = useStyle();
+    return(
+        <Menu
+            anchorEl={props.anchor}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            keepMounted
+            transformOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            open={props.menuOpen}
+            onClose={props.func}
+            className={classes.menu}
+            color={"secondary"}
+        >
+            <MenuItem>
+                <Badge  badgeContent={4} color="primary">
+                    <Avatar src={""}/>
+                </Badge>
+                <Box p={3}>
+
+                    <Typography display={"block"} variant="h4" gutterBottom>Alex Rees</Typography>
+                    <Typography display={"block"} variant={"body2"} gutterBottom>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</Typography>
+                </Box>
+            </MenuItem>
+            <MenuItem>
+                <Badge  badgeContent={4} color="primary">
+                    <Avatar src={""}/>
+                </Badge>
+                <Box p={3}>
+
+                    <Typography display={"block"} variant="h4" gutterBottom>Alex Rees</Typography>
+                    <Typography display={"block"} variant={"body2"} gutterBottom>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</Typography>
+                </Box>
+            </MenuItem>
+        </Menu>
+    )
+};
+
+
+export default Message;

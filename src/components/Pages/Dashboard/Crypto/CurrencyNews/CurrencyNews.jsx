@@ -4,8 +4,8 @@ import Tab from '@material-ui/core/Tab';
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import TabsItems from "./TabsItems";
-import * as axios from "axios";
 import List from "@material-ui/core/List";
+import {userAPI} from "../../../../../api/api";
 
 
 //http://newsapi.org/v2/top-headlines?country=us&apiKey=e4d0f150f8f54c878a0935c9af7e9798
@@ -18,14 +18,11 @@ const CurrencyNews = (props) => {
     };
     const [news, setDataNews] = useState([]);
     useEffect(()=>{
-        axios.get("https://newsapi.org/v2/everything?q=currency&pageSize=5&apiKey=e4d0f150f8f54c878a0935c9af7e9798")
-            .then((response) => {
-                setDataNews(response.data.articles);
-            })
-            .catch(error => console.log(error));
+            userAPI.getNews()
+                .then(data => setDataNews(data))
+                .catch(error => console.log(error));
     }, []);
 
-    console.log(news);
     let index=1;
     let tabs_panel = news.map(el => <TabsItems keys={el.source.name} picSrc={el.urlToImage} title={el.title} desc={el.description} value={tabIndexes} index={(index < 3) ? index++ : index--} url={el.url}/>);
     let all_tab_panel = news.map(el => <TabsItems keys={el.source.name} picSrc={el.urlToImage} title={el.title} desc={el.description} value={tabIndexes} index={0} url={el.url}/>);
@@ -38,7 +35,6 @@ const CurrencyNews = (props) => {
                     value={tabIndexes}
                     indicatorColor="primary"
                     textColor="primary"
-                    centered
                     variant="scrollable"
                     scrollButtons="auto"
                     onChange={handleTabsChange}>

@@ -31,3 +31,5 @@ ReactDOM.render(
     </Provider>,
   rootElement
 );
+
+window.store = store;

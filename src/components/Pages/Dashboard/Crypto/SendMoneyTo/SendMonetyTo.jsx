@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import SendMoneyInfo from "./SendMoneyInfo";
-import * as axios from "axios";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
+import {userAPI} from "./../../../../../api/api";
 
 const useStyle = makeStyles((theme) => ({
     tableContainer: {
@@ -20,21 +20,18 @@ const SendMoneyTo = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(()=>{
         setLoaded(false);
-        axios.get(`https://randomuser.me/api/?page=${currentPage}&results=10&seed=abc`)
-            .then((response) =>
-            {
-                console.log(response);
-                setUsers(response.data);
-                setTimeout(()=>setLoaded(true), 2000);
+        userAPI.getUsers(currentPage)
+            .then(data => {
+                setUsers(data);
+                setTimeout(()=>setLoaded(true), 1000);
             });
     }, [currentPage]);
         let userList;
-        if(users.results){
-            userList = users.results.map(el =>
+        if(users){
+            userList = users.map(el =>
                 <SendMoneyInfo key={el.id.value + "324nnsdkl" + Math.random()*100/3} loaded={loaded} name={el.name} image={el.picture}/>
                 );
         }
-
         return <TableContainer component={Paper} className={classes.tableContainer}>
             <Box m={2} fontSize={"h3.fontSize"}>
                 Send Money To

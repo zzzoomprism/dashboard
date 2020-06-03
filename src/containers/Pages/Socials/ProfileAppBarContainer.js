@@ -1,5 +1,4 @@
 import React, {Fragment, useState} from "react";
-import {connect} from "react-redux";
 import ProfileAppBar from "../../../components/Pages/Socials/Profile/ProfileAppBar";
 
 
@@ -19,14 +18,6 @@ const ProfileAppBarContainer = (props) => {
                 />
             </Fragment>
 };
-
-const mapStoreToProps = (store) => ({
-    post: store.post,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-
-});
 
 
 export default ProfileAppBarContainer;

@@ -8,7 +8,6 @@ import Friends from "./Friends";
 import ProfileAppBarContainer from "../../../../containers/Pages/Socials/ProfileAppBarContainer";
 
 import {withAuthRedirect} from "./../../../../hoc/AuthRedirect";
-import {connect} from "react-redux";
 import {compose} from "redux";
 
 

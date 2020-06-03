@@ -1,6 +1,4 @@
-import React, {useState, useEffect, Fragment} from "react" ;
-import * as axios from "axios";
-import {List} from "@material-ui/core";
+import React, {Fragment} from "react" ;
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -10,7 +8,6 @@ import ListItem from "@material-ui/core/ListItem";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
-import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Link from "@material-ui/core/Link";
 

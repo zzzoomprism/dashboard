@@ -1,5 +1,5 @@
 import React from "react";
-import {Paper, Typography, Grid, Box} from "@material-ui/core";
+import {Paper, Grid, Box} from "@material-ui/core";
 import Advertisment from "./Advertisment";
 import Calculator from "./Calculator";
 import {makeStyles} from "@material-ui/core/styles";

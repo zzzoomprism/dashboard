@@ -1,15 +1,13 @@
 import React, { Fragment } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarNavigation from "./containers/AppBarNavigation";
-import {ThemeProvider, createMuiTheme, makeStyles} from "@material-ui/core/styles";
+import {ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import lightGreen from "@material-ui/core/colors/lightGreen";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import SideBarDrawer from "./containers/SideBarDrawer";
 import Footer from "./components/Footer";
-import {HashRouter, Route, Switch} from "react-router-dom";
-import Auth from "./components/Pages/Auth/Auth";
-import Crypto from "./components/Pages/Dashboard/Crypto/Crypto";
-import Profile from "./components/Pages/Socials/Profile/Profile";
+import {HashRouter} from "react-router-dom";
+import Content from "./components/Content";
 
 
 const theme = createMuiTheme({
@@ -56,30 +54,11 @@ const theme = createMuiTheme({
   },
 });
 
-const useStyle = makeStyles((theme)=>({
-  content: {
-    float: "right",
-    [theme.breakpoints.up('md')]:{
-      width: "calc(100% - 270px)",
-    }
-  },
-  toolbar: theme.mixins.toolbar,
-}));
+
 
 
 
 const App = () => {
-  const classes = useStyle();
-  const Content = () => (
-      <Switch>
-        <Route exact path={"/dashboard/currency"} component={Crypto}/>
-        <Route exact path={"/socials/profile"} component={Profile}/>
-        <Route exact path={"/auth"} component={Auth}/>
-      </Switch>
-  );
-
-
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -88,12 +67,7 @@ const App = () => {
         <CssBaseline />
         <AppBarNavigation />
         <SideBarDrawer />
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
-              <Switch>
-                <Content/>
-              </Switch>
-          </main>
+              <Content/>
         <Footer/>
         </HashRouter>
       </Fragment>

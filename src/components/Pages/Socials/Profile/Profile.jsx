@@ -6,7 +6,6 @@ import Contact from "./Contact";
 import Biography from "./Biography";
 import Friends from "./Friends";
 import ProfileAppBarContainer from "../../../../containers/Pages/Socials/ProfileAppBarContainer";
-
 import {withAuthRedirect} from "./../../../../hoc/AuthRedirect";
 import {compose} from "redux";
 
@@ -23,10 +22,13 @@ const useStyle = makeStyles(theme => ({
         paddingRight: theme.spacing(3),
     },
     friendsComponent: {
-        marginTop: -theme.spacing(6),
-        [theme.breakpoints.down("md")]: {
+       marginTop: -theme.spacing(6),
+        [theme.breakpoints.down("sm")]: {
             marginTop: theme.spacing(2),
-        }
+        },
+        // [theme.breakpoints.up("lg")]: {
+        //     marginTop: theme.spacing(1),
+        // }
     }
 }));
 
@@ -54,5 +56,5 @@ const Profile = () => {
 };
 
 
-
+// export default Profile;
 export default compose(withAuthRedirect)(Profile);

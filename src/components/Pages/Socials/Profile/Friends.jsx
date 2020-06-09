@@ -12,7 +12,7 @@ import Badge from "@material-ui/core/Badge";
 const useStyle = makeStyles(theme=>({
     paper: {
         marginLeft: theme.spacing(3),
-        [theme.breakpoints.down('md')]:{
+        [theme.breakpoints.down('sm')]:{
             marginLeft: 0,
             marginTop: theme.spacing(1),
         },

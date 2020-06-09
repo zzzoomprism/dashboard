@@ -1,5 +1,6 @@
 import React, {Fragment, useState} from "react";
 import ProfileAppBar from "../../../components/Pages/Socials/Profile/ProfileAppBar";
+import {connect} from "react-redux";
 
 
 const ProfileAppBarContainer = (props) => {
@@ -9,7 +10,6 @@ const ProfileAppBarContainer = (props) => {
         setStatusMenu(!statusMenuIsOpen);
         setAnchorEl(event.currentTarget);
     };
-    console.log(props.post);
     return <Fragment>
                 <ProfileAppBar {...props}
                      statusMenuIsOpen={statusMenuIsOpen}
@@ -19,5 +19,10 @@ const ProfileAppBarContainer = (props) => {
             </Fragment>
 };
 
+const mapStateToProps = (store) => ({
+    profile_info: store.profile.user_data,
+});
 
-export default ProfileAppBarContainer;
+
+
+export default connect(mapStateToProps, {})(ProfileAppBarContainer);

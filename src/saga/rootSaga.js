@@ -1,11 +1,15 @@
-import { put, takeLatest } from "redux-saga/effects";
+import {fork, all} from "redux-saga/effects";
+import {sendMoneyToSetUsers} from "./currency.saga";
+import {loginWatch} from "./profile.saga";
+import {setPeopleWatch} from "./people.saga";
 
-export const myDelay = ms => new Promise(res => setTimeout(res, ms));
-
-export function* fetchData(action) {
+export default function* rootSaga() {
+    yield all([
+        fork(sendMoneyToSetUsers),
+        fork(loginWatch),
+        fork(setPeopleWatch)
+    ])
 
 }
 
-export function* watch() {
-  yield takeLatest("UPDATE_CART_COUNT_CHECK", fetchData);
-}
+

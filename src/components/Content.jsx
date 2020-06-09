@@ -3,7 +3,8 @@ import {Route, Switch} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import Crypto from "./Pages/Dashboard/Crypto/Crypto";
 import Profile from "./Pages/Socials/Profile/Profile";
-import Auth from "./Pages/Auth/Auth";
+import Auth from "./../containers/Auth";
+import People from "./Pages/Socials/People/People";
 
 const useStyle = makeStyles((theme)=>({
     content: {
@@ -22,6 +23,7 @@ const Content = () => {
         <Switch>
             <Route exact path={"/dashboard/currency"} component={Crypto}/>
             <Route exact path={"/socials/profile"} component={Profile}/>
+            <Route exact path={"/socials/people"} component={People}/>
             <Route exact path={"/auth"} component={Auth}/>
         </Switch>
     );

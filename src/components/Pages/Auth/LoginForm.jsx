@@ -47,6 +47,7 @@ const useStyle = makeStyles(theme=>({
 const LoginForm = (props) => {
     const classes = useStyle();
     const [passwordIsVisible, setPasswordVisible] = useState(false);
+
     return  <form onSubmit={props.handleSubmit} style={{width: "100%", display: "flex", flexDirection: "column"}}>
                 <Field name={"login"} component={renderTextField}
                        classesStyle={classes.formControl}

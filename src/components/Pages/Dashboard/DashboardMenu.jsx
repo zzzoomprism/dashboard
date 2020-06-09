@@ -20,6 +20,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MailIcon from '@material-ui/icons/Mail';
 import ListIcon from '@material-ui/icons/List';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import ChatIcon from '@material-ui/icons/Chat';
 import {NavLink} from "react-router-dom";
@@ -172,6 +173,12 @@ const DashboardMenu = props => {
         </ListItemIcon>
         <ListItemText primary="Wall app" />
       </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <GroupAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="People" />
+        </ListItem>
     </Fragment>
   );
 };

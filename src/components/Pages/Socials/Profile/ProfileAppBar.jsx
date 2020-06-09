@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
 import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -11,6 +10,7 @@ import {Link} from "react-router-dom"
 import Badge from "@material-ui/core/Badge";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import LargeAvatar from "../../../../utils/helpers/LargeAvatar";
 
 
 const useStyle = makeStyles((theme)=>({
@@ -43,19 +43,15 @@ const useStyle = makeStyles((theme)=>({
 
 const ProfileAppBar = (props) => {
     const classes = useStyle();
-    console.log(props);
+
     return <Fragment><Grid  container className={classes.container}
                   direction="row"
                   alignItems="center" justify={"space-between"}>
                     <Grid item xs={12} sm={12} md={6}>
                         <Box display={"flex"} alignItems={"center"} justifyContent="center">
-                            <Badge color="primary" overlap="circle" badgeContent=" "
-                                   anchorOrigin={{
-                                       vertical: 'top',
-                                       horizontal: 'right',
-                                   }}>
-                                <Avatar className={classes.large} onClick={props.handleMenuOpen}/>
 
+
+                            <LargeAvatar picture={props.profile_info.picture.large} click={props.handleMenuOpen}>
                                 <Menu
                                     id="status-menu"
                                     anchorEl={props.anchorEl}
@@ -64,7 +60,13 @@ const ProfileAppBar = (props) => {
                                     onClose={props.handleMenuOpen}
                                 >
                                     <MenuItem>
-                                        <Typography variant="inherit">Online</Typography>
+                                        <Badge color="secondary" variant="dot"
+                                               anchorOrigin={{
+                                                   vertical: 'top',
+                                                   horizontal: 'right',
+                                               }}>
+                                            <Typography variant="inherit">Online</Typography>
+                                        </Badge>
                                     </MenuItem>
                                     <MenuItem>
                                         <Typography variant="inherit">Inherit</Typography>
@@ -73,18 +75,15 @@ const ProfileAppBar = (props) => {
                                         <Typography variant="inherit">Waiting</Typography>
                                     </MenuItem>
                                 </Menu>
-                            </Badge>
-
-
+                            </LargeAvatar>
 
 
                             <Typography component={"div"}>
                                 <Box fontSize={"h4.fontSize"} ml={2} mr={2}>
-                                Robert Johnson
+                                    {props.profile_info.name.first + " " +  props.profile_info.name.last}
                                 </Box>
                                 <Box fontSize={"body2.fontSize"} ml={2} mr={2}>
-                                    Florida, USA
-
+                                    {props.profile_info.location.city + ", " + props.profile_info.location.state}
                                 </Box>
                             </Typography>
                         </Box>

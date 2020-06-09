@@ -63,13 +63,11 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
-        <HashRouter>
         <CssBaseline />
         <AppBarNavigation />
         <SideBarDrawer />
               <Content/>
         <Footer/>
-        </HashRouter>
       </Fragment>
     </ThemeProvider>
   );

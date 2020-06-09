@@ -12,9 +12,9 @@ import List from "@material-ui/core/List";
 const useStyle = makeStyles(theme=>({
     contact: {
         marginLeft: theme.spacing(3),
-        [theme.breakpoints.down('md')]:{
+        [theme.breakpoints.down('sm')]:{
             marginLeft: 0,
-            marginTop: theme.spacing(1),
+            marginTop: theme.spacing(3),
         },
         marginBottom: theme.spacing(1),
         padding: theme.spacing(3)
@@ -38,7 +38,7 @@ const Contact = (props) => {
                 <ListItemIcon>
                     <ImageIcon />
                 </ListItemIcon>
-                <ListItemText primary="http://github.com/zzzoomprism" secondary="webpage"/>
+                <ListItemText primary="http://github.com" secondary="webpage"/>
             </ListItem>
             <ListItem>
                 <ListItemIcon>

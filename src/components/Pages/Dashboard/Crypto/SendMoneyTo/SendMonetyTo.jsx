@@ -4,7 +4,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import SendMoneyInfo from "./SendMoneyInfo";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
-import {userAPI} from "./../../../../../api/api";
 
 const useStyle = makeStyles((theme) => ({
     tableContainer: {
@@ -15,20 +14,17 @@ const useStyle = makeStyles((theme) => ({
 const SendMoneyTo = (props) => {
 
     const classes = useStyle();
-    const [users, setUsers] = useState([]);
     const [loaded, setLoaded] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(()=>{
         setLoaded(false);
-        userAPI.getUsers(currentPage)
-            .then(data => {
-                setUsers(data);
-                setTimeout(()=>setLoaded(true), 1000);
-            });
+        props.setUsers(currentPage);
+        setTimeout(()=>setLoaded(true), 1000 );
     }, [currentPage]);
         let userList;
-        if(users){
-            userList = users.map(el =>
+        if(props.users){
+            userList = props.users.map(el =>
                 <SendMoneyInfo key={el.id.value + "324nnsdkl" + Math.random()*100/3} loaded={loaded} name={el.name} image={el.picture}/>
                 );
         }

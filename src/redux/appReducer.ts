@@ -1,12 +1,15 @@
+
+export type InitialStateType = typeof initialState;
+
 const initialState = {
-    isAuth: false,
-    user: null,
-    loginErrorMessage: "",
-    loading: false,
+    isAuth: false as boolean,
+    user: null as Array<Object> | null,
+    loginErrorMessage: "" as Array<string> | null | string,
+    loading: false as boolean,
 };
 
 
-const reducer = (state = initialState, action)=>{
+const reducer = (state = initialState, action: any): InitialStateType => {
     const newState = {...state};
     switch(action.type){
         case "LOGIN":
@@ -35,5 +38,12 @@ const reducer = (state = initialState, action)=>{
 export default reducer;
 
 
-export const login = (login_data, password_data) => ({type: "LOGIN_USER", login: login_data, password: password_data});
+const LOGIN_USER = "LOGIN_USER";
+export const login = (login_data: string, password_data: string): LoginType => ({ type: LOGIN_USER, password: password_data, login: login_data })
 
+
+export type LoginType = {
+    type: typeof LOGIN_USER
+    login: string
+    password: string
+}

@@ -25,12 +25,21 @@ const useStyle = makeStyles(theme=>({
     }
 }));
 
+type RenderTextType = {
+    label: string
+    iconButton: string
+    input: string
+    meta: {
+        touched: any
+        error: any
+    }
+    custom: any,
+}
 
-
-    const renderTextField = ({label, iconButton, input, meta: {touched, error}, ...custom })=> {
+    const renderTextField: React.FC<RenderTextType> = ({label, iconButton, input, meta: {touched, error}, ...custom })=> {
         const hasError = touched && error;
         return   <TextField
-                error={touched && error}
+                error={hasError}
                 {...input}
                 {...custom}
                 label={label}
@@ -44,13 +53,13 @@ const useStyle = makeStyles(theme=>({
             />
     };
 
-const LoginForm = (props) => {
+const LoginForm = (props: any) => {
     const classes = useStyle();
     const [passwordIsVisible, setPasswordVisible] = useState(false);
 
     return  <form onSubmit={props.handleSubmit} style={{width: "100%", display: "flex", flexDirection: "column"}}>
                 <Field name={"login"} component={renderTextField}
-                       classesStyle={classes.formControl}
+
                        validate={[
                            required
                        ]}

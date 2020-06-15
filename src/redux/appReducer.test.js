@@ -1,6 +1,6 @@
 import {takeLatest} from 'redux-saga/effects';
 import { loginWatch, login} from './../saga/profile.saga';
-import reducer from "./../redux/appReducer";
+import reducer from "./appReducer";
 
 
 

@@ -5,10 +5,10 @@ import {makeStyles} from "@material-ui/core/styles";
 import ListItemOfPerson from "./ListItemOfPerson";
 import Loaded from "../../../Loaded";
 
-const useStyle = makeStyles((theme)=>({
+const useStyle = makeStyles((theme) => ({
     paper: {
-        margin: theme.spacing(3),
         padding: theme.spacing(2),
+        margin: theme.spacing(3)
     },
     listItem: {
         justifyItems: "center",
@@ -20,22 +20,24 @@ const useStyle = makeStyles((theme)=>({
 
 
 const ListOfPeople = (props) => {
-    useEffect(()=>{
+    useEffect(() => {
         props.setPeople();
     }, []);
     const classes = useStyle();
-    if(!props.people)
-        return <Loaded/>;
     const list = props.people.map(el => <ListItemOfPerson classProp={classes.listItem}
                                                           textClassProp={classes.listItemText}
                                                           photo={el.photos.small}
                                                           personName={el.name}
                                                           followed={el.followed}
+                                                          id={el.id}
+                                                          followClick={() => props.following(el.id)}
+                                                          unfollowClick={() => props.unfollowing(el.id)}
+                                                          loading={props.isLoading}
 
     />);
     return <List>
         <Paper className={classes.paper}>
-           {list}
+            {list}
         </Paper>
     </List>
 };

@@ -165,7 +165,7 @@ const DashboardMenu = props => {
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
-          <ListItemText><NavLink to={"/socials/profile"}>Profile</NavLink></ListItemText>
+          <ListItemText><NavLink to={"/socials/people/me"}>Profile</NavLink></ListItemText>
       </ListItem>
       <ListItem button>
         <ListItemIcon>
@@ -177,7 +177,7 @@ const DashboardMenu = props => {
             <ListItemIcon>
                 <GroupAddIcon />
             </ListItemIcon>
-            <ListItemText primary="People" />
+            <ListItemText><NavLink to={"/socials/people"}>People</NavLink></ListItemText>
         </ListItem>
     </Fragment>
   );

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +11,7 @@ import LoginReduxForm from "./LoginForm";
 import {Redirect} from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import Loaded from "../../Loaded";
+import {PeopleType} from "../../../types/socials";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -30,15 +31,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+type AuthProps = {
+    isAuth: boolean,
+    errorMessage: Array<string> | null | string,
+    loading: boolean,
+    user_data: PeopleType | null,
+    login: (login_data: string, password_data: string) => void
+}
 
-
-const Auth = (props) => {
+const Auth: React.FC<AuthProps> = ({isAuth, errorMessage,
+                                       loading, user_data,
+                                       login,
+                                       ...props}) => {
     const classes = useStyles();
-    if(props.isAuth && props.user_data)
-        return <Redirect to={"/socials/profile"}/>;
+    console.log(user_data);
+    if(isAuth && user_data)
+        return <Redirect to={`/socials/people/${user_data.id}`}/>;
     return <div>
         <Dialog fullScreen open={true}>
-            {(props.loading) && <Loaded classProp={classes.backdrop}/>}
+            {(loading) && <Loaded classProp={classes.backdrop}/>}
 
             <AppBar className={classes.appBar}>
                 <Toolbar>
@@ -63,15 +74,14 @@ const Auth = (props) => {
                       <Typography variant={"body2"}> If you want to sign in as a test user </Typography>
                   <Typography variant={"caption"}>Login: test_react_app</Typography>
                   <Typography variant={"caption"}>Password: 11111 </Typography>
-                  {(!props.isAuth && props.errorMessage.length > 0) &&
+                  {(!isAuth && errorMessage) &&
                   <Alert variant="filled" severity="error">
-                      {props.errorMessage}
+                      {errorMessage}
                   </Alert>}
-                      <LoginReduxForm onSubmit={(formData)=>props.login(formData.login, formData.password)}/>
+                      <LoginReduxForm onSubmit={(formData: any)=> login(formData.login, formData.password)}/>
                   </Grid>
         </Dialog>
     </div>
 };
-
 
 export default Auth;

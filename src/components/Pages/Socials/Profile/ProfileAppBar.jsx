@@ -44,14 +44,13 @@ const useStyle = makeStyles((theme)=>({
 const ProfileAppBar = (props) => {
     const classes = useStyle();
 
+
     return <Fragment><Grid  container className={classes.container}
                   direction="row"
                   alignItems="center" justify={"space-between"}>
                     <Grid item xs={12} sm={12} md={6}>
                         <Box display={"flex"} alignItems={"center"} justifyContent="center">
-
-
-                            <LargeAvatar picture={props.profile_info.picture.large} click={props.handleMenuOpen}>
+                            <LargeAvatar click={props.handleMenuOpen}>
                                 <Menu
                                     id="status-menu"
                                     anchorEl={props.anchorEl}
@@ -80,10 +79,10 @@ const ProfileAppBar = (props) => {
 
                             <Typography component={"div"}>
                                 <Box fontSize={"h4.fontSize"} ml={2} mr={2}>
-                                    {props.profile_info.name.first + " " +  props.profile_info.name.last}
+                                    {props.profile_info.login}
                                 </Box>
                                 <Box fontSize={"body2.fontSize"} ml={2} mr={2}>
-                                    {props.profile_info.location.city + ", " + props.profile_info.location.state}
+                                    Soligorsk, Belarus
                                 </Box>
                             </Typography>
                         </Box>

@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import AboutCard from "./AboutCard";
 import {makeStyles} from "@material-ui/core/styles";
@@ -32,8 +32,13 @@ const useStyle = makeStyles(theme => ({
     }
 }));
 
-const Profile = () => {
+const Profile = (props) => {
     const classes = useStyle();
+    let id = props.match.params.id;
+    useEffect(()=>{
+        props.getUserByUserId(id);
+    }, []);
+    console.log(props.user);
     return <Fragment>
         <ProfileAppBarContainer/>
             <Grid container className={classes.paper}>

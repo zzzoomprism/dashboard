@@ -38,7 +38,7 @@ const useStyle = makeStyles({
     }
 });
 
-const CryptoPrice = props => {
+const CryptoPrice = () => {
   const classes = useStyle();
   return (
     <Grid container spacing={2} className={classes.grid}>

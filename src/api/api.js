@@ -11,6 +11,9 @@ const news_instance = axios.create({
 const login_instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
+    headers: {
+        "API-KEY": "077845a8-8416-4c14-9d8d-6b3c4d32ecdc"
+    }
 });
 
 export const userAPI = {
@@ -27,13 +30,29 @@ export const userAPI = {
             .then(response => response.data.articles);
 
     },
-    login: (email, password) => {
-        return login_instance.post("auth/login", {email, password})
+    login: async (email, password) => {
+        let response = await login_instance.post("auth/login", {email, password});
+        return response.data;
+    },
+    me: () => {
+      return login_instance.get("auth/me")
+          .then(response => response.data.data);
+    },
+    getUserById: (userId)=>{
+        return login_instance.get(`/profile/${userId}`)
             .then(response => response.data);
     },
     users: ()=>{
         return login_instance.get("users")
             .then(response=>response.data.items);
+    },
+    follow: (userId)=>{
+        return login_instance.post(`follow/${userId}`)
+            .then(response => response.data.resultCode);
+    },
+    unfollow: (userId) =>{
+      return login_instance.delete(`follow/${userId}`)
+          .then(response => response.data.resultCode);
     }
 };
 

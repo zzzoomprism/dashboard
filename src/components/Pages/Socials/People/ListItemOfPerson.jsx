@@ -7,31 +7,40 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import Box from "@material-ui/core/Box";
+import Skeleton from "@material-ui/lab/Skeleton";
+import {Link} from "react-router-dom";
 
 const ListItemOfPerson = (props) => {
+
     return <Fragment>
     <ListItem alignItems="flex-start" className={props.classProp}>
             <Grid container display={"flex"} alignItems="center" justify="space-between">
-                <ListItemAvatar>
+                {props.loading ? <Skeleton variant={"circle"}>
+                    <LargeAvatar/>
+                </Skeleton> :  <ListItemAvatar>
                     <LargeAvatar picture={props.photo}/>
-                </ListItemAvatar>
+                </ListItemAvatar>}
+
                 <ListItemText className={props.textClassProp}
-                    primary={props.personName}
+                    primary={props.loading ? <Skeleton/> :  <Link to={`/socials/people/${props.id}`}>{props.personName}</Link> }
                     secondary={
                             <Typography
                                 component="span"
                                 variant="body2"
                                 color="textPrimary"
                             >
-                                Florida, USA
+                                {props.loading ? <Skeleton/> : "Florida, USA"}
                             </Typography>
                     }
                 />
-
-                <Button variant="outlined" color="primary">
-                    {props.followed ? "UNFOLLOW" : "FOLLOW"}
-                </Button>
+                { props.loading ? " " :
+                    props.followed ? <Button variant="contained" color="primary" onClick={props.unfollowClick} >
+                        UNFOLLOW
+                    </Button>
+                        : <Button variant="outlined" color="primary" onClick={props.followClick}>
+                            FOLLOW
+                        </Button>
+                }
             </Grid>
         </ListItem>
         <Divider/>

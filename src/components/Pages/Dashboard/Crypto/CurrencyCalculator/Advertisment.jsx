@@ -22,7 +22,7 @@ const useStyle = makeStyles((theme)=>({
     },
 }));
 
-const Advertisment = (props) => {
+const Advertisment = () => {
     const classes = useStyle();
     return <Paper className={classes.advertisment}>
                 <Box display="flex" justifyContent={"center"} pt={4}>

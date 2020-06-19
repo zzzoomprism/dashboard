@@ -1,18 +1,29 @@
 import React from "react";
 import {connect} from "react-redux";
 import ListOfPeople from "../../../components/Pages/Socials/People/ListOfPeople";
-import {setPeople, following, unfollowing} from "../../../redux/Socials/peopleReducer";
+import {
+    setPeopleThunk,
+    followingThunk,
+    unfollowingThunk
+} from "../../../redux/Socials/peopleReducer";
 import {PeopleType} from "../../../types/socials";
+import {RootStateType} from "../../../redux/rootReducer";
+import {Dispatch} from "redux";
 
-type ListOfPeoplePropsType = {
+type MapStateType = {
     people: Array<PeopleType>,
     isLoading: boolean,
 }
 
+type MapDispatchType = {
+    setPeopleThunk: ()=>void
+    followingThunk: (id: number) => void
+    unfollowingThunk: (id: number) => void
+}
 
-const mapStateToProps = (store: any): ListOfPeoplePropsType => ({
+const mapStateToProps = (store: RootStateType): MapStateType => ({
     people: store.people.people,
     isLoading: store.people.loading,
 });
 
-export default connect(mapStateToProps, {setPeople, following, unfollowing})(ListOfPeople);
+export default connect<MapStateType, MapDispatchType, {},  RootStateType>(mapStateToProps, { setPeopleThunk, followingThunk, unfollowingThunk})(ListOfPeople);

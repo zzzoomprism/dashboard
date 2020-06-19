@@ -37,11 +37,12 @@ type AuthProps = {
     loading: boolean,
     user_data: PeopleType | null,
     login: (login_data: string, password_data: string) => void
+    loginThunk: (login_data: string, password_data: string) => void
 }
 
 const Auth: React.FC<AuthProps> = ({isAuth, errorMessage,
                                        loading, user_data,
-                                       login,
+                                       login,loginThunk,
                                        ...props}) => {
     const classes = useStyles();
     console.log(user_data);
@@ -49,7 +50,7 @@ const Auth: React.FC<AuthProps> = ({isAuth, errorMessage,
         return <Redirect to={`/socials/people/${user_data.id}`}/>;
     return <div>
         <Dialog fullScreen open={true}>
-            {(loading) && <Loaded classProp={classes.backdrop}/>}
+            {(loading) && <Loaded />}
 
             <AppBar className={classes.appBar}>
                 <Toolbar>
@@ -78,7 +79,7 @@ const Auth: React.FC<AuthProps> = ({isAuth, errorMessage,
                   <Alert variant="filled" severity="error">
                       {errorMessage}
                   </Alert>}
-                      <LoginReduxForm onSubmit={(formData: any)=> login(formData.login, formData.password)}/>
+                      <LoginReduxForm onSubmit={(formData: any)=> loginThunk(formData.login, formData.password)}/>
                   </Grid>
         </Dialog>
     </div>

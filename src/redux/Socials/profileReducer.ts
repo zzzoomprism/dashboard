@@ -1,4 +1,5 @@
-import {PeopleType} from "../../types/socials";
+import {PeopleType, SamuraiType} from "../../types/socials";
+import {userAPI} from "../../api/api";
 
 const GET_USER_PROFILE = "GET_USER_PROFILE";
 
@@ -6,7 +7,7 @@ const GET_USER_PROFILE = "GET_USER_PROFILE";
 const initialState = {
     user_data: null as PeopleType | null,
     loading: false as boolean,
-    user: null as Object | null,
+    user: null as SamuraiType | null,
 };
 
 type InitialStateType = typeof initialState;
@@ -34,4 +35,10 @@ type GetUserByIdType = {
     id: number | string
 }
 
-export const getUserByUserId = (userId: number):GetUserByIdType => ({type: "GET_USER_PROFILE", id: userId});
+
+export const getUserByIdThunk = (userId: number) => (dispatch:any) => {
+    userAPI.getUserById(userId)
+        .then(user => {
+            dispatch({type: "GET_USER", user});
+        })
+}

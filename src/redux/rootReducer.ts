@@ -15,4 +15,10 @@ export const rootReducer = combineReducers({
     form: formReducer,
 });
 
+type ActionTypes<T> = T extends {[key: string]: infer U} ? U : never;
+export type InferActionTypes<T extends {[key: string]: (...arg: any[]) => any}> = ReturnType<ActionTypes<T>>
+
+
 export type RootStateType = ReturnType<typeof rootReducer>
+
+

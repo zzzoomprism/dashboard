@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Auth from "../components/Pages/Auth/Auth";
-import {login} from "../redux/appReducer";
+import {loginThunk} from "../redux/appReducer";
 import {RootStateType} from "../redux/rootReducer";
 import {PeopleType} from "../types/socials";
 
@@ -13,7 +13,8 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    login: (login_data: string, password_data: string) => void
+    loginThunk: (login_data: string, password_data: string) => void,
+
 }
 
 const mapStoreToProps = (store: RootStateType) => ({
@@ -24,4 +25,4 @@ const mapStoreToProps = (store: RootStateType) => ({
 });
 
 //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState
-export default connect<MapStatePropsType, MapDispatchPropsType, {},  RootStateType>(mapStoreToProps, {login})(Auth);
+export default connect<MapStatePropsType, MapDispatchPropsType, {},  RootStateType>(mapStoreToProps, { loginThunk})(Auth);

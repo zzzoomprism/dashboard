@@ -1,16 +1,19 @@
 import {PeopleType} from "../../types/socials";
-
-const SET_PEOPLE = "SET_PEOPLE";
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
+import {userAPI} from "../../api/api";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {InferActionTypes, RootStateType} from "../rootReducer";
 
 
 const initialState = {
     people: [] as Array<PeopleType>,
     loading: false as boolean,
 };
+
+
+
 type InitialStateType = typeof initialState;
-const reducer = (state = initialState, action: any): InitialStateType => {
+const reducer = (state = initialState, action: ActionType): InitialStateType => {
     const newState = {...state};
 
 
@@ -43,22 +46,55 @@ const reducer = (state = initialState, action: any): InitialStateType => {
 
 export default reducer;
 
-type SetPeopleType = {
-    type: typeof SET_PEOPLE
+type SetPeopleActionType = {
+    type: "SET_PEOPLE_TO_STATE",
+    people: Array<PeopleType>
+};
+type FollowType = {
+    type: "FOLLOW_ACTION",
+    id: number
+};
+type UnFollowType = {
+    type: "UNFOLLOW_ACTION",
+    id: number
+};
+type SetPeopleLoadingType = {
+    type: "SET_PEOPLE_LOADING",
+    data: boolean
+};
+
+export const action = {
+    setPeopleToState: (people: Array<PeopleType>): SetPeopleActionType => ({type: "SET_PEOPLE_TO_STATE", people}),
+    followAction: (id: number):FollowType => ({type: "FOLLOW_ACTION", id: id}),
+    unfollowAction: (id: number): UnFollowType => ({type: "UNFOLLOW_ACTION", id: id}),
+    setPeopleLoading: (data: boolean):SetPeopleLoadingType => ({type: "SET_PEOPLE_LOADING", data: data }),
 }
 
-export const setPeople = (): SetPeopleType => ({type: "SET_PEOPLE"});
+type ActionType = InferActionTypes<typeof action>;
 
-type FollowingType = {
-    type: typeof FOLLOW,
-    id: number,
+
+export const setPeopleThunk = () :ThunkAction<void, RootStateType, any, ActionType>=> async (dispatch) => {
+    dispatch(action.setPeopleLoading(true));
+    let people = await userAPI.users();
+    console.log(people);
+    dispatch(action.setPeopleToState(people));
+    dispatch(action.setPeopleLoading(false));
 }
 
-export const following = (userId: number): FollowingType => ({type: "FOLLOW", id: userId});
 
-type UnFollowingType = {
-    type: typeof UNFOLLOW,
-    id: number,
+export const followingThunk = (userId : number):ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
+   userAPI.follow(userId)
+       .then(response => {
+           console.log(response);
+           dispatch(action.followAction(userId))
+       })
 }
 
-export const unfollowing = (userId: number): UnFollowingType => ({type: "UNFOLLOW", id: userId});
+
+export const unfollowingThunk = (userId : number):ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
+    userAPI.unfollow(userId)
+        .then(response => {
+            console.log(response);
+            dispatch(action.unfollowAction(userId))
+        })
+}

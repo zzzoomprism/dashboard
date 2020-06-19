@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Profile from "../../../components/Pages/Socials/Profile/Profile";
-import {getUserByUserId} from "../../../redux/Socials/profileReducer";
+import {getUserByIdThunk} from "../../../redux/Socials/profileReducer";
 import {PeopleType} from "../../../types/socials";
 
 type ProfilePropsType = {
@@ -14,4 +14,4 @@ const mapStateToProps = (store: any): ProfilePropsType => ({
 });
 
 
-export default connect(mapStateToProps, {getUserByUserId})(Profile);
+export default connect(mapStateToProps, {getUserByIdThunk})(Profile);

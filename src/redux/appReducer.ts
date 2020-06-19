@@ -1,3 +1,4 @@
+import {userAPI} from "../api/api";
 
 export type InitialStateType = typeof initialState;
 
@@ -11,15 +12,13 @@ const initialState = {
 
 const reducer = (state = initialState, action: any): InitialStateType => {
     const newState = {...state};
-    switch(action.type){
+    switch (action.type) {
         case "LOGIN":
-            if(action.data.resultCode || !action.data)
-            {
+            if (action.data.resultCode || !action.data) {
                 newState.loading = false;
                 newState.isAuth = false;
                 newState.loginErrorMessage = action.data.messages[0];
-            }
-            else{
+            } else {
                 newState.user = action.data;
                 newState.isAuth = true;
             }
@@ -38,12 +37,20 @@ const reducer = (state = initialState, action: any): InitialStateType => {
 export default reducer;
 
 
-const LOGIN_USER = "LOGIN_USER";
-export const login = (login_data: string, password_data: string): LoginType => ({ type: LOGIN_USER, password: password_data, login: login_data })
+export const loginThunk = (email: string, password: string) => (dispatch: any) => {
+    dispatch({type: "LOADING", data: true});
+    userAPI.login(email, password)
+        .then(login_user => {
+                dispatch({type: "LOGIN", data: login_user});
+                if (!login_user.resultCode) {
+                    userAPI.me()
+                        .then(user_data => {
+                            console.log(user_data);
+                            dispatch({type: "SET_USER_DATA", user_data});
+                            dispatch({type: "LOADING", data: false});
+                        })
 
-
-export type LoginType = {
-    type: typeof LOGIN_USER
-    login: string
-    password: string
+                }
+            }
+        );
 }

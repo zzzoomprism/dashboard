@@ -3,13 +3,13 @@ import {connect} from "react-redux";
 import Auth from "../components/Pages/Auth/Auth";
 import {loginThunk} from "../redux/appReducer";
 import {RootStateType} from "../redux/rootReducer";
-import {PeopleType} from "../types/socials";
+import {PeopleType, SamuraiType} from "../types/socials";
 
 type MapStatePropsType = {
     isAuth: boolean,
     errorMessage: Array<string> | null | string,
     loading: boolean,
-    user_data: PeopleType | null,
+    user: number | null
 }
 
 type MapDispatchPropsType = {
@@ -21,7 +21,7 @@ const mapStoreToProps = (store: RootStateType) => ({
     isAuth: store.app.isAuth,
     errorMessage: store.app.loginErrorMessage,
     loading: store.app.loading,
-    user_data: store.profile.user_data
+    user: store.app.user
 });
 
 //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState

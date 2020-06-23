@@ -11,7 +11,7 @@ import LoginReduxForm from "./LoginForm";
 import {Redirect} from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import Loaded from "../../Loaded";
-import {PeopleType} from "../../../types/socials";
+import {PeopleType, SamuraiType} from "../../../types/socials";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -35,19 +35,19 @@ type AuthProps = {
     isAuth: boolean,
     errorMessage: Array<string> | null | string,
     loading: boolean,
-    user_data: PeopleType | null,
+    user: number | null
     login: (login_data: string, password_data: string) => void
     loginThunk: (login_data: string, password_data: string) => void
 }
 
 const Auth: React.FC<AuthProps> = ({isAuth, errorMessage,
-                                       loading, user_data,
+                                       loading, user,
                                        login,loginThunk,
                                        ...props}) => {
     const classes = useStyles();
-    console.log(user_data);
-    if(isAuth && user_data)
-        return <Redirect to={`/socials/people/${user_data.id}`}/>;
+    console.log(user);
+    if(isAuth && user)
+        return <Redirect to={`/profile/${user}`}/>;
     return <div>
         <Dialog fullScreen open={true}>
             {(loading) && <Loaded />}

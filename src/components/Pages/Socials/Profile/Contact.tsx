@@ -12,25 +12,30 @@ import {Contacts} from "../../../../types/socials";
 
 const useStyle = makeStyles(theme=>({
     contact: {
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        [theme.breakpoints.down("md")]: {
+            marginTop: theme.spacing(2)
+        }
     }
 }));
 
 type PropsType = {
-    contactInfo: Contacts
+    contactInfo: Contacts | null
 }
 
 const Contact:React.FC<PropsType> = ({contactInfo}) => {
     const classes = useStyle();
     let arrayList: any = [];
-    for(let [key, value] of Object.entries(contactInfo)){
-        if(value)
-       arrayList = [...arrayList,  <ListItem>
-            <ListItemIcon>
-                <ImageIcon />
-            </ListItemIcon>
-            <ListItemText primary={value} secondary={key}/>
-        </ListItem> ]
+    if(contactInfo) {
+        for (let [key, value] of Object.entries(contactInfo)) {
+            if (value)
+                arrayList = [...arrayList, <ListItem>
+                    <ListItemIcon>
+                        <ImageIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={value} secondary={key}/>
+                </ListItem>]
+        }
     }
 
     return <Paper className={classes.contact}>

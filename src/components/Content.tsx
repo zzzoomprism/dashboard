@@ -26,9 +26,8 @@ const Content = () => {
         <Suspense fallback={<Loaded/>}>
             <Switch>
                 <Route exact path={"/dashboard/currency"} component={Crypto}/>
-                <Route exact path={"/socials/profile"} component={Profile}/>
-                <Route path={"/socials/people/:id"} component={Profile}/>
-                <Route path={"/socials/people"} component={People}/>
+                <Route path={"/profile/:id"} component={Profile}/>
+                <Route exact path={"/socials/people"} component={People}/>
                 <Route exact path={"/auth"} component={Auth}/>
             </Switch>
         </Suspense>

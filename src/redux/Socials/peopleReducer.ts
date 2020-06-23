@@ -1,8 +1,8 @@
 import {PeopleType} from "../../types/socials";
-import {userAPI} from "../../api/api";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootStateType} from "../rootReducer";
+import {serverAPI} from "../../api/api";
 
 
 const initialState = {
@@ -15,7 +15,6 @@ const initialState = {
 type InitialStateType = typeof initialState;
 const reducer = (state = initialState, action: ActionType): InitialStateType => {
     const newState = {...state};
-
 
     switch (action.type) {
         case "SET_PEOPLE_TO_STATE":
@@ -73,28 +72,26 @@ export const action = {
 type ActionType = InferActionTypes<typeof action>;
 
 
-export const setPeopleThunk = () :ThunkAction<void, RootStateType, any, ActionType>=> async (dispatch) => {
+export const setPeopleThunk = (page: number) :ThunkAction<void, RootStateType, any, ActionType>=> async (dispatch) => {
     dispatch(action.setPeopleLoading(true));
-    let people = await userAPI.users();
-    console.log(people);
-    dispatch(action.setPeopleToState(people));
+    let people = await serverAPI.users(page);
+    console.log(people.totalCount / 10);
+    dispatch(action.setPeopleToState(people.items));
     dispatch(action.setPeopleLoading(false));
 }
 
 
 export const followingThunk = (userId : number):ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
-   userAPI.follow(userId)
+    serverAPI.follow(userId)
        .then(response => {
-           console.log(response);
            dispatch(action.followAction(userId))
        })
 }
 
 
 export const unfollowingThunk = (userId : number):ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
-    userAPI.unfollow(userId)
+    serverAPI.unfollow(userId)
         .then(response => {
-            console.log(response);
             dispatch(action.unfollowAction(userId))
         })
 }

@@ -67,7 +67,7 @@ const Calculator: React.FC<PropsType> = ({result, loading, from, to, amount}) =>
         <Field name={"from"} label="From"  component={renderField} className={classes.input} validate={[required]}>
             <MenuItem value={"USD"}>USD</MenuItem>
             <MenuItem value={"EUR"}>EUR</MenuItem>
-            <MenuItem value={"RUS"}>RUS</MenuItem>
+            <MenuItem value={"RUB"}>RUB</MenuItem>
         </Field>
 
 
@@ -75,7 +75,7 @@ const Calculator: React.FC<PropsType> = ({result, loading, from, to, amount}) =>
         <Field name={"to"} label="To"  component={renderField} className={classes.input} validate={[required]}>
             <MenuItem value={"USD"}>USD</MenuItem>
             <MenuItem value={"EUR"}>EUR</MenuItem>
-            <MenuItem value={"RUS"}>RUS</MenuItem>
+            <MenuItem value={"RUB"}>RUB</MenuItem>
         </Field>
 
         <Field name="amount" label="Amount"  component={renderTextField} classNameStyle={classes.textField}/>

@@ -1,8 +1,6 @@
 import {PeopleType, SamuraiType} from "../../types/socials";
-import {userAPI} from "../../api/api";
-
-const GET_USER_PROFILE = "GET_USER_PROFILE";
-
+import {userAPI} from "../../api/user-api";
+import {serverAPI} from "../../api/api";
 
 const initialState = {
     user_data: null as PeopleType | null,
@@ -30,14 +28,10 @@ const reducer = (state = initialState, action: any) :InitialStateType => {
 
 export default reducer;
 
-type GetUserByIdType = {
-    type: typeof GET_USER_PROFILE,
-    id: number | string
-}
-
 
 export const getUserByIdThunk = (userId: number) => (dispatch:any) => {
-    userAPI.getUserById(userId)
+    dispatch({type: "GET_USER", user: null});
+    serverAPI.getUserById(userId)
         .then(user => {
             dispatch({type: "GET_USER", user});
         })

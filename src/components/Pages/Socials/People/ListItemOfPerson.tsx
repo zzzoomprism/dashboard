@@ -11,15 +11,15 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import {Link} from "react-router-dom";
 
 type PropsType = {
-    classProp : any
-    photo: string | null
-    textClassProp: string
+    classProp? : any
+    photo?: string | null
+    textClassProp?: string
     loading: boolean
-    id: number
-    personName: string
-    followed: boolean
-    unfollowClick: ()=>void
-    followClick: () => void
+    id?: number
+    personName?: string
+    followed?: boolean
+    unfollowClick?: ()=>void
+    followClick?: () => void
 }
 
 
@@ -37,7 +37,7 @@ const ListItemOfPerson:React.FC<PropsType> = ({classProp, photo, textClassProp, 
                 </ListItemAvatar>}
 
                 <ListItemText className={textClassProp}
-                    primary={loading ? <Skeleton/> :  <Link to={`/socials/people/${id}`}>{personName}</Link> }
+                    primary={loading ? <Skeleton/> :  <Link to={`/profile/${id}`}>{personName}</Link> }
                     secondary={
                             <Typography
                                 component="span"

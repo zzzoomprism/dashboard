@@ -13,6 +13,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import LargeAvatar from "../../../../utils/helpers/LargeAvatar";
 import {PeopleType, SamuraiType} from "../../../../types/socials";
 import Loaded from "../../../Loaded";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 
 const useStyle = makeStyles((theme)=>({
@@ -56,15 +57,16 @@ const ProfileAppBar: React.FC<Props> = ({profile_info}) => {
         setStatusMenu(!statusMenuIsOpen);
         // setAnchorEl(event.currentTarget);
     }
-    if(!profile_info)
-        return <Loaded/>
 
     return <Fragment><Grid container className={classes.container}
                   direction="row"
                   alignItems="center" justify={"space-between"}>
                     <Grid item xs={12} sm={12} md={6}>
                         <Box display={"flex"} alignItems={"center"} justifyContent="center">
-                            <LargeAvatar click={handleMenuOpen}>
+                            {
+                                (!profile_info) ? <Skeleton variant={"circle"}>
+                                <LargeAvatar/>
+                                </Skeleton> : <LargeAvatar click={handleMenuOpen}>
                                 <Menu
                                     id="status-menu"
                                     // anchorEl={anchorEl}
@@ -89,16 +91,25 @@ const ProfileAppBar: React.FC<Props> = ({profile_info}) => {
                                     </MenuItem>
                                 </Menu>
                             </LargeAvatar>
-
+                            }
 
                             <Typography component={"div"}>
-                                <Box fontSize={"h4.fontSize"} ml={2} mr={2}>
-                                    {profile_info.fullName}
-                                </Box>
-                                <Box fontSize={"body2.fontSize"} ml={2} mr={2}>
-                                    Soligorsk, Belarus
-                                </Box>
-                            </Typography>
+                                {
+                                    (!profile_info) ? <Skeleton animation="wave" height={10} width={"25%"}>
+                                            <Box fontSize={"h4.fontSize"} ml={2} mr={2}/>
+                                        </Skeleton> :
+                                        <Box fontSize={"h4.fontSize"} ml={2} mr={2}>
+                                            {profile_info.fullName}
+                                        </Box>
+                                }
+                                {
+                                    (!profile_info) ? <Skeleton animation="wave" height={10} width={"25%"}/> :
+                                        <Box fontSize={"body2.fontSize"} ml={2} mr={2}>
+                                            Soligorsk, Belarus
+                                        </Box>
+                                }
+
+                                </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={12} md={5}>

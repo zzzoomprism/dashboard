@@ -33,14 +33,15 @@ const useStyles = makeStyles((theme)=>({
   }
 }));
 
-const DashboardMenu = () => {
+const DashboardMenu = (props: any) => {
   const [open, setOpen] = useState(false);
   const [menuIsOpen, setMenuOpen] = useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
-
   const classes = useStyles();
+
+
 
   return (
     <Fragment>
@@ -165,7 +166,7 @@ const DashboardMenu = () => {
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
-          <ListItemText><NavLink to={"/socials/people/me"}>Profile</NavLink></ListItemText>
+          <ListItemText><NavLink to={`/profile/${props.user || "me"}`}>Profile</NavLink></ListItemText>
       </ListItem>
       <ListItem button>
         <ListItemIcon>

@@ -16,7 +16,7 @@ type MapStateType = {
 }
 
 type MapDispatchType = {
-    setPeopleThunk: ()=>void
+    setPeopleThunk: (page: number)=>void
     followingThunk: (id: number) => void
     unfollowingThunk: (id: number) => void
 }

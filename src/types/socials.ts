@@ -105,3 +105,9 @@ type LoginType = {
         sha1: string,
         sha256: string
 }
+
+export type LoginServerType = {
+    id: number
+    email: string
+    login: string
+}

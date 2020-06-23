@@ -2,8 +2,8 @@ import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
-import DashboardMenu from "./Pages/Dashboard/DashboardMenu";
 import Hidden from '@material-ui/core/Hidden';
+import DashboardMenu from "../containers/Pages/Dashboard/DashboardMenu";
 
 const drawerWidth = 270;
 

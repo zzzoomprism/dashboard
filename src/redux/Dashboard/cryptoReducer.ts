@@ -1,10 +1,9 @@
-import {currencyAPI, userAPI} from "../../api/api";
+import {currencyAPI} from "../../api/currency-api";
 import {NewsType, UserType} from "../../types/socials";
 import {InferActionTypes, RootStateType} from "../rootReducer";
 import {ThunkAction} from "redux-thunk";
-import {act} from "react-dom/test-utils";
-import {action} from "../Socials/peopleReducer";
-import {Dispatch} from "redux";
+import {userAPI} from "../../api/user-api";
+import {newsAPI} from "../../api/news-api";
 
 
 const initialState = {
@@ -106,12 +105,12 @@ type ThunkType = ThunkAction<Promise<void>, RootStateType, any, ActionType>
 
 export const setUsersThunk = (currentPage: number):ThunkType => async (dispatch) => {
     let users = await userAPI.getUsers(currentPage);
-    dispatch(actions.setUsersAction(users));
+    dispatch(actions.setUsersAction(users.results));
 }
 
 export const setNewsThunk =() : ThunkAction<void, RootStateType, any, ActionType> => async (dispatch) => {
-    let news = await userAPI.getNews();
-    dispatch(actions.setNewsAction(news));
+    let news = await newsAPI.getNews();
+    dispatch(actions.setNewsAction(news.articles));
 }
 
 export const currencyExchange = (from: string, to: string, amount: number) : ThunkType => async (dispatch) => {
@@ -119,10 +118,14 @@ export const currencyExchange = (from: string, to: string, amount: number) : Thu
     let amount_value = amount || 1;
     dispatch(actions.setCalculateData(from, to, amount_value));
     let response = await currencyAPI.getCurrencyExchange(from, to);
-    let rate = response.rates[to];
-    let result = (rate*amount_value).toFixed(3);
-    dispatch(actions.setCurrencyResult(+result));
-    setTimeout(()=>{dispatch(actions.setCalculateLoading(false));}, 1000);
+    let rate = Object.values(response.rates)[0];
+        if(rate) {
+            let result = (rate * amount_value).toFixed(3);
+            dispatch(actions.setCurrencyResult(+result));
+            setTimeout(() => {
+                dispatch(actions.setCalculateLoading(false));
+            }, 1000);
+        }
 }
 
 

@@ -1,14 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {PeopleType} from "../types/socials";
-
-const instance = axios.create({
-    baseURL: "https://randomuser.me/api/",
-});
-
-const news_instance = axios.create({
-    baseURL: "https://newsapi.org/v2/"
-});
-
+import {PeopleType, SamuraiType} from "../types/socials";
 
 const login_instance = axios.create({
     withCredentials: true,
@@ -18,52 +9,56 @@ const login_instance = axios.create({
     }
 });
 
+type ProfilesResType = {
+    items: Array<PeopleType>
+    totalCount: number
+    error: string | null
+}
 
+type FollowResType = {
+    resultCode: ResultCodeEnum,
+    message: Array<string>
+    data: object
+}
 
-export const userAPI = {
-    getUsers: async (currentPage: number) => {
-        let response = await instance.get(`/?page=${currentPage}&results=10&seed=abc`);
-        return response.data.results;
-    },
-    getRandomUser: async ()=>{
-        let response = await instance.get('/?gender=female&nat=us,dk,fr,gb');
-        return response.data.results[0];
-    },
-    getNews : () =>{
-        return news_instance.get("everything?q=currency&pageSize=5&apiKey=e4d0f150f8f54c878a0935c9af7e9798")
-            .then((response) => response.data.articles);
+export type AuthMeType = {
+    resultCode: ResultCodeEnum
+    messages: Array<string>
+    data: {
+        id: number
+        email: string
+        login: string
+    }
+}
 
-    },
+export enum ResultCodeEnum {
+    Success ,
+    Error
+}
+
+export const serverAPI = {
     login: async (email: string, password: string) => {
         let response = await login_instance.post("auth/login", {email, password});
         return response.data;
     },
     me: () => {
-      return login_instance.get("auth/me")
-          .then(response => response.data.data);
+        return login_instance.get("auth/me")
+            .then(response => response.data.data);
     },
-    getUserById: (userId: number)=>{
+    getUserById: (userId: number) => {
         return login_instance.get(`/profile/${userId}`)
-            .then((response:AxiosResponse<PeopleType>) => response.data);
+            .then((response: AxiosResponse<SamuraiType>) => response.data);
     },
-    users: ()=>{
-        return login_instance.get("users")
-            .then((response) => response.data.items);
+    users: (page: number) => {
+        return login_instance.get(`users?count=10&page=${page}`)
+            .then((response:AxiosResponse<ProfilesResType>) => response.data);
     },
-    follow: (userId: number)=>{
+    follow: (userId: number) :Promise<FollowResType> => {
         return login_instance.post(`follow/${userId}`)
-            .then((response) => response.data.resultCode);
+            .then((response) => response.data);
     },
-    unfollow: (userId: number) =>{
-      return login_instance.delete(`follow/${userId}`)
-          .then(response => response.data.resultCode);
+    unfollow: (userId: number) :Promise<FollowResType> => {
+        return login_instance.delete(`follow/${userId}`)
+            .then(response => response.data);
     },
-};
-
-export const currencyAPI = {
-    getCurrencyExchange: (from:string, to:string)=>{
-        return axios.get(`https://api.ratesapi.io/api/latest?base=${from}&symbols=${to}`)
-            .then(response=>response.data)
-    }
 }
-

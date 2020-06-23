@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import AboutCard from "./AboutCard";
 import {makeStyles} from "@material-ui/core/styles";
@@ -20,8 +20,12 @@ const useStyle = makeStyles(theme => ({
     },
     secondPaperBlock: {
         marginTop: -theme.spacing(2),
-        paddingRight: theme.spacing(2),
+        paddingLeft: theme.spacing(3),
+        paddingRight: theme.spacing(3),
     },
+    block: {
+        marginRight: theme.spacing(2),
+    }
 }));
 
 type PropsType = {
@@ -36,24 +40,20 @@ const Profile: React.FC<PropsType> = ({user, match, getUserByIdThunk} ) => {
     useEffect(()=>{
         getUserByIdThunk(id);
     }, []);
-    console.log(user);
-    if(!user)
-        return <Loaded/>
     return <Fragment>
         <ProfileAppBar/>
-        <Grid container>
-            <Grid container className={classes.paper} xs={12} sm={12} md={7} spacing={2}>
+        <Grid container className={classes.paper} justify={"space-between"}>
+            <Grid container item xs={12} sm={12} md={7} spacing={2}>
                     <Grid item xs={12} sm={12} md={12}>
                         <AboutCard/>
                     </Grid>
                 <Grid item xs={12} sm={12} md={12}>
-                    <Biography description={user.aboutMe} fullname={user.fullName}/>
+                    <Biography description={(user) ? user.aboutMe : ''} fullname={(user) ? user.fullName : '' } />
                 </Grid>
-
             </Grid>
-            <Grid container className={classes.secondPaperBlock} xs={12} sm={12} md={5}>
+            <Grid container item xs={12} sm={12} md={5} spacing={1}>
                 <Grid item xs={12} sm={12} md={12}>
-                    <Contact contactInfo={user.contacts}/>
+                    <Contact contactInfo={(user) ? user.contacts : null}/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                     <Friends/>

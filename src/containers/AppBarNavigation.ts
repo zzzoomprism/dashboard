@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import AppBarNavigation from "../components/AppBarNavigation";
 import {RootStateType} from "../redux/rootReducer";
 
+
+
 const mapStoreToProps = (store: RootStateType) => {
   return {};
 };
@@ -15,3 +17,4 @@ export default connect(
   mapStoreToProps,
   mapDispatchToProps
 )(AppBarNavigation);
+

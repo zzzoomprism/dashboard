@@ -8,7 +8,7 @@ import {HashRouter} from "react-router-dom";
 import thunk from "redux-thunk";
 
 
-
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(

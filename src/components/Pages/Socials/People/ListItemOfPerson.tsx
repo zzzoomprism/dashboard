@@ -9,6 +9,8 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Skeleton from "@material-ui/lab/Skeleton";
 import {Link} from "react-router-dom";
+import FollowButtonContainer from "../components/FollowButtonContainer";
+
 
 type PropsType = {
     classProp? : any
@@ -18,14 +20,10 @@ type PropsType = {
     id?: number
     personName?: string
     followed?: boolean
-    unfollowClick?: ()=>void
-    followClick?: () => void
 }
 
 
-const ListItemOfPerson:React.FC<PropsType> = ({classProp, photo, textClassProp, loading, id, personName, followed,unfollowClick, followClick }) => {
-
-
+const ListItemOfPerson:React.FC<PropsType> = ({classProp, photo, textClassProp, loading, id, personName, followed }) => {
     return <Fragment>
     <ListItem alignItems="flex-start" className={classProp}>
             {/*   @ts-ignore*/}
@@ -36,8 +34,7 @@ const ListItemOfPerson:React.FC<PropsType> = ({classProp, photo, textClassProp, 
                     <LargeAvatar picture={photo}/>
                 </ListItemAvatar>}
 
-                <ListItemText className={textClassProp}
-                    primary={loading ? <Skeleton/> :  <Link to={`/profile/${id}`}>{personName}</Link> }
+                <ListItemText className={textClassProp} primary={loading ? <Skeleton/> :  <Link to={{pathname: `/profile/${id}`, state: {followed: followed} }}>{personName}</Link> }
                     secondary={
                             <Typography
                                 component="span"
@@ -48,14 +45,7 @@ const ListItemOfPerson:React.FC<PropsType> = ({classProp, photo, textClassProp, 
                             </Typography>
                     }
                 />
-                { loading ? " " :
-                    followed ? <Button variant="contained" color="primary" onClick={unfollowClick} >
-                        UNFOLLOW
-                    </Button>
-                        : <Button variant="outlined" color="primary" onClick={followClick}>
-                            FOLLOW
-                        </Button>
-                }
+              <FollowButtonContainer followed={followed || false} id={id || 0 }/>
             </Grid>
         </ListItem>
         <Divider/>

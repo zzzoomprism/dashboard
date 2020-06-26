@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {Route, Switch} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-import Profile from "../containers/Pages/Socials/Profile";
+import Profile from "./Pages/Socials/Profile/Profile/ProfileContainer";
 import Auth from "../containers/Auth";
 import Loaded from "./Loaded";
 import Crypto from "../containers/Pages/Dashboard/Crypto/Crypto";

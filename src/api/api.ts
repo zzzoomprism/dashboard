@@ -15,21 +15,20 @@ type ProfilesResType = {
     error: string | null
 }
 
-type FollowResType = {
+type ServerResultType<D> = {
     resultCode: ResultCodeEnum,
-    message: Array<string>
-    data: object
+    message: Array<string>,
+    data: D
 }
 
 export type AuthMeType = {
-    resultCode: ResultCodeEnum
-    messages: Array<string>
-    data: {
         id: number
         email: string
         login: string
-    }
 }
+
+
+type FormDataType = Omit<SamuraiType, 'photos'>;
 
 export enum ResultCodeEnum {
     Success ,
@@ -41,7 +40,7 @@ export const serverAPI = {
         let response = await login_instance.post("auth/login", {email, password});
         return response.data;
     },
-    me: () => {
+    me: ():Promise<ServerResultType<AuthMeType>> => {
         return login_instance.get("auth/me")
             .then(response => response.data.data);
     },
@@ -53,12 +52,22 @@ export const serverAPI = {
         return login_instance.get(`users?count=10&page=${page}`)
             .then((response:AxiosResponse<ProfilesResType>) => response.data);
     },
-    follow: (userId: number) :Promise<FollowResType> => {
+    follow: (userId: number) :Promise<ServerResultType<object>> => {
         return login_instance.post(`follow/${userId}`)
             .then((response) => response.data);
     },
-    unfollow: (userId: number) :Promise<FollowResType> => {
+    unfollow: (userId: number) :Promise<ServerResultType<object>> => {
         return login_instance.delete(`follow/${userId}`)
             .then(response => response.data);
     },
+    isFollow: (userId: number) => {
+        return login_instance.get(`follow/${userId}`)
+            .then((response) => response.data);
+    },
+    updateProfile: (data: FormDataType): Promise<ServerResultType<object>> => {
+        return login_instance.put('profile', data)
+            .then(res => res.data);
+    }
 }
+
+

@@ -3,9 +3,7 @@ import List from "@material-ui/core/List";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 import ListItemOfPerson from "./ListItemOfPerson";
-import Loaded from "../../../Loaded";
 import {PeopleType} from "../../../../types/socials";
-import {followingThunk, setPeopleThunk, unfollowingThunk} from "../../../../redux/Socials/peopleReducer";
 import {Pagination} from "@material-ui/lab";
 
 const useStyle = makeStyles((theme) => ({
@@ -24,13 +22,11 @@ const useStyle = makeStyles((theme) => ({
 type PropsType = {
     setPeopleThunk : (page: number) => void
     people: Array<PeopleType>,
-    followingThunk: (id: number) => void
-    unfollowingThunk: (id : number) => void
     isLoading: boolean
 
 }
 
-const ListOfPeople: React.FC<PropsType> = ({people, setPeopleThunk, followingThunk, unfollowingThunk,isLoading  }) => {
+const ListOfPeople: React.FC<PropsType> = ({people, setPeopleThunk, isLoading  }) => {
     const [page, setPage] = useState(1);
     useEffect(() => {
         setPeopleThunk(page);
@@ -39,18 +35,16 @@ const ListOfPeople: React.FC<PropsType> = ({people, setPeopleThunk, followingThu
     let list: any = [];
     if(people.length === 0) {
         for (let i = 0; i < 10; i++)
-            list = [...list, <ListItemOfPerson classProp={classes.listItem} textClassProp={classes.listItemText}
+            list = [...list, <ListItemOfPerson key={i} classProp={classes.listItem} textClassProp={classes.listItemText}
                                                loading={isLoading}/>];
     }
     else
-    list = people.map(el => <ListItemOfPerson classProp={classes.listItem}
+    list = people.map(el => <ListItemOfPerson key={el.id} classProp={classes.listItem}
                                                         textClassProp={classes.listItemText}
                                                         photo={el.photos.small}
                                                         personName={el.name}
                                                         followed={el.followed}
                                                         id={el.id}
-                                                        followClick={() => followingThunk(el.id)}
-                                                        unfollowClick={() => unfollowingThunk(el.id)}
                                                         loading={isLoading}
 
         />);

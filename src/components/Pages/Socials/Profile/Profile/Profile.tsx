@@ -1,15 +1,16 @@
 import React, {Fragment, useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
-import AboutCard from "./AboutCard";
 import {makeStyles} from "@material-ui/core/styles";
-import Contact from "./Contact";
-import Biography from "./Biography";
-import Friends from "./Friends";
-import ProfileAppBar from "../../../../containers/Pages/Socials/ProfileAppBar";
-import {withAuthRedirect} from "./../../../../hoc/AuthRedirect";
+import Biography from "../Biography/Biography";
+import Friends from "../Friends";
+import ProfileAppBar from "../../../../../containers/Pages/Socials/ProfileAppBar";
+import {withAuthRedirect} from "../../../../../hoc/AuthRedirect";
 import {compose} from "redux";
-import {PeopleType, SamuraiType} from "../../../../types/socials";
-import Loaded from "../../../Loaded";
+import {SamuraiType} from "../../../../../types/socials";
+import Loaded from "../../../../Loaded";
+import AboutCard from "../AboutCard/AboutCardContainer";
+import {formChecking} from "../../../../../hoc/FormEditCheck";
+import Contact from "../Contacts/ContactContainer";
 
 
 const useStyle = makeStyles(theme => ({
@@ -31,29 +32,34 @@ const useStyle = makeStyles(theme => ({
 type PropsType = {
     user: SamuraiType | null,
     match: any,
+    location: any,
     getUserByIdThunk: (id: number) => void
 }
 
-const Profile: React.FC<PropsType> = ({user, match, getUserByIdThunk} ) => {
+const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk} ) => {
+    console.log(user);
     const classes = useStyle();
     let id = match.params.id;
     useEffect(()=>{
         getUserByIdThunk(id);
-    }, []);
+    }, [id]);
+    if(!user)
+        return <Loaded/>
     return <Fragment>
-        <ProfileAppBar/>
+        <ProfileAppBar />
         <Grid container className={classes.paper} justify={"space-between"}>
             <Grid container item xs={12} sm={12} md={7} spacing={2}>
                     <Grid item xs={12} sm={12} md={12}>
-                        <AboutCard/>
+                        <AboutCard lookingForAJob={user.lookingForAJob} jobDescription={user.lookingForAJobDescription}/>
                     </Grid>
                 <Grid item xs={12} sm={12} md={12}>
-                    <Biography description={(user) ? user.aboutMe : ''} fullname={(user) ? user.fullName : '' } />
+                   <Biography description={user.aboutMe}
+                                fullname={user.fullName}/>
                 </Grid>
             </Grid>
             <Grid container item xs={12} sm={12} md={5} spacing={1}>
                 <Grid item xs={12} sm={12} md={12}>
-                    <Contact contactInfo={(user) ? user.contacts : null}/>
+                    <Contact />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                     <Friends/>
@@ -61,8 +67,7 @@ const Profile: React.FC<PropsType> = ({user, match, getUserByIdThunk} ) => {
             </Grid>
         </Grid>
         </Fragment>
-};
+});
 
 
-// export default Profile;
 export default compose(withAuthRedirect)(Profile);

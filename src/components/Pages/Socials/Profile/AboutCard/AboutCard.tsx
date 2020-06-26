@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +12,18 @@ import ImageIcon from '@material-ui/icons/Image';
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Divider from "@material-ui/core/Divider";
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import {Fab, IconButton, Slide, Snackbar, Tooltip} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
+import AboutCardFormRedux from "./AboutCardForm";
+import CloseIcon from '@material-ui/icons/Close';
+import {SamuraiType} from "../../../../../types/socials";
+import Loaded from "../../../../Loaded";
+import {Alert} from "@material-ui/lab";
+import {formChecking} from "../../../../../hoc/FormEditCheck";
+import {compose} from "redux";
+
 
 const useStyle = makeStyles(theme => ({
     paper: {
@@ -42,16 +54,35 @@ const TabPanels: React.FC<PropsType> = ({ children, value, index, ...other }) =>
     </div>
 };
 
-const AboutCard = () => {
+function SlideTransition(props: any) {
+    return <Slide {...props} direction="up" />;
+}
+
+type PropsTypeAboutCard = {
+    user: SamuraiType | null
+    myIdUser: number | null
+    updateProfile: (formData: Omit<SamuraiType, 'photos'> ) => void
+    showEditMode: boolean
+    isEdit: boolean
+    editButton: React.ComponentType
+    closeEditMode: () => void
+}
+
+const AboutCard: React.FC<PropsTypeAboutCard> = ({ updateProfile, user, editButton, isEdit , closeEditMode }) => {
     const classes = useStyle();
+    if(!user)
+        return <Loaded/>
     return <Paper className={classes.paper}>
-    <Grid container justify={"space-between"} alignItems={"center"}>
-            <Grid item xs={3}>
+    <Grid container
+          direction="row"
+          justify="space-between"
+          alignItems="center">
+            <Grid item >
                 <Typography variant={"h3"}>
                     About
                 </Typography>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item>
                 <Tabs
                     value={0}
                     indicatorColor="primary"
@@ -59,55 +90,30 @@ const AboutCard = () => {
                     scrollButtons="auto"
                 >
                     <Tab label="Overview" />
-                    <Tab label="Work"  />
-                    <Tab label="Education"  />
                 </Tabs>
             </Grid>
+         <Grid item>
+             {editButton}
+        </Grid>
         </Grid>
         <Divider/>
-        <TabPanels value={0} index={0}>
+        {isEdit ? <AboutCardFormRedux lookingJob={user.lookingForAJob} desc={user.lookingForAJobDescription} onSubmit={(formData: any) => { updateProfile(formData); closeEditMode()} }/> :
+            <TabPanels value={0} index={0}>
             <Grid container>
                 <Grid item xs={12} sm={12} md={6}>
                     <List component="nav">
                         <ListItem>
                             <ListItemIcon>
-                                    <ImageIcon />
+                                { user.lookingForAJob ? <CheckCircleRoundedIcon color={"primary"}/> : <CancelRoundedIcon/>}
                             </ListItemIcon>
-                            <ListItemText primary="G-axon Tech Pvt. Ltd." secondary="work at"/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                    <ImageIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="G-axon Tech Pvt. Ltd." secondary="went to"/>
-                        </ListItem>
-                    </List>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                    <List component="nav">
-                        <ListItem>
-                            <ListItemIcon>
-                                    <ImageIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Oxford University" secondary="birthday"/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon>
-                                    <ImageIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="G-axon Tech Pvt. Ltd." secondary="lives in"/>
+                            <ListItemText secondary={"Looking job?"} primary={user.lookingForAJobDescription}/>
                         </ListItem>
                     </List>
                 </Grid>
             </Grid>
-        </TabPanels>
-        <TabPanels value={0} index={1}>
-            Item Two
-        </TabPanels>
-        <TabPanels value={0} index={2}>
-            Item Three
-        </TabPanels>
+        </TabPanels>}
+
     </Paper>
 };
 
-export default AboutCard;
+export default compose(formChecking)(AboutCard);

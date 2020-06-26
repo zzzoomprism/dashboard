@@ -63,7 +63,6 @@ const App = () => {
         <AppBarNavigation />
         <SideBarDrawer />
               <Content/>
-        <Footer/>
       </Fragment>
     </ThemeProvider>
   );

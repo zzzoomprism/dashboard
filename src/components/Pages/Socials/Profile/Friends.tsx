@@ -11,7 +11,6 @@ import Badge from "@material-ui/core/Badge";
 
 const useStyle = makeStyles(theme=>({
     paper: {
-
         marginBottom: theme.spacing(1),
         padding: theme.spacing(3)
     },

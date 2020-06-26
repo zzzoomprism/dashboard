@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -14,6 +14,9 @@ import LargeAvatar from "../../../../utils/helpers/LargeAvatar";
 import {PeopleType, SamuraiType} from "../../../../types/socials";
 import Loaded from "../../../Loaded";
 import Skeleton from "@material-ui/lab/Skeleton";
+import FollowButtonContainer from "../components/FollowButtonContainer";
+import {serverAPI} from "../../../../api/api";
+import {CircularProgress} from "@material-ui/core";
 
 
 const useStyle = makeStyles((theme)=>({
@@ -45,19 +48,34 @@ const useStyle = makeStyles((theme)=>({
 }));
 
 type Props = {
-    profile_info: SamuraiType | null
+    profile_info: SamuraiType | null,
+    userId: number | null,
+    people: Array<PeopleType>,
+    isCurrentUserFollowed: boolean
+    getCurrentUserFollow: (id: number) => void
 }
 
 
-const ProfileAppBar: React.FC<Props> = ({profile_info}) => {
+const ProfileAppBar: React.FC<Props> = ({profile_info, userId,getCurrentUserFollow,isCurrentUserFollowed, people}) => {
     const classes = useStyle();
+
     const [statusMenuIsOpen, setStatusMenu] = useState(false);
     // const [anchorEl, setAnchorEl] = React.useState( "" );
     const handleMenuOpen: React.ReactEventHandler<EventTarget> = (event) => {
         setStatusMenu(!statusMenuIsOpen);
         // setAnchorEl(event.currentTarget);
     }
+    const [getFollowLoading, setLoading] = useState(false);
+    useEffect(()=>{
+        if(profile_info) {
+            setLoading(true);
+            getCurrentUserFollow(profile_info.userId);
+            setTimeout(()=>setLoading(false), 1000);
+        }
+        else
+            setLoading(true);
 
+    }, [profile_info])
     return <Fragment><Grid container className={classes.container}
                   direction="row"
                   alignItems="center" justify={"space-between"}>
@@ -95,7 +113,7 @@ const ProfileAppBar: React.FC<Props> = ({profile_info}) => {
 
                             <Typography component={"div"}>
                                 {
-                                    (!profile_info) ? <Skeleton animation="wave" height={10} width={"25%"}>
+                                    (!profile_info) ? <Skeleton animation="wave" height={10} width={150}>
                                             <Box fontSize={"h4.fontSize"} ml={2} mr={2}/>
                                         </Skeleton> :
                                         <Box fontSize={"h4.fontSize"} ml={2} mr={2}>
@@ -103,12 +121,11 @@ const ProfileAppBar: React.FC<Props> = ({profile_info}) => {
                                         </Box>
                                 }
                                 {
-                                    (!profile_info) ? <Skeleton animation="wave" height={10} width={"25%"}/> :
+                                    (!profile_info) ? <Skeleton animation="wave" height={10} width={150}/> :
                                         <Box fontSize={"body2.fontSize"} ml={2} mr={2}>
                                             Soligorsk, Belarus
                                         </Box>
                                 }
-
                                 </Typography>
                         </Box>
                     </Grid>
@@ -154,28 +171,38 @@ const ProfileAppBar: React.FC<Props> = ({profile_info}) => {
                         </Button>
                     </ButtonGroup>
                 </Box>
-
             </Grid>
-                        <Grid className={classes.menuBlock} container justify={"space-between"} alignItems={"center"}>
-                            <Grid item>
-                                <Link to="#" className={classes.links}>
-                                    About !
-                                </Link>
-                                <Link to="#" className={classes.links}>
-                                    Friends !
-                                </Link>
-                                <Link to="#" className={classes.links}>
-                                    Saved Jobs !
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Button
-                                    startIcon={<SettingsIcon />}
-                                >
-                                    Settings
-                                </Button>
-                            </Grid>
-                        </Grid>
+
+        { (profile_info && userId === profile_info.userId) ?
+            <Grid className={classes.menuBlock} container justify={"space-between"} alignItems={"center"}>
+                <Grid item>
+                    <Link to="#" className={classes.links}>
+                        About !
+                    </Link>
+                    <Link to="#" className={classes.links}>
+                        Friends !
+                    </Link>
+                    <Link to="#" className={classes.links}>
+                        Saved Jobs !
+                    </Link>
+                </Grid>
+                <Grid item>
+                    <Button
+                        startIcon={<SettingsIcon />}
+                    >
+                        Settings
+                    </Button>
+                </Grid>
+            </Grid>
+        :
+            <Grid className={classes.menuBlock} container justify={"flex-end"} alignItems={"center"}>
+                <Grid item>
+                    {getFollowLoading ? <CircularProgress/> : <FollowButtonContainer id={(!profile_info) ? 0 : profile_info.userId} followed={isCurrentUserFollowed}/>}
+                </Grid>
+            </Grid>
+
+        }
+
                     </Grid>
 
     </Fragment>

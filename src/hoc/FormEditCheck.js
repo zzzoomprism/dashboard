@@ -18,7 +18,7 @@ export const formChecking = (Component) => {
         return <Component {...props} showEditMode={edit} isEdit={isEdit} closeEditMode={() => setEditMode(false)}
                           editButton={edit &&
                           <Tooltip title="Edit" aria-label="add" onClick={() => setEditMode(!isEdit)}>
-                              <Fab size="small" color="primary">
+                              <Fab size="small" color="secondary">
                                   {(isEdit) ? <CloseIcon/> : <EditIcon/>}
                               </Fab>
                           </Tooltip>}/>

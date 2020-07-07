@@ -8,9 +8,9 @@ import {getUserByIdThunk} from "./profileReducer";
 
 const initialState = {
     people: [] as Array<PeopleType>,
+    followQueue: [] as Array<number>,
     loading: false as boolean,
     isCurrentUserFollowed: false,
-    followingIsFetching: false as boolean
 };
 
 
@@ -28,6 +28,7 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
                     return {...el, followed: true}
                 return el;
             })
+            newState.isCurrentUserFollowed = true;
             break;
         case "UNFOLLOW_ACTION":
             newState.people = state.people.map(el => {
@@ -35,23 +36,33 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
                     return {...el, followed: false}
                 return el;
             })
+            newState.isCurrentUserFollowed = false;
             break;
         case "SET_PEOPLE_LOADING":
             newState.loading = action.data;
             break;
         case "GET_USER_BY_ID":
+            let a;
             if(state.people.length !== 0) {
-                let a = state.people.find((item) => {
+                a = state.people.find((item) => {
                     if (item.id === action.userId)
                         return item;
                 });
                 if(a)
                 newState.isCurrentUserFollowed = a.followed;
+                console.log(a);
+                console.log(newState.isCurrentUserFollowed);
             }
             break;
-        case "SET_FOLLOW_LOADING":
-            newState.followingIsFetching = action.data;
+        case "SET_FOLLOW_QUEUE":
+            newState.followQueue = [...state.followQueue, action.id];
             break;
+        case "DELETE_FOLLOW_QUEUE":
+            newState.followQueue = state.followQueue.filter((el)=>{
+                return el !== action.id;
+            });
+            break;
+
     }
 
     return newState;
@@ -68,7 +79,8 @@ export const actions = {
     unfollowAction: (id: number) => ({type: "UNFOLLOW_ACTION", id: id}as const),
     setPeopleLoading: (data: boolean) => ({type: "SET_PEOPLE_LOADING", data: data }as const),
     getUserById: (userId: number) => ({type: "GET_USER_BY_ID", userId} as const),
-    setFollowLoading: (data: boolean) => ({type: "SET_FOLLOW_LOADING", data} as const),
+    setFollowQueue: (id: number) => ({type: "SET_FOLLOW_QUEUE", id} as const),
+    deleteFollowQueue: (id: number) => ({type: "DELETE_FOLLOW_QUEUE", id} as const),
 }
 
 type ActionType = InferActionTypes<typeof actions>;
@@ -83,21 +95,21 @@ export const setPeopleThunk = (page: number) :ThunkAction<void, RootStateType, a
 
 
 export const followingThunk = (userId : number):ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
-    dispatch(actions.setFollowLoading(true));
+    dispatch(actions.setFollowQueue(userId));
     serverAPI.follow(userId)
-       .then(response => {
-           dispatch(actions.followAction(userId));
-           dispatch(actions.setFollowLoading(false));
-       })
+        .then(() => {
+            dispatch(actions.followAction(userId));
+            dispatch(actions.deleteFollowQueue(userId));
+        });
 }
 
 
 export const unfollowingThunk = (userId : number):ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
-    dispatch(actions.setFollowLoading(true));
+    dispatch(actions.setFollowQueue(userId));
     serverAPI.unfollow(userId)
-        .then(response => {
+        .then(() => {
             dispatch(actions.unfollowAction(userId));
-            dispatch(actions.setFollowLoading(false));
+            dispatch(actions.deleteFollowQueue(userId));
         })
 }
 

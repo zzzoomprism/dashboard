@@ -71,7 +71,7 @@ const CryptoPrice = () => {
                   ['2018',  750 ]]}
               className={classes.charts}
               options={{
-                backgroundColor: blueGrey[900],
+                backgroundColor: "transparent",
                   colors: [lightGreen.A400,'white'],
                 chartArea: { width: "100%", height: "100%" },
                 vAxis: {
@@ -113,7 +113,7 @@ const CryptoPrice = () => {
                       ['2018',  200 ]]}
                   className={classes.charts}
                   options={{
-                      backgroundColor: blueGrey[900],
+                      backgroundColor: "transparent",
                       colors: [pink.A200],
                       chartArea: { width: "100%", height: "100%" },
                       vAxis: {
@@ -154,7 +154,7 @@ const CryptoPrice = () => {
                       ['2016',  100 ],]}
                   className={classes.charts}
                   options={{
-                      backgroundColor: blueGrey[900],
+                      backgroundColor: "transparent",
                       colors: [blue[500]],
                       chartArea: { width: "100%", height: "100%" },
                       vAxis: {
@@ -195,8 +195,8 @@ const CryptoPrice = () => {
                         ['2016',  100 ],]}
                     className={classes.charts}
                     options={{
-                        backgroundColor: blueGrey[900],
-                        colors: [blue[500]],
+                        backgroundColor: "transparent",
+                        colors: [blue[500], "red"],
                         chartArea: { width: "100%", height: "100%" },
                         vAxis: {
                             ticks: []

@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileAppBar from "../../../components/Pages/Socials/Profile/ProfileAppBar";
+import ProfileAppBar from "../../../components/Pages/Socials/Profile/ProfileAppBar/ProfileAppBar";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../redux/rootReducer";
 import {PeopleType, SamuraiType} from "../../../types/socials";

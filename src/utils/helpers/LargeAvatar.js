@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
 
 const LargeAvatar = (props) => {
     let classes = useStyle();
-    return <Badge color="primary" overlap="circle" badgeContent=" " onClick={props.click}
+    return <Badge color="secondary" overlap="circle" badgeContent=" " onClick={props.click}
                   anchorOrigin={{
                       vertical: 'top',
                       horizontal: 'right',

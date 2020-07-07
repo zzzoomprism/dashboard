@@ -3,9 +3,13 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Box} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {renderField} from "../../../../../utils/helpers/FormInput";
+import {SamuraiType} from "../../../../../types/socials";
+import Loaded from "../../../../Loaded";
+import {submitButton} from "../../../../../utils/helpers/SubmitButton";
+import BioFormField from "./BioFormField";
 
 type PropsType = {
-
+    isFetching: boolean
 }
 
 type FormPropsType = {
@@ -13,22 +17,14 @@ type FormPropsType = {
 }
 
 
-const BiographyForm:React.FC<InjectedFormProps<FormPropsType, PropsType> & PropsType> = ({handleSubmit}) => {
+const BiographyForm:React.FC<InjectedFormProps<FormPropsType, PropsType> & PropsType> = ({handleSubmit, isFetching}) => {
     return <form onSubmit={handleSubmit}>
         <Box mt={2}>
-       <Field
-            name="aboutMe"
-            component={renderField}
-            label={"About me description"}
-            variant={"outlined"}
-            multiline
-            rows={4}
-            fullWidth
-        />
+       <BioFormField/>
         <Box mt={3}>
-            <Button type={"submit"} variant="contained" component={"button"} color="primary" >
-                Ok!
-            </Button>
+            {
+                submitButton(isFetching, "Save", "contained", "primary")
+            }
         </Box>
         </Box>
     </form>
@@ -36,7 +32,8 @@ const BiographyForm:React.FC<InjectedFormProps<FormPropsType, PropsType> & Props
 
 
 let BiographyReduxForm = reduxForm<FormPropsType, PropsType>({
-    form: 'biography'
+    form: 'biography',
+    enableReinitialize: true
 })(BiographyForm)
 
 export default BiographyReduxForm

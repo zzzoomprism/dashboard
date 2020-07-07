@@ -30,7 +30,10 @@ const useStyles = makeStyles((theme)=>({
   },
   root:{
     background: theme.palette.background.default
-  }
+  },
+    menuCategory: {
+      paddingLeft: theme.spacing(2),
+    }
 }));
 
 const DashboardMenu = (props: any) => {
@@ -45,7 +48,6 @@ const DashboardMenu = (props: any) => {
 
   return (
     <Fragment>
-
       <ListItem alignItems="flex-start" button onClick={()=>setMenuOpen(!menuIsOpen)} className={classes.root}>
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -79,7 +81,7 @@ const DashboardMenu = (props: any) => {
 
 
 
-      <Typography variant={"overline"} color={"secondary"}>
+      <Typography variant={"overline"} color={"secondary"} className={classes.menuCategory}>
         Main
       </Typography>
       <ListItem button onClick={handleClick}>
@@ -132,7 +134,7 @@ const DashboardMenu = (props: any) => {
         <ListItemText primary="Widgets" />
       </ListItem>
 
-      <Typography variant={"overline"} color={"secondary"}>
+      <Typography variant={"overline"} color={"secondary"} className={classes.menuCategory}>
         In-built apps
       </Typography>
       <ListItem button>
@@ -159,7 +161,7 @@ const DashboardMenu = (props: any) => {
         </ListItemIcon>
         <ListItemText primary="Chat" />
       </ListItem>
-      <Typography variant={"overline"} color={"secondary"}>
+      <Typography variant={"overline"} color={"secondary"} className={classes.menuCategory}>
         Social Apps
       </Typography>
       <ListItem button>

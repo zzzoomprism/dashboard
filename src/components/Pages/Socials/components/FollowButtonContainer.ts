@@ -6,8 +6,8 @@ import {followingThunk, getCurrentUserFollow, unfollowingThunk} from "../../../.
 
 
 type MapStateType = {
-    isLoading: boolean
     peopleSetLoading:boolean
+    followQueue: Array<number>
 }
 
 type MapDispatchtype = {
@@ -20,8 +20,8 @@ type OwnPropsType = {
 }
 
 const mapStateToProps = (store: RootStateType) => ({
-    isLoading: store.people.followingIsFetching,
-    peopleSetLoading: store.people.loading
+    peopleSetLoading: store.people.loading,
+    followQueue: store.people.followQueue
 });
 
 

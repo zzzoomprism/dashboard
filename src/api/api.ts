@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {PeopleType, SamuraiType} from "../types/socials";
+import {ErrorType} from "../types/errors";
 
 const login_instance = axios.create({
     withCredentials: true,
@@ -31,8 +32,8 @@ export type AuthMeType = {
 type FormDataType = Omit<SamuraiType, 'photos'>;
 
 export enum ResultCodeEnum {
-    Success ,
-    Error
+    Success=0 ,
+    Error=1
 }
 
 export const serverAPI = {
@@ -64,7 +65,7 @@ export const serverAPI = {
         return login_instance.get(`follow/${userId}`)
             .then((response) => response.data);
     },
-    updateProfile: (data: FormDataType): Promise<ServerResultType<object>> => {
+    updateProfile: (data: FormDataType): Promise<ErrorType> => {
         return login_instance.put('profile', data)
             .then(res => res.data);
     }

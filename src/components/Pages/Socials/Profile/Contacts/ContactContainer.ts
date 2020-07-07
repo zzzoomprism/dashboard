@@ -6,7 +6,9 @@ import {updateProfile} from "../../../../../redux/Socials/profileReducer";
 
 
 const mapStateToProps = (store :RootStateType) => ({
-    user: store.profile.user
+    user: store.profile.user,
+    isFetching: store.profile.isFetching,
+    error: store.profile.error,
 });
 
 

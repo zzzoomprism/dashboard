@@ -4,7 +4,6 @@ import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ImageIcon from "@material-ui/icons/Image";
 import ListItemText from "@material-ui/core/ListItemText";
 import {Contacts, SamuraiType} from "../../../../../types/socials";
 import {Divider, List} from "@material-ui/core";
@@ -12,6 +11,13 @@ import Grid from "@material-ui/core/Grid";
 import ContactReduxForm from "./ContactForm";
 import {compose} from "redux";
 import {formChecking} from "../../../../../hoc/FormEditCheck";
+import {iconHelper} from "../../../../../utils/helpers/SocialNetworkIcon";
+import Loaded from "../../../../Loaded";
+import HeadLineOfProfilePaper from "../../components/HeadLineOfProfilePaper";
+import {ErrorType} from "../../../../../types/errors";
+import SnackBarContainer from "../../../components/SnackbarContainer";
+import {stopSubmit} from "redux-form";
+import {ResultCodeEnum} from "../../../../../api/api";
 
 
 const useStyle = makeStyles(theme=>({
@@ -29,45 +35,46 @@ type PropsType = {
     user: SamuraiType | null
     isEdit: boolean
     editButton: React.ComponentType
+    isFetching: boolean
+    error: ErrorType | null
     closeEditMode: () => void
-    updateProfile: (formData: Object) => void
+    updateProfile: (formData: Object, formName: string) => Promise<void>
 }
 
-const Contact:React.FC<PropsType> = ({user,  editButton, isEdit , closeEditMode, updateProfile}) => {
+const Contact:React.FC<PropsType> = ({user,  editButton, isEdit , closeEditMode, updateProfile, error, isFetching}) => {
     const classes = useStyle();
     let arrayList: any = [];
-    if(user) {
+    if(!user)
+        return <Loaded/>
+    const onSubmit = (formData: any) => {
+        updateProfile(formData, 'contacts')
+            .then(() => {
+                closeEditMode();
+            })
+            .catch((e)=>{
+                stopSubmit('contacts', e)
+            })
+    }
         for (let [key, value] of Object.entries(user.contacts)) {
             if (value)
-                arrayList = [...arrayList, <ListItem>
+                arrayList = [...arrayList, <ListItem key={value + "-edit-form"}>
                     <ListItemIcon>
-                        <ImageIcon/>
+                        {iconHelper(key)}
                     </ListItemIcon>
-                    <ListItemText primary={value} secondary={key}/>
+                    <ListItemText>
+                        <Typography noWrap variant={"body2"}>{value}</Typography>
+                    </ListItemText>
                 </ListItem>]
         }
-    }
 
     return <Paper className={classes.contact}>
-        <Grid container
-              direction="row"
-              justify="space-between"
-              alignItems="center">
-            <Grid item >
-                <Typography variant={"h3"}>
-                    Contacts
-                </Typography>
-            </Grid>
-            <Grid item >
-                {editButton}
-            </Grid>
-        </Grid>
-        <Divider/>
-        {isEdit ? <ContactReduxForm onSubmit={(formData: any) => { updateProfile({'contacts': formData}); closeEditMode()}}/> :
+        <HeadLineOfProfilePaper editButton={editButton} headline={"Contacts"}/>
+        {isEdit ? <ContactReduxForm isFetching={isFetching} initialValues={user} userInfo={user} onSubmit={onSubmit}/> :
             <List component="nav">
-            {arrayList}
+                    {arrayList}
         </List>}
-
+        {error && !isFetching &&
+        <SnackBarContainer error={error} successAlert={"Your information about you update successfully!"}/>}
     </Paper>
 };
 

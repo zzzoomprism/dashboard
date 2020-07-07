@@ -23,7 +23,6 @@ type PropsType = {
     setPeopleThunk : (page: number) => void
     people: Array<PeopleType>,
     isLoading: boolean
-
 }
 
 const ListOfPeople: React.FC<PropsType> = ({people, setPeopleThunk, isLoading  }) => {

@@ -54,7 +54,7 @@ const Friends = () =>{
               <ButtonBase className={classes.button}>
                   <Badge color="error" badgeContent=" " overlap="circle" variant="dot" component={"div"} className={classes.badge}>
                       {/* @ts-ignore*/}
-                      <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.largeAvatar} button>
+                      <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.largeAvatar} button={true}>
                           <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
                               Remy Sharp
                           </Typography>

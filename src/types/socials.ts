@@ -5,13 +5,13 @@ export type PhotoType = {
 
 export type Contacts = {
     github: string
-    vk: string
     facebook: string
     instagram: string
     twitter: string
-    website: string
     youtube: string
+    website: string
     mainLink:string
+    vk: string
 }
 
 export type SamuraiType = {

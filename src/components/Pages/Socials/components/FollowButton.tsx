@@ -5,16 +5,17 @@ import {CircularProgress} from "@material-ui/core";
 
 
 type PropsType = {
-    isLoading: boolean
-    followed?: any
+    followed?: boolean
     id: number
     peopleSetLoading: boolean
     followingThunk: (userId: number) => void
     unfollowingThunk: (userId: number) => void
+    followQueue: Array<number>
 }
 
 
-const FollowButton: React.FC<PropsType> = ({isLoading, followed, followingThunk, unfollowingThunk, id, peopleSetLoading}) => {
+const FollowButton: React.FC<PropsType> = ({ followed, followingThunk, unfollowingThunk, id, peopleSetLoading, followQueue}) => {
+    let isLoading = followQueue.includes(id);
     return <Fragment>
         {
             (isLoading || peopleSetLoading)  ? <CircularProgress/> :

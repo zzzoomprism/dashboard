@@ -1,7 +1,7 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
-import Biography from "../Biography/Biography";
+import Biography from "../Biography/BiographyContainer";
 import Friends from "../Friends";
 import ProfileAppBar from "../../../../../containers/Pages/Socials/ProfileAppBar";
 import {withAuthRedirect} from "../../../../../hoc/AuthRedirect";
@@ -9,7 +9,6 @@ import {compose} from "redux";
 import {SamuraiType} from "../../../../../types/socials";
 import Loaded from "../../../../Loaded";
 import AboutCard from "../AboutCard/AboutCardContainer";
-import {formChecking} from "../../../../../hoc/FormEditCheck";
 import Contact from "../Contacts/ContactContainer";
 
 
@@ -36,37 +35,36 @@ type PropsType = {
     getUserByIdThunk: (id: number) => void
 }
 
-const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk} ) => {
-    console.log(user);
+const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk}) => {
     const classes = useStyle();
     let id = match.params.id;
-    useEffect(()=>{
+    useEffect(() => {
         getUserByIdThunk(id);
     }, [id]);
-    if(!user)
+    if (!user)
         return <Loaded/>
     return <Fragment>
-        <ProfileAppBar />
-        <Grid container className={classes.paper} justify={"space-between"}>
-            <Grid container item xs={12} sm={12} md={7} spacing={2}>
-                    <Grid item xs={12} sm={12} md={12}>
-                        <AboutCard lookingForAJob={user.lookingForAJob} jobDescription={user.lookingForAJobDescription}/>
-                    </Grid>
+        <ProfileAppBar/>
+        <Grid container justify={"space-between"} alignItems={"flex-start"} className={classes.paper}>
+            <Grid container item xs={12} sm={12} md={7} spacing={1}>
                 <Grid item xs={12} sm={12} md={12}>
-                   <Biography description={user.aboutMe}
-                                fullname={user.fullName}/>
+                    <AboutCard lookingForAJob={user.lookingForAJob} jobDescription={user.lookingForAJobDescription}/>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12}>
+                    <Biography description={user.aboutMe}
+                               fullname={user.fullName}/>
                 </Grid>
             </Grid>
             <Grid container item xs={12} sm={12} md={5} spacing={1}>
                 <Grid item xs={12} sm={12} md={12}>
-                    <Contact />
+                    <Contact/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                     <Friends/>
                 </Grid>
             </Grid>
         </Grid>
-        </Fragment>
+    </Fragment>
 });
 
 

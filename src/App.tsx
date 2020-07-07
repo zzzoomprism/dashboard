@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBarNavigation from "./containers/AppBarNavigation";
 import {ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import lightGreen from "@material-ui/core/colors/lightGreen";
+import cyan from "@material-ui/core/colors/cyan";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import SideBarDrawer from "./containers/SideBarDrawer";
 import Footer from "./components/Footer";
@@ -12,9 +13,9 @@ import Content from "./components/Content";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: lightGreen.A100,
-      main: lightGreen.A400,
-      dark: lightGreen.A700
+      light: cyan.A100,
+      main: cyan.A200,
+      dark: cyan.A700
     },
     secondary: {
       light: blueGrey[200],
@@ -22,8 +23,8 @@ const theme = createMuiTheme({
       dark: blueGrey[900],
     },
     background: {
-      default: blueGrey[800],
-      paper: blueGrey[900],
+      default: "#323232",
+      paper: "#212121",
     },
     type: "dark",
   },

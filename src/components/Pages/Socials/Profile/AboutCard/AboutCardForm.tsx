@@ -1,12 +1,15 @@
 import React, {useState} from "react";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import Button from "@material-ui/core/Button";
-import {Box, FormControlLabel, Switch, TextField} from "@material-ui/core";
+import {Box, CircularProgress, FormControlLabel, Switch, TextField} from "@material-ui/core";
 import {renderField, renderSwitchField} from "../../../../../utils/helpers/FormInput";
+import {submitButton} from "../../../../../utils/helpers/SubmitButton";
+import AboutFormField from "./AboutFormField";
 
 type PropsType = {
     lookingJob: boolean
     desc: string
+    isFetching: boolean
 }
 
 type FormProps = {
@@ -26,32 +29,14 @@ type TextFieldType = {
 }
 
 
-const AboutCardForm: React.FC<InjectedFormProps<FormProps, PropsType> & PropsType> = ({handleSubmit, desc, lookingJob}) => {
-    const [checked, setChecked] = useState(lookingJob || false);
-    const handleChecked = () => {
-        setChecked(!checked);
-    }
+const AboutCardForm: React.FC<InjectedFormProps<FormProps, PropsType> & PropsType> = ({handleSubmit, desc, lookingJob, isFetching}) => {
+
     return <form onSubmit={handleSubmit}>
-        <Field
-            checked={checked}
-            onChange={handleChecked}
-            name="lookingForAJob"
-            component={renderSwitchField}
-            label={"Are you looking for a job?"}
-        />
-        {checked ? <Field
-            name="lookingForAJobDescription"
-            component={renderField}
-            label={"Looking for a job Description: "}
-            fullWidth
-            type="text"
-            placeholder="Short job description"
-            value={desc}
-        /> : ""}
+        <AboutFormField lookingJob={lookingJob}/>
         <Box mt={3}>
-            <Button type={"submit"} variant="contained" component={"button"} color="primary" >
-                Ok!
-            </Button>
+            {
+                submitButton(isFetching, "Save", "contained", "primary")
+            }
         </Box>
     </form>
 };

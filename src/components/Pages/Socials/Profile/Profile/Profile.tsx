@@ -42,7 +42,7 @@ const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk}
         getUserByIdThunk(id);
     }, [id]);
     if (!user)
-        return <Loaded/>
+        return <Loaded/>;
     return <Fragment>
         <ProfileAppBar/>
         <Grid container justify={"space-between"} alignItems={"flex-start"} className={classes.paper}>

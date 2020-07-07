@@ -16,8 +16,8 @@ const ShortInfoOfProfile: React.FC<PropsType> = ({profile_info}) => {
         <Box display={"flex"} alignItems={"center"} justifyContent="center">
             {
                 (!profile_info) ? <Skeleton variant={"circle"}>
-                    <LargeAvatar/>
-                </Skeleton> : <LargeAvatar>
+                    <LargeAvatar />
+                </Skeleton> : <LargeAvatar picture={(profile_info) ? profile_info.photos.large : ""}>
                 </LargeAvatar>
             }
             <Typography component={"div"}>

@@ -1,8 +1,8 @@
 import {Contacts, PhotoType, SamuraiType} from "../../types/socials";
-import {ResultCodeEnum, serverAPI} from "../../api/api";
+import {serverAPI} from "../../api/api";
 import {InferActionTypes, RootStateType} from "../rootReducer";
-import {Action, Dispatch} from "redux";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 import {ErrorType} from "../../types/errors";
 import {stopSubmit} from "redux-form";
 
@@ -24,18 +24,18 @@ const initialState = {
 };
 
 type InitialStateType = typeof initialState;
-const reducer = (state = initialState, action: ActionType) :InitialStateType => {
+const reducer = (state = initialState, action: ActionType): InitialStateType => {
     const newState = {...state};
     switch (action.type) {
         case "SET_FETCHING":
             newState.isFetching = action.isFetching;
             break;
         case "GET_USER":
-            if(action.user)
-            newState.user = {...action.user};
+            if (action.user)
+                newState.user = {...action.user};
             break;
         case "SET_FORM_DATA":
-            if(state.user) {
+            if (state.user) {
                 let formdata = {...state.user};
                 formdata.contacts = {...state.user.contacts};
                 delete formdata.photos;
@@ -47,6 +47,14 @@ const reducer = (state = initialState, action: ActionType) :InitialStateType => 
         case "SET_ERROR_MESSAGE":
             newState.error = {...action.error};
             break;
+        case "SET_PROFILE_PHOTO":
+            if (state.user) {
+                let obj = {...state.user};
+                obj.photos = {...action.images};
+                newState.user = {...obj};
+            }
+            console.log(newState.user);
+            break;
     }
     return newState;
 };
@@ -54,11 +62,11 @@ export default reducer;
 
 const actions = {
     getUser: (user: SamuraiType | null) => ({type: "GET_USER", user} as const),
-    setErrorData: (error: ErrorType) => ({type: "SET_ERROR_MESSAGE", error: error} as const) ,
+    setErrorData: (error: ErrorType) => ({type: "SET_ERROR_MESSAGE", error: error} as const),
     setFetching: (isFetching: boolean) => ({type: "SET_FETCHING", isFetching} as const),
     setFormData: (dataForm: Omit<SamuraiType, 'photos'>) => ({type: "SET_FORM_DATA", dataForm} as const),
-
-}
+    setPhotos: (images: PhotoType) => ({type: "SET_PROFILE_PHOTO", images} as const),
+};
 
 type ActionType = InferActionTypes<typeof actions>
 
@@ -69,57 +77,64 @@ export const getUserByIdThunk = (userId: number) => (dispatch: Dispatch<ActionTy
             dispatch(actions.getUser(user));
             console.log(user);
         })
-}
+};
 
+export const updatePhoto = (image: any): ThunkAction<void, RootStateType, any, ActionType> => (dispatch) => {
+    let formData = new FormData();
+    formData.append("image", image);
+    return serverAPI.updatePhoto(formData)
+        .then(res => {
+            dispatch(actions.setPhotos(res.data.photos));
+        });
+};
 
 // export type ThunkAction<R, S, E, A extends Action> = (
 //     dispatch: ThunkDispatch<S, E, A>,
 //     getState: () => S,
 //     extraArgument: E
 // ) => R;
-export const updateProfile = (data: any, formName:string):ThunkAction<void, RootStateType, any, ActionType> => async (dispatch, getState: any) => {
+export const updateProfile = (data: any, formName: string): ThunkAction<void, RootStateType, any, ActionType> => async (dispatch, getState: any) => {
     dispatch(actions.setFetching(true));
     dispatch(actions.setFormData(data));
     let response = await serverAPI.updateProfile(getState().profile.dataForm);
-                if(response.resultCode === 0){
-                    dispatch(getUserByIdThunk(getState().app.user));
-                    dispatch(actions.setErrorData(response));
-                    dispatch(actions.setFetching(false));
-                }
-             else {
-                 let objKeys = {...getState().profile.dataForm}
-                 delete objKeys.contacts;
-                 let arrayKey = Object.keys(objKeys);
-                    let key = arrayKey.filter((el)=>{
-                      for(let i = 0; i < response.messages.length; i++) {
-                          if (response.messages[i].toLowerCase().includes(el))
-                              return el;
-                      }
-                })
-                let contactsKeys = [ "facebook", "twitter", "vk", "github", "mainLink", "instagram", "website", "youtube" ];
-                    let key2 = contactsKeys.filter((el)=> {
-                        for (let i = 0; i < response.messages.length; i++) {
-                            if (response.messages[i].toLowerCase().includes(el))
-                                return el;
-                        }
-                    });
-                    let errorStack = {};
-                 for(let i = 0; i < key.length; i++){
-                     errorStack = Object.assign(errorStack,{[key[i]]: response.messages[i]});
-                 }
-                 let contactsError = {contacts: {}};
-                    for(let i = 0; i < key2.length; i++){
-                       contactsError.contacts = {...contactsError.contacts, [key2[i]]: response.messages[i]};
-                    }
-                    errorStack =  Object.assign(errorStack,contactsError);
-                    console.log(key2);
-                    console.log(errorStack);
-                 //@ts-ignore
-                    dispatch(stopSubmit(formName, errorStack))
-                    dispatch(actions.setErrorData(response));
-                    dispatch(actions.setFetching(false));
-                    return Promise.reject(response);
-                }
+    if (response.resultCode === 0) {
+        dispatch(getUserByIdThunk(getState().app.user));
+        dispatch(actions.setErrorData(response));
+        dispatch(actions.setFetching(false));
+    } else {
+        let objKeys = {...getState().profile.dataForm}
+        delete objKeys.contacts;
+        let arrayKey = Object.keys(objKeys);
+        let key = arrayKey.filter((el) => {
+            for (let i = 0; i < response.messages.length; i++) {
+                if (response.messages[i].toLowerCase().includes(el))
+                    return el;
+            }
+        });
+        let contactsKeys = ["facebook", "twitter", "vk", "github", "mainLink", "instagram", "website", "youtube"];
+        let key2 = contactsKeys.filter((el) => {
+            for (let i = 0; i < response.messages.length; i++) {
+                if (response.messages[i].toLowerCase().includes(el))
+                    return el;
+            }
+        });
+        let errorStack = {};
+        for (let i = 0; i < key.length; i++) {
+            errorStack = Object.assign(errorStack, {[key[i]]: response.messages[i]});
+        }
+        let contactsError = {contacts: {}};
+        for (let i = 0; i < key2.length; i++) {
+            contactsError.contacts = {...contactsError.contacts, [key2[i]]: response.messages[i]};
+        }
+        errorStack = Object.assign(errorStack, contactsError);
+        console.log(key2);
+        console.log(errorStack);
+        //@ts-ignore
+        dispatch(stopSubmit(formName, errorStack))
+        dispatch(actions.setErrorData(response));
+        dispatch(actions.setFetching(false));
+        return Promise.reject(response);
+    }
 
-}
+};
 

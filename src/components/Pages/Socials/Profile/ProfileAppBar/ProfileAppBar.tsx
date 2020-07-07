@@ -53,7 +53,7 @@ const ProfileAppBar: React.FC<PropsType> = ({profile_info, userId, getCurrentUse
         } else
             setLoading(true);
 
-    }, [profile_info])
+    }, [profile_info]);
     return <Fragment><Grid container className={classes.container}
                            direction="row"
                            alignItems="center" justify={"space-between"}>

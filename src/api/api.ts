@@ -68,6 +68,14 @@ export const serverAPI = {
     updateProfile: (data: FormDataType): Promise<ErrorType> => {
         return login_instance.put('profile', data)
             .then(res => res.data);
+    },
+    updatePhoto: (image: any) => {
+        return login_instance.put('profile/photo', image, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+            .then(res=>res.data);
     }
 }
 

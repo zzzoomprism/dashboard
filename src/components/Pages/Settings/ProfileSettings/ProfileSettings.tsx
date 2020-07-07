@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from 'react';
 import {Divider, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import ProfileForm from "./ProfileForm";
-import AvatarSetting from "./AvatarSetting";
+import AvatarSetting from "../ProfilePhoto/AvatarSettingContainer";
 import {SamuraiType} from "../../../../types/socials";
 import Loaded from "../../../Loaded";
 import SnackBarContainer from "../../components/SnackbarContainer";
@@ -30,9 +30,9 @@ const ProfileSettings: React.FC<PropsType> = ({profile, updateProfile, error, is
     const classes = useStyle();
     const onSubmit = (formData: any) => {
         updateProfile(formData, 'profileSettings')
-    }
+    };
     if (!profile)
-        return <Loaded/>
+        return <Loaded/>;
     return (
         <Fragment>
             <Typography variant={"h3"}>Public Profile</Typography>
@@ -45,7 +45,7 @@ const ProfileSettings: React.FC<PropsType> = ({profile, updateProfile, error, is
                 </Grid>
                 <Grid container item xs={12} sm={12} md={5} justify="center"
                       alignItems="center">
-                    <AvatarSetting/>
+                    <AvatarSetting user={profile}/>
                 </Grid>
             </Grid>
             {error && !isFetching &&

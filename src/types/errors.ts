@@ -6,5 +6,5 @@ enum ErrorCode {
 export type ErrorType = {
     resultCode: ErrorCode,
     messages: Array<string>
-    data: {}
+    data: {  }
 }

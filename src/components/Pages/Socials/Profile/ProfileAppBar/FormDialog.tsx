@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 const FormDialog = () => {
     const [open, setOpen] = useState(false);
-    const handleClose = () =>{
+    const handleClose = () => {
         setOpen(false);
     }
     return (

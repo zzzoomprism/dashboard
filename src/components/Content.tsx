@@ -1,5 +1,5 @@
 import React, {Suspense} from "react";
-import {Route, Switch, Redirect} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import Profile from "./Pages/Socials/Profile/Profile/ProfileContainer";
 import Auth from "../containers/Auth";
@@ -33,7 +33,7 @@ const Content = () => {
                 <Route exact path={"/socials/people"} component={People}/>
                 <Route exact path={"/auth"} component={Auth}/>
                 <Route path={"/settings"} component={Settings}/>
-                <Route exact path={"/"} render={()=><Redirect to={"/auth"}/> }/>
+                <Route exact path={"/"} render={() => <Redirect to={"/auth"}/>}/>
             </Switch>
         </Suspense>
     );

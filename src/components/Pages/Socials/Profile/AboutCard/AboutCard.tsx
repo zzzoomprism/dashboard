@@ -2,7 +2,6 @@ import React from "react";
 import {compose} from "redux";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import {makeStyles} from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -51,21 +50,20 @@ const AboutCard: React.FC<PropsTypeAboutCard> = ({updateProfile, user, editButto
     }
     return <Paper className={classes.paper}>
         <HeadLineOfProfilePaper editButton={editButton} headline={"About"}/>
-        {isEdit ? <AboutCardFormRedux initialValues={user} lookingJob={user.lookingForAJob} isFetching={isFetching}
-                                      desc={user.lookingForAJobDescription} onSubmit={onSubmit}/> :
-                <Grid container>
-                    <Grid item xs={12} sm={12} md={6}>
-                        <List component="nav">
-                            <ListItem>
-                                <ListItemIcon>
-                                    {user.lookingForAJob ? <CheckCircleRoundedIcon color={"primary"}/> :
-                                        <CancelRoundedIcon/>}
-                                </ListItemIcon>
-                                <ListItemText secondary={"Looking job?"} primary={user.lookingForAJobDescription}/>
-                            </ListItem>
-                        </List>
-                    </Grid>
-                </Grid> }
+        {isEdit ? <AboutCardFormRedux initialValues={user} lookingJob={user.lookingForAJob} isFetching={isFetching} onSubmit={onSubmit}/> :
+            <Grid container>
+                <Grid item xs={12} sm={12} md={6}>
+                    <List component="nav">
+                        <ListItem>
+                            <ListItemIcon>
+                                {user.lookingForAJob ? <CheckCircleRoundedIcon color={"primary"}/> :
+                                    <CancelRoundedIcon/>}
+                            </ListItemIcon>
+                            <ListItemText secondary={"Looking job?"} primary={user.lookingForAJobDescription}/>
+                        </ListItem>
+                    </List>
+                </Grid>
+            </Grid>}
         {error && !isFetching &&
         <SnackBarContainer error={error} successAlert={"Your information about you update successfully!"}/>}
     </Paper>

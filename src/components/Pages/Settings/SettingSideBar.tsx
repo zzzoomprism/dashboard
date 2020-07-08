@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Drawer from "@material-ui/core/Drawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,8 +9,6 @@ import Divider from "@material-ui/core/Divider";
 import {makeStyles} from "@material-ui/core/styles";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import Box from "@material-ui/core/Box";
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,21 +44,21 @@ const SettingSideBar = () => {
             <Toolbar/>
             <div className={classes.drawerContainer}>
                 <List>
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText>
-                           <Typography variant={"caption"}> Robert Johnson</Typography>
+                    <ListItem alignItems="flex-start">
+                        <ListItemAvatar>
+                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
+                        </ListItemAvatar>
+                        <ListItemText>
+                            <Typography variant={"caption"}> Robert Johnson</Typography>
                             <Typography variant={"caption"}> Personal settings</Typography>
-                    </ListItemText>
-                </ListItem>
+                        </ListItemText>
+                    </ListItem>
                 </List>
                 <Typography variant={"overline"} color={"secondary"}>
                     Profile
                 </Typography>
                 <List>
-                    {['Personal Info'].map((text, index) => (
+                    {['Personal Info'].map((text) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text}/>
                         </ListItem>
@@ -71,7 +69,7 @@ const SettingSideBar = () => {
                     Appearance
                 </Typography>
                 <List>
-                    {['Theme'].map((text, index) => (
+                    {['Theme'].map((text) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text}/>
                         </ListItem>

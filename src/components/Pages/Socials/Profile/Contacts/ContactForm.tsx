@@ -1,7 +1,6 @@
 import React from "react";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {SamuraiType} from "../../../../../types/socials";
-import {renderTextFieldWithIcon} from "../../../../../utils/helpers/FormInput";
 import {Box} from "@material-ui/core";
 import Loaded from "../../../../Loaded";
 import {submitButton} from "../../../../../utils/helpers/SubmitButton";
@@ -17,7 +16,7 @@ const ContactForm: React.FC<InjectedFormProps<SamuraiType, PropsType> & PropsTyp
         return <Loaded/>
 
     return <form onSubmit={handleSubmit}>
-       <FormFields userInfo={userInfo}/>
+        <FormFields userInfo={userInfo}/>
         <Box mt={3}>
             {
                 submitButton(isFetching, "Save", "contained", "primary")

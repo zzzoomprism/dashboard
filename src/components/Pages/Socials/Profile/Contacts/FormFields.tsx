@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import {Field} from "redux-form";
 import {renderTextFieldWithIcon} from "../../../../../utils/helpers/FormInput";
 import {SamuraiType} from "../../../../../types/socials";
@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 
-const FormFields:React.FC<PropsType> = ({userInfo}) => {
+const FormFields: React.FC<PropsType> = ({userInfo}) => {
     let fieldsArray = Object.keys(userInfo.contacts).map((el) => {
         return <Field
             name={`contacts.${el}`}

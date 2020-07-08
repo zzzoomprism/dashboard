@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment} from "react";
 import {FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -7,7 +7,7 @@ import SyncAltIcon from '@material-ui/icons/SyncAlt';
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {Field} from "redux-form";
-import {comparison, required} from "../../../../../utils/validators/validator";
+import {required} from "../../../../../utils/validators/validator";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyle = makeStyles((theme: any) => ({
@@ -33,10 +33,10 @@ type FieldProps = {
     custom?: any
 }
 
-const renderTextField:React.FC<FieldProps>=({label, classNameStyle, input, meta: {touched, error}, ...custom})=>{
+const renderTextField: React.FC<FieldProps> = ({label, classNameStyle, input, meta: {touched, error}, ...custom}) => {
     let hasError = touched && error;
     return <FormControl className={classNameStyle}>
-        <TextField {...input} {...custom} error={hasError} />
+        <TextField {...input} {...custom} error={hasError}/>
     </FormControl>
 }
 
@@ -64,21 +64,20 @@ const Calculator: React.FC<PropsType> = ({result, loading, from, to, amount}) =>
     //@ts-ignore
     return <Fragment>
 
-        <Field name={"from"} label="From"  component={renderField} className={classes.input} validate={[required]}>
+        <Field name={"from"} label="From" component={renderField} className={classes.input} validate={[required]}>
             <MenuItem value={"USD"}>USD</MenuItem>
             <MenuItem value={"EUR"}>EUR</MenuItem>
             <MenuItem value={"RUB"}>RUB</MenuItem>
         </Field>
 
 
-
-        <Field name={"to"} label="To"  component={renderField} className={classes.input} validate={[required]}>
+        <Field name={"to"} label="To" component={renderField} className={classes.input} validate={[required]}>
             <MenuItem value={"USD"}>USD</MenuItem>
             <MenuItem value={"EUR"}>EUR</MenuItem>
             <MenuItem value={"RUB"}>RUB</MenuItem>
         </Field>
 
-        <Field name="amount" label="Amount"  component={renderTextField} classNameStyle={classes.textField}/>
+        <Field name="amount" label="Amount" component={renderTextField} classNameStyle={classes.textField}/>
 
         <Box display={"flex"}>
             <Box mt={3} mr={3}>
@@ -93,7 +92,7 @@ const Calculator: React.FC<PropsType> = ({result, loading, from, to, amount}) =>
             <Box mt={(loading) ? 3 : 4}>
                 <Typography variant={"h4"} color={"secondary"}>
                     {loading ? <CircularProgress
-                        size={30}/>  : (result) ? `${amount}  ${from } = ${result} ${to}` : ""}
+                        size={30}/> : (result) ? `${amount}  ${from} = ${result} ${to}` : ""}
                 </Typography>
             </Box>
         </Box>

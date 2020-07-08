@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import {Divider, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import ProfileForm from "./ProfileForm";
@@ -6,7 +6,6 @@ import AvatarSetting from "../ProfilePhoto/AvatarSettingContainer";
 import {SamuraiType} from "../../../../types/socials";
 import Loaded from "../../../Loaded";
 import SnackBarContainer from "../../components/SnackbarContainer";
-import Paper from "@material-ui/core/Paper";
 import {ErrorType} from "../../../../types/errors";
 
 
@@ -16,6 +15,10 @@ const useStyle = makeStyles((theme) => ({
             marginTop: theme.spacing(2),
         },
     },
+    gridMargin: {
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(5),
+    }
 
 }));
 
@@ -37,19 +40,19 @@ const ProfileSettings: React.FC<PropsType> = ({profile, updateProfile, error, is
         <Fragment>
             <Typography variant={"h3"}>Public Profile</Typography>
             <Divider/>
-            <Grid container direction="row"
+            <Grid container direction="row-reverse"
                   justify="space-between"
                   alignItems="flex-start" className={classes.root}>
+                <Grid container item xs={12} sm={12} md={5} justify="center"
+                      alignItems="center" className={classes.gridMargin}>
+                    <AvatarSetting/>
+                </Grid>
                 <Grid item xs={12} sm={12} md={7}>
                     <ProfileForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                 </Grid>
-                <Grid container item xs={12} sm={12} md={5} justify="center"
-                      alignItems="center">
-                    <AvatarSetting user={profile}/>
-                </Grid>
             </Grid>
             {error && !isFetching &&
-            <SnackBarContainer error={error} successAlert={"Your information about you update successfully!"}/>}
+            <SnackBarContainer error={error} successAlert={"Information was updated successfully!"}/>}
         </Fragment>
     );
 };

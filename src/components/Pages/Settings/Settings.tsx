@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import SettingSideBar from "./SettingSideBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import {HashRouter, Route, Switch} from "react-router-dom";
 import ProfileSettings from "./ProfileSettings/ProfileSettingsContainer";
 import ThemeSettings from "./ThemeSettings";

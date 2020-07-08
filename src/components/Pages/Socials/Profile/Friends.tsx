@@ -9,18 +9,18 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Badge from "@material-ui/core/Badge";
 
 
-const useStyle = makeStyles(theme=>({
+const useStyle = makeStyles(theme => ({
     paper: {
         marginBottom: theme.spacing(1),
         padding: theme.spacing(3)
     },
-    button:{
-        width: "calc(100% / 3 - " + theme.spacing(1)  + "px)",
+    button: {
+        width: "calc(100% / 3 - " + theme.spacing(1) + "px)",
         height: theme.spacing(15),
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(2),
     },
-    badge:{
+    badge: {
         width: "100%",
         height: "100%",
     },
@@ -34,44 +34,50 @@ const useStyle = makeStyles(theme=>({
     },
 }));
 
-const Friends = () =>{
+const Friends = () => {
     const classes = useStyle();
     return <Paper className={classes.paper}>
         <Typography variant={"h3"}>
             Friends - 539
         </Typography>
         <Divider/>
-          <Box display={"flex"}>
-              <ButtonBase className={classes.button}>
-              <Badge color="primary" badgeContent=" " overlap="circle" variant="dot" component={"div"} className={classes.badge}>
-                  <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.largeAvatar}>
-                      <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
-                          Remy Sharp
-                      </Typography>
-                  </Avatar>
-              </Badge>
-              </ButtonBase>
-              <ButtonBase className={classes.button}>
-                  <Badge color="error" badgeContent=" " overlap="circle" variant="dot" component={"div"} className={classes.badge}>
-                      {/* @ts-ignore*/}
-                      <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.largeAvatar} button={true}>
-                          <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
-                              Remy Sharp
-                          </Typography>
-                      </Avatar>
-                  </Badge>
-              </ButtonBase>
-              <ButtonBase className={classes.button}>
-                  <Badge color="primary" badgeContent=" " overlap="circle" variant="dot" component={"div"} className={classes.badge}>
-                      {/* @ts-ignore*/}
-                      <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.largeAvatar} button>
-                          <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
-                              Remy Sharp
-                          </Typography>
-                      </Avatar>
-                  </Badge>
-              </ButtonBase>
-          </Box>
+        <Box display={"flex"}>
+            <ButtonBase className={classes.button}>
+                <Badge color="primary" badgeContent=" " overlap="circle" variant="dot" component={"div"}
+                       className={classes.badge}>
+                    <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg"
+                            className={classes.largeAvatar}>
+                        <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
+                            Remy Sharp
+                        </Typography>
+                    </Avatar>
+                </Badge>
+            </ButtonBase>
+            <ButtonBase className={classes.button}>
+                <Badge color="error" badgeContent=" " overlap="circle" variant="dot" component={"div"}
+                       className={classes.badge}>
+                    {/* @ts-ignore*/}
+                    <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg"
+                            className={classes.largeAvatar} button={true}>
+                        <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
+                            Remy Sharp
+                        </Typography>
+                    </Avatar>
+                </Badge>
+            </ButtonBase>
+            <ButtonBase className={classes.button}>
+                <Badge color="primary" badgeContent=" " overlap="circle" variant="dot" component={"div"}
+                       className={classes.badge}>
+                    {/* @ts-ignore*/}
+                    <Avatar variant="rounded" alt="Remy Sharp" src="/static/images/avatar/1.jpg"
+                            className={classes.largeAvatar} button>
+                        <Typography variant={"caption"} color={"primary"} className={classes.namesOfAvatar}>
+                            Remy Sharp
+                        </Typography>
+                    </Avatar>
+                </Badge>
+            </ButtonBase>
+        </Box>
     </Paper>
 };
 

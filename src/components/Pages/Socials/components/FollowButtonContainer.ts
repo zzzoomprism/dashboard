@@ -1,12 +1,11 @@
-import React from "react";
 import {connect} from "react-redux";
 import FollowButton from "./FollowButton";
 import {RootStateType} from "../../../../redux/rootReducer";
-import {followingThunk, getCurrentUserFollow, unfollowingThunk} from "../../../../redux/Socials/peopleReducer";
+import {followingThunk, unfollowingThunk} from "../../../../redux/Socials/peopleReducer";
 
 
 type MapStateType = {
-    peopleSetLoading:boolean
+    peopleSetLoading: boolean
     followQueue: Array<number>
 }
 
@@ -26,4 +25,7 @@ const mapStateToProps = (store: RootStateType) => ({
 
 
 //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState>
-export default connect<MapStateType, MapDispatchtype, OwnPropsType, RootStateType>(mapStateToProps, {followingThunk, unfollowingThunk })(FollowButton);
+export default connect<MapStateType, MapDispatchtype, OwnPropsType, RootStateType>(mapStateToProps, {
+    followingThunk,
+    unfollowingThunk
+})(FollowButton);

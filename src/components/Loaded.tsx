@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
 const Loaded = () => {
     const classes = useStyles();
     return <Backdrop open={true} className={classes.backdrop}>
-            <CircularProgress color="inherit"/>
-            </Backdrop>
+        <CircularProgress color="inherit"/>
+    </Backdrop>
 };
 
 

@@ -4,7 +4,6 @@ import Box from "@material-ui/core/Box";
 import Skeleton from "@material-ui/lab/Skeleton";
 import LargeAvatar from "../../../../../utils/helpers/LargeAvatar";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 
 export type PropsType = {
@@ -16,7 +15,7 @@ const ShortInfoOfProfile: React.FC<PropsType> = ({profile_info}) => {
         <Box display={"flex"} alignItems={"center"} justifyContent="center">
             {
                 (!profile_info) ? <Skeleton variant={"circle"}>
-                    <LargeAvatar />
+                    <LargeAvatar/>
                 </Skeleton> : <LargeAvatar picture={(profile_info) ? profile_info.photos.large : ""}>
                 </LargeAvatar>
             }

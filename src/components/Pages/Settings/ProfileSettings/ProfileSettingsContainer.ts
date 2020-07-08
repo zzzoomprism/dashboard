@@ -1,4 +1,3 @@
-import React from "react";
 import {connect} from "react-redux";
 import ProfileSettings from "./ProfileSettings";
 import {RootStateType} from "../../../../redux/rootReducer";
@@ -16,7 +15,7 @@ type MapDispatchType = {
     updateProfile: (formData: Omit<SamuraiType, 'photos'>, formName: string) => void
 }
 
-const mapStoreToProps = (store:RootStateType) =>({
+const mapStoreToProps = (store: RootStateType) => ({
     profile: store.profile.user,
     error: store.profile.error,
     isFetching: store.profile.isFetching

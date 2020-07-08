@@ -2,7 +2,6 @@ import React from 'react';
 import Box from "@material-ui/core/Box";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 
 const FollowersButton = () => {
     return (

@@ -58,13 +58,14 @@ const ProfileAppBar: React.FC<PropsType> = ({profile_info, userId, getCurrentUse
                            direction="row"
                            alignItems="center" justify={"space-between"}>
         <Grid item xs={12} sm={12} md={6}>
-             <ShortInfoOfProfile profile_info={profile_info}/>
+            <ShortInfoOfProfile profile_info={profile_info}/>
         </Grid>
         <Grid item xs={12} sm={12} md={5}>
-           <FollowersButton/>
+            <FollowersButton/>
         </Grid>
 
-       <ButtonsBar getFollowLoading={getFollowLoading} isCurrentUserFollowed={isCurrentUserFollowed} profile_info={profile_info} userId={userId}/>
+        <ButtonsBar getFollowLoading={getFollowLoading} isCurrentUserFollowed={isCurrentUserFollowed}
+                    profile_info={profile_info} userId={userId}/>
 
     </Grid>
 

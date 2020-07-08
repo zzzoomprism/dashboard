@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Card, CardContent, Typography, Button } from "@material-ui/core";
+import {Button, Card, CardContent, Grid, Typography} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Badge from "@material-ui/core/Badge";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -20,10 +20,10 @@ const useStyle = makeStyles({
 
 
 const PortfolioBalance = () => {
-   const classes = useStyle();
+    const classes = useStyle();
     return <Card className={classes.portfolioCard}>
-            <CardContent>
-                <Grid container>
+        <CardContent>
+            <Grid container>
                 <Grid item xs={12} sm={12} md={6}>
                     <Typography variant={"h4"}>
                         Your Portfolio Balance
@@ -32,7 +32,7 @@ const PortfolioBalance = () => {
                         <Box display={"inline"} fontSize={"h3.fontSize"}>
                             $1.123
                         </Box>
-                        <Badge badgeContent={<ArrowDropUpIcon/>} color={"default"} >
+                        <Badge badgeContent={<ArrowDropUpIcon/>} color={"default"}>
                             <Box display={"inline"} fontSize={"body2.fontSize"} ml={1} component={"span"}>
                                 10%
                             </Box>
@@ -42,52 +42,52 @@ const PortfolioBalance = () => {
                         Overall balance
                     </Typography>
                     <Box mt={2}>
-                    <Button variant="outlined" size={"small"} color={"primary"}>
-                        open
-                    </Button>
-                    <Button variant="outlined" color={"inherit"} size={"small"} className={classes.buttonGroup}>
-                        Delete
-                    </Button>
+                        <Button variant="outlined" size={"small"} color={"primary"}>
+                            open
+                        </Button>
+                        <Button variant="outlined" color={"inherit"} size={"small"} className={classes.buttonGroup}>
+                            Delete
+                        </Button>
                     </Box>
 
                 </Grid>
-                <Grid item xs={12} sm={12} md={6} >
+                <Grid item xs={12} sm={12} md={6}>
                     <Box mt={2}>
                         <Typography variant={"caption"} color={"secondary"}>
                             Portfolio Distribution
                         </Typography>
                     </Box>
                     <Box>
-                    <Typography variant={"overline"}>
-                        BTC | 8.74
-                        <LinearProgress variant="determinate" value={70} />
-                    </Typography>
-                    </Box>
-                    <Box>
                         <Typography variant={"overline"}>
                             BTC | 8.74
-                            <LinearProgress variant="determinate" value={60} />
+                            <LinearProgress variant="determinate" value={70}/>
                         </Typography>
                     </Box>
                     <Box>
                         <Typography variant={"overline"}>
                             BTC | 8.74
-                            <LinearProgress variant="determinate" value={20} />
+                            <LinearProgress variant="determinate" value={60}/>
+                        </Typography>
+                    </Box>
+                    <Box>
+                        <Typography variant={"overline"}>
+                            BTC | 8.74
+                            <LinearProgress variant="determinate" value={20}/>
                         </Typography>
                     </Box>
 
 
                 </Grid>
-                    <Box mt={2}>
-                        <Tooltip title="Add new wallet" aria-label="add" >
-                            <Fab color="primary">
-                                <AddIcon />
-                            </Fab>
-                        </Tooltip>
-                    </Box>
-                </Grid>
-            </CardContent>
-        </Card>
+                <Box mt={2}>
+                    <Tooltip title="Add new wallet" aria-label="add">
+                        <Fab color="primary">
+                            <AddIcon/>
+                        </Fab>
+                    </Tooltip>
+                </Box>
+            </Grid>
+        </CardContent>
+    </Card>
 
 };
 

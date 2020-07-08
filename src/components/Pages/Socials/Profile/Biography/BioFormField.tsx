@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import {renderField} from "../../../../../utils/helpers/FormInput";
 import {Field} from "redux-form";
 

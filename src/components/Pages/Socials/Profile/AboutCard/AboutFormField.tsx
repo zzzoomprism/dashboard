@@ -6,7 +6,7 @@ type PropsType = {
     lookingJob: boolean
 }
 
-const AboutFormField:React.FC<PropsType> = ({lookingJob}) => {
+const AboutFormField: React.FC<PropsType> = ({lookingJob}) => {
     const [checked, setChecked] = useState(lookingJob || false);
     const handleChecked = () => {
         setChecked(!checked);

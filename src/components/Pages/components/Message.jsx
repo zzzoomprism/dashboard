@@ -8,42 +8,45 @@ import Menu from "@material-ui/core/Menu";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyle = makeStyles((theme) => ({
-    menu:{
+    menu: {
         marginTop: theme.spacing(4),
-    }}));
+    }
+}));
 
 const Message = (props) => {
 
     const classes = useStyle();
-    return(
+    return (
         <Menu
             anchorEl={props.anchor}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
             keepMounted
-            transformOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            transformOrigin={{vertical: 'bottom', horizontal: 'center'}}
             open={props.menuOpen}
             onClose={props.func}
             className={classes.menu}
             color={"secondary"}
         >
             <MenuItem>
-                <Badge  badgeContent={4} color="primary">
+                <Badge badgeContent={4} color="primary">
                     <Avatar src={""}/>
                 </Badge>
                 <Box p={3}>
 
                     <Typography display={"block"} variant="h4" gutterBottom>Alex Rees</Typography>
-                    <Typography display={"block"} variant={"body2"} gutterBottom>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</Typography>
+                    <Typography display={"block"} variant={"body2"} gutterBottom>Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit...</Typography>
                 </Box>
             </MenuItem>
             <MenuItem>
-                <Badge  badgeContent={4} color="primary">
+                <Badge badgeContent={4} color="primary">
                     <Avatar src={""}/>
                 </Badge>
                 <Box p={3}>
 
                     <Typography display={"block"} variant="h4" gutterBottom>Alex Rees</Typography>
-                    <Typography display={"block"} variant={"body2"} gutterBottom>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</Typography>
+                    <Typography display={"block"} variant={"body2"} gutterBottom>Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit...</Typography>
                 </Box>
             </MenuItem>
         </Menu>

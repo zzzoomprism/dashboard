@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 
 
-const useStyle = makeStyles((theme)=>({
+const useStyle = makeStyles((theme) => ({
     footerComponent: {
         top: "auto",
         bottom: 0,
@@ -12,7 +12,7 @@ const useStyle = makeStyles((theme)=>({
         color: "white",
         padding: theme.spacing(4),
         float: "right",
-        [theme.breakpoints.up('md')]:{
+        [theme.breakpoints.up('md')]: {
             width: "calc(100% - 270px)",
         },
         border: "none",
@@ -23,9 +23,9 @@ const useStyle = makeStyles((theme)=>({
 
 const Footer = () => {
     const classes = useStyle();
-    return  <AppBar position={"relative"} className={classes.footerComponent}>
+    return <AppBar position={"relative"} className={classes.footerComponent}>
         <Typography variant={"body2"}>
-            Copyright  A.Susha.  Done by React JS and Material UI. © 2018
+            Copyright A.Susha. Done by React JS and Material UI. © 2018
 
         </Typography>
     </AppBar>

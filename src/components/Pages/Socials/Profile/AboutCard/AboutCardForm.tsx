@@ -1,14 +1,11 @@
-import React, {useState} from "react";
-import {reduxForm, Field, InjectedFormProps} from "redux-form";
-import Button from "@material-ui/core/Button";
-import {Box, CircularProgress, FormControlLabel, Switch, TextField} from "@material-ui/core";
-import {renderField, renderSwitchField} from "../../../../../utils/helpers/FormInput";
+import React from "react";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {Box} from "@material-ui/core";
 import {submitButton} from "../../../../../utils/helpers/SubmitButton";
 import AboutFormField from "./AboutFormField";
 
 type PropsType = {
     lookingJob: boolean
-    desc: string
     isFetching: boolean
 }
 
@@ -18,18 +15,8 @@ type FormProps = {
     handleSubmit: any
 }
 
-type TextFieldType = {
-    label: string
-    input: any
-    meta: {
-        touched: boolean
-        error: boolean
-    }
-    custom?: any
-}
 
-
-const AboutCardForm: React.FC<InjectedFormProps<FormProps, PropsType> & PropsType> = ({handleSubmit, desc, lookingJob, isFetching}) => {
+const AboutCardForm: React.FC<InjectedFormProps<FormProps, PropsType> & PropsType> = ({handleSubmit, lookingJob, isFetching}) => {
 
     return <form onSubmit={handleSubmit}>
         <AboutFormField lookingJob={lookingJob}/>

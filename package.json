@@ -16,7 +16,6 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/redux-form": "^8.2.6",
     "axios": "^0.19.2",
-    "fetch-mock": "^9.10.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-google-charts": "3.0.15",

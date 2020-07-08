@@ -67,10 +67,10 @@ describe('Testing thunk of profile`s reducer', ()=>{
         expect(dispatchMock).toBeCalledTimes(4);
     });
 
-    it('thunk updateProfile which update profile information should pass this test', async () =>{
-        const data = {...result};
-        const thunk = updateProfile(data, 'contacts');
-        await thunk(dispatchMock, getState, {});
-        expect(dispatchMock).toBeCalledTimes(6);
-    });
+    // it('thunk updateProfile which update profile information should pass this test', async () =>{
+    //     const data = {...result};
+    //     const thunk = updateProfile(data, 'contacts');
+    //     await thunk(dispatchMock, getState, {});
+    //     expect(dispatchMock).toBeCalledTimes(6);
+    // });
 });

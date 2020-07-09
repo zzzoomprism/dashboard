@@ -11,15 +11,21 @@ const useStyle = makeStyles((theme) => ({
     },
 }));
 
-const LargeAvatar = (props) => {
+type PropsType = {
+    click: ()=> void,
+    picture: string,
+    children: React.ComponentType
+}
+
+const LargeAvatar:React.FC<PropsType> = ({click, picture, children}) => {
     let classes = useStyle();
-    return <Badge color="secondary" overlap="circle" badgeContent=" " onClick={props.click}
+    return <Badge color="secondary" overlap="circle" badgeContent=" " onClick={click}
                   anchorOrigin={{
                       vertical: 'top',
                       horizontal: 'right',
                   }}>
-        <Avatar src={props.picture} className={classes.large} />
-        {props.children}
+        <Avatar src={picture} className={classes.large} />
+        {children}
     </Badge>
 };
 

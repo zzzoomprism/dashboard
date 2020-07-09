@@ -8,7 +8,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkIcon from '@material-ui/icons/Link';
 
 
-export const iconHelper = (key) => {
+export const iconHelper = (key:string) => {
     switch (key) {
         case 'github': return <GitHubIcon/>;
         case 'facebook' : return <FacebookIcon/>;

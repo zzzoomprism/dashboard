@@ -9,7 +9,6 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import FolderIcon from '@material-ui/icons/Folder';
-import WidgetsIcon from '@material-ui/icons/Widgets';
 import Typography from "@material-ui/core/Typography";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
@@ -18,11 +17,7 @@ import Menu from "@material-ui/core/Menu";
 import Box from "@material-ui/core/Box";
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import MailIcon from '@material-ui/icons/Mail';
-import ListIcon from '@material-ui/icons/List';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
-import ChatIcon from '@material-ui/icons/Chat';
 import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -100,65 +95,13 @@ const DashboardMenu = (props: any) => {
                     <ListItem button>
                         <ListItemText><NavLink to={"/dashboard/currency"}>Currency</NavLink></ListItemText>
                     </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Listing"/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Crm"/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Intranet"/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="eCommerce"/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="News"/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary="Misc"/>
-                    </ListItem>
                 </List>
             </Collapse>
             <ListItem button>
                 <ListItemIcon>
                     <FolderIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Folders"/>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <WidgetsIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Widgets"/>
-            </ListItem>
-
-            <Typography variant={"overline"} color={"secondary"} className={classes.menuCategory}>
-                In-built apps
-            </Typography>
-            <ListItem button>
-                <ListItemIcon>
-                    <MailIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Mail"/>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <ListIcon/>
-                </ListItemIcon>
-                <ListItemText primary="To do"/>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <PermContactCalendarIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Contact"/>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <ChatIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Chat"/>
+                <ListItemText><NavLink to={"/dashboard/folders"}>Folders</NavLink></ListItemText>
             </ListItem>
             <Typography variant={"overline"} color={"secondary"} className={classes.menuCategory}>
                 Social Apps
@@ -168,12 +111,6 @@ const DashboardMenu = (props: any) => {
                     <PersonIcon/>
                 </ListItemIcon>
                 <ListItemText><NavLink to={`/profile/${props.user || "me"}`}>Profile</NavLink></ListItemText>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <WidgetsIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Wall app"/>
             </ListItem>
             <ListItem button>
                 <ListItemIcon>

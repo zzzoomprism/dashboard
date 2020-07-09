@@ -26,17 +26,6 @@ const FollowersButton = () => {
                             Following
                         </Box>
                     </Box>
-
-                </Button>
-                <Button size={"small"}>
-                    <Box>
-                        <Box fontSize={"h4.fontSize"} display={"block"}>
-                            327
-                        </Box>
-                        <Box fontSize={"body2.fontSize"} display={"block"}>
-                            Friends
-                        </Box>
-                    </Box>
                 </Button>
             </ButtonGroup>
         </Box>

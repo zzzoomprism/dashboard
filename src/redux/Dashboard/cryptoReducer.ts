@@ -58,46 +58,14 @@ const reducer = (state = initialState, action: ActionType): InitialStateType =>{
 
 export default reducer;
 
-
-type SetUsersActionType = {
-    type: "SET_USERS",
-    users: Array<UserType>
-}
-type SetCurrentPageType = {
-    type: "SET_CURRENT_PAGE",
-    currentPage: number
-}
-type SetLoadedValueAction = {
-    type: "SET_LOADED_VALUE",
-    loaded: boolean
-}
-type SetNewsActionType = {
-    type: "SET_NEWS"
-    news: Array<NewsType>
-}
-type CurrencyType = {
-    type: "SET_CURRENCY_DATA"
-    from: string
-    to: string
-    amount: number
-}
-type CurrencyResultType = {
-    type: "SET_CURRENCY_RESULT",
-    result: number
-}
-type CalculateLoadingType = {
-    type: "SET_CALCULATE_LOADING",
-    loading: boolean
-}
-
 export const actions = {
-    setUsersAction: (users: Array<UserType>):SetUsersActionType => ({type: "SET_USERS", users}),
-    setCurrentPageAction: (currentPage: number): SetCurrentPageType => ({type: "SET_CURRENT_PAGE", currentPage}),
-    setLoadedValueAction: (data: boolean):SetLoadedValueAction => ({type: "SET_LOADED_VALUE", loaded: data}),
-    setNewsAction: (news: Array<NewsType>): SetNewsActionType => ({type: "SET_NEWS", news}),
-    setCalculateData: (calculate_from: string, calculate_to: string, calculate_amount: number): CurrencyType => ({type: "SET_CURRENCY_DATA", from: calculate_from, to: calculate_to, amount: calculate_amount}),
-    setCurrencyResult: (result: number):CurrencyResultType => ({type: "SET_CURRENCY_RESULT", result}),
-    setCalculateLoading: (loading: boolean): CalculateLoadingType => ({type: "SET_CALCULATE_LOADING", loading})
+    setUsersAction: (users: Array<UserType>) => ({type: "SET_USERS", users} as const),
+    setCurrentPageAction: (currentPage: number) => ({type: "SET_CURRENT_PAGE", currentPage} as const),
+    setLoadedValueAction: (data: boolean) => ({type: "SET_LOADED_VALUE", loaded: data} as const),
+    setNewsAction: (news: Array<NewsType>) => ({type: "SET_NEWS", news} as const),
+    setCalculateData: (calculate_from: string, calculate_to: string, calculate_amount: number) => ({type: "SET_CURRENCY_DATA", from: calculate_from, to: calculate_to, amount: calculate_amount} as const),
+    setCurrencyResult: (result: number) => ({type: "SET_CURRENCY_RESULT", result} as const),
+    setCalculateLoading: (loading: boolean) => ({type: "SET_CALCULATE_LOADING", loading} as const)
 }
 
 type ActionType = InferActionTypes<typeof actions>

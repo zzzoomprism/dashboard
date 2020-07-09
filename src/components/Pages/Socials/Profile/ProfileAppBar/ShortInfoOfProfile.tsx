@@ -16,8 +16,7 @@ const ShortInfoOfProfile: React.FC<PropsType> = ({profile_info}) => {
             {
                 (!profile_info) ? <Skeleton variant={"circle"}>
                     <LargeAvatar/>
-                </Skeleton> : <LargeAvatar picture={(profile_info) ? profile_info.photos.large : ""}>
-                </LargeAvatar>
+                </Skeleton> : <LargeAvatar picture={(profile_info) ? profile_info.photos.large : ""}/>
             }
             <Typography component={"div"}>
                 {

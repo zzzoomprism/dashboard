@@ -12,9 +12,9 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 type PropsType = {
-    click: ()=> void,
-    picture: string,
-    children: React.ComponentType
+    click?: ()=> void,
+    picture?: string | null,
+    children?: React.ComponentType
 }
 
 const LargeAvatar:React.FC<PropsType> = ({click, picture, children}) => {
@@ -24,7 +24,7 @@ const LargeAvatar:React.FC<PropsType> = ({click, picture, children}) => {
                       vertical: 'top',
                       horizontal: 'right',
                   }}>
-        <Avatar src={picture} className={classes.large} />
+        <Avatar src={picture || ""} className={classes.large} />
         {children}
     </Badge>
 };

@@ -3,6 +3,7 @@ import {actions, getUserByIdThunk, updatePhoto, updateProfile} from "./profileRe
 import {serverAPI} from "../../api/api";
 import {PhotoType, SamuraiType} from "../../types/socials";
 import {ErrorType} from "../../types/errors";
+import {createStore} from "redux";
 jest.mock("../../api/api");
 
 const dispatchMock = jest.fn();

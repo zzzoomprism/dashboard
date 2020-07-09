@@ -1,10 +1,8 @@
-enum ErrorCode {
-    'Succeess' = 0,
-    'ServerProblem' = 429
-}
+import {ResultCodeEnum} from "../api/api";
+
 
 export type ErrorType = {
-    resultCode: ErrorCode,
+    resultCode: ResultCodeEnum,
     messages: Array<string>
-    data: {  }
+    data: any
 }

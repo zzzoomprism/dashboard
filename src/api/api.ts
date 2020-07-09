@@ -10,7 +10,7 @@ const login_instance = axios.create({
     }
 });
 
-type ProfilesResType = {
+export type ProfilesResType = {
     items: Array<PeopleType>
     totalCount: number
     error: string | null
@@ -53,11 +53,11 @@ export const serverAPI = {
         return login_instance.get(`users?count=10&page=${page}`)
             .then((response:AxiosResponse<ProfilesResType>) => response.data);
     },
-    follow: (userId: number) :Promise<ServerResultType<object>> => {
+    follow: (userId: number) :Promise<ErrorType> => {
         return login_instance.post(`follow/${userId}`)
             .then((response) => response.data);
     },
-    unfollow: (userId: number) :Promise<ServerResultType<object>> => {
+    unfollow: (userId: number) :Promise<ErrorType> => {
         return login_instance.delete(`follow/${userId}`)
             .then(response => response.data);
     },

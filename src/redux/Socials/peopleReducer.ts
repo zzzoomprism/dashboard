@@ -13,12 +13,12 @@ const initialState = {
 };
 
 
-type InitialStateType = typeof initialState;
-const reducer = (state = initialState, action: ActionType): InitialStateType => {
+export type InitialStateType = typeof initialState;
+export const reducer = (state = initialState, action: ActionType): InitialStateType => {
     const newState = {...state};
     switch (action.type) {
         case "SET_PEOPLE_TO_STATE":
-            newState.people = action.people;
+            newState.people = [...action.people];
             break;
         case "FOLLOW_ACTION":
             newState.people = state.people.map(el => {
@@ -48,8 +48,6 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
                 });
                 if (a)
                     newState.isCurrentUserFollowed = a.followed;
-                console.log(a);
-                console.log(newState.isCurrentUserFollowed);
             }
             break;
         case "SET_FOLLOW_QUEUE":
@@ -90,7 +88,6 @@ export const setPeopleThunk = (page: number): ThunkAction<void, RootStateType, a
     dispatch(actions.setPeopleLoading(false));
 }
 
-
 export const followingThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
     dispatch(actions.setFollowQueue(userId));
     serverAPI.follow(userId)
@@ -99,7 +96,6 @@ export const followingThunk = (userId: number): ThunkAction<void, RootStateType,
             dispatch(actions.deleteFollowQueue(userId));
         });
 }
-
 
 export const unfollowingThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
     dispatch(actions.setFollowQueue(userId));

@@ -17,7 +17,7 @@ const AboutPaper = () => {
     return (
         <Grid container alignItems="center" justify={"space-between"} className={classes.infoBar}>
             <Grid item>
-                <LargeAvatar/>
+                <LargeAvatar picture={""}/>
             </Grid>
             <Grid item xs={12} sm container>
                 <Grid item xs container direction="column" spacing={2}>

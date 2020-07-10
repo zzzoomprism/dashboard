@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import SettingSideBar from "./SettingSideBarContainer";
 import {HashRouter, Route, Switch} from "react-router-dom";
 import ProfileSettings from "./ProfileSettings/ProfileSettingsContainer";
-import ThemeSettings from "./ThemeSettings";
+import ThemeSettings from "./ThemeSetting/ThemeSettingContainer";
 import {makeStyles} from "@material-ui/core/styles";
 import {withAuthRedirect} from "../../../hoc/AuthRedirect";
 

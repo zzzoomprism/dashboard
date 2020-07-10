@@ -76,7 +76,11 @@ export const serverAPI = {
             }
         })
             .then(res=>res.data);
+    },
+    followingCount: () => {
+        return login_instance.get('users?friend=true&count=0')
+            .then(res => res.data);
     }
-}
+};
 
 

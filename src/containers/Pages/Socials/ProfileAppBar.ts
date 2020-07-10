@@ -10,6 +10,7 @@ type MapStatePropsType = {
     userId: number | null,
     isCurrentUserFollowed: boolean
     people: Array<PeopleType>
+    followingCount: number
 
 }
 
@@ -22,7 +23,8 @@ const mapStateToProps = (store: RootStateType): MapStatePropsType => ({
     profile_info: store.profile.user,
     userId: store.app.user,
     isCurrentUserFollowed: store.people.isCurrentUserFollowed,
-    people: store.people.people
+    people: store.people.people,
+    followingCount: store.app.followingCount
 });
 
 

@@ -40,9 +40,10 @@ type PropsType = {
     userId: number | null,
     isCurrentUserFollowed: boolean
     getCurrentUserFollow: (id: number) => void
+    followingCount: number
 }
 
-const ProfileAppBar: React.FC<PropsType> = ({profile_info, userId, getCurrentUserFollow, isCurrentUserFollowed}) => {
+const ProfileAppBar: React.FC<PropsType> = ({profile_info, userId, getCurrentUserFollow, isCurrentUserFollowed, followingCount}) => {
     const classes = useStyle();
     const [getFollowLoading, setLoading] = useState(false);
     useEffect(() => {
@@ -61,7 +62,7 @@ const ProfileAppBar: React.FC<PropsType> = ({profile_info, userId, getCurrentUse
             <ShortInfoOfProfile profile_info={profile_info}/>
         </Grid>
         <Grid item xs={12} sm={12} md={5}>
-            <FollowersButton/>
+            <FollowersButton followingCount={followingCount}/>
         </Grid>
 
         <ButtonsBar getFollowLoading={getFollowLoading} isCurrentUserFollowed={isCurrentUserFollowed}

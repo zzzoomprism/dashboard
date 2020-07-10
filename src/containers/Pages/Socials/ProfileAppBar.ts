@@ -24,7 +24,7 @@ const mapStateToProps = (store: RootStateType): MapStatePropsType => ({
     userId: store.app.user,
     isCurrentUserFollowed: store.people.isCurrentUserFollowed,
     people: store.people.people,
-    followingCount: store.app.followingCount
+    followingCount: store.profile.followingCount
 });
 
 

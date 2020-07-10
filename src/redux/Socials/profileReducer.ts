@@ -1,4 +1,4 @@
-import {Contacts, PhotoType, SamuraiType} from "../../types/socials";
+import {PhotoType, SamuraiType} from "../../types/socials";
 import {ResultCodeEnum, serverAPI} from "../../api/api";
 import {InferActionTypes, RootStateType} from "../rootReducer";
 import {ThunkAction} from "redux-thunk";
@@ -14,7 +14,8 @@ const initialState = {
     isFetching: false,
     isSuccess: false,
     error: null as ErrorType | null,
-    dataForm: null as Omit<SamuraiType, 'photos'> | null
+    dataForm: null as Omit<SamuraiType, 'photos'> | null,
+    followingCount: 0,
 };
 
 export type InitialStateType = typeof initialState;
@@ -30,7 +31,7 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
             }
             break;
         case "SET_ERROR_MESSAGE":
-            if(action.error)
+            if (action.error)
                 newState.error = {...action.error};
             else
                 newState.error = null;
@@ -44,8 +45,7 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
                 newState.dataForm = {...formdata};
                 newState.dataForm.contacts = {...formdata.contacts};
                 Object.assign(newState.dataForm, action.dataForm);
-            }
-            else
+            } else
                 newState.dataForm = null;
             break;
         case "SET_PROFILE_PHOTO":
@@ -59,6 +59,9 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
             newState.currentUser.contacts = {...action.user.contacts};
             newState.currentUser.photos = {...action.user.photos};
             break;
+        case "SET_FOLLOW_COUNT":
+            newState.followingCount = action.count;
+            break;
     }
     return newState;
 };
@@ -71,6 +74,7 @@ export const actions = {
     setFormData: (dataForm: Omit<SamuraiType, 'photos'>) => ({type: "SET_FORM_DATA", dataForm} as const),
     setPhotos: (image: PhotoType) => ({type: "SET_PROFILE_PHOTO", image} as const),
     setCurrentUser: (user: SamuraiType) => ({type: "SET_CURRENT_USER", user} as const),
+    followCount: (count: number) => ({type: "SET_FOLLOW_COUNT", count} as const),
 };
 
 type ActionType = InferActionTypes<typeof actions>
@@ -82,11 +86,16 @@ type ActionType = InferActionTypes<typeof actions>
 
 export const getUserByIdThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch, getState) => {
     dispatch(actions.setUser(null));
-    serverAPI.getUserById(userId)
-        .then((user: SamuraiType) => {
+    Promise.all([
+        serverAPI.getUserById(userId),
+        serverAPI.followingCount(),
+    ])
+
+        .then(([user, countInfo]) => {
             dispatch(actions.setUser(user));
-            if(user.userId === getState().app.user)
+            if (user.userId === getState().app.user)
                 dispatch(actions.setCurrentUser(user));
+            dispatch(actions.followCount(countInfo.totalCount));
         })
 };
 export const updatePhoto = (image: any): ThunkAction<Promise<void>, RootStateType, any, ActionType> => (dispatch) => {
@@ -94,15 +103,14 @@ export const updatePhoto = (image: any): ThunkAction<Promise<void>, RootStateTyp
     formData.append("image", image);
     dispatch(actions.setFetching(true));
     return serverAPI.updatePhoto(formData)
-        .then((res)=> {
-            if(res.resultCode === ResultCodeEnum.Success) {
+        .then((res) => {
+            if (res.resultCode === ResultCodeEnum.Success) {
                 dispatch(actions.setPhotos(res.data.photos));
                 dispatch(actions.setErrorData(res));
                 dispatch(actions.setFetching(false));
-            }
-            else
+            } else
                 dispatch(actions.setErrorData(res));
-                setTimeout(()=>dispatch(actions.setErrorData(null)), 6000);
+            setTimeout(() => dispatch(actions.setErrorData(null)), 6000);
         });
 };
 export const updateProfile = (data: any, formName: string): ThunkAction<void, RootStateType, any, ActionType> => async (dispatch, getState: any) => {
@@ -113,9 +121,9 @@ export const updateProfile = (data: any, formName: string): ThunkAction<void, Ro
         dispatch(getUserByIdThunk(getState().app.user));
         dispatch(actions.setErrorData(response));
         dispatch(actions.setFetching(false));
-        setTimeout(()=>dispatch(actions.setErrorData(null)), 6000);
+        setTimeout(() => dispatch(actions.setErrorData(null)), 6000);
     } else {
-        let objKeys = {...getState().profile.dataForm}
+        let objKeys = {...getState().profile.dataForm};
         delete objKeys.contacts;
         let arrayKey = Object.keys(objKeys);
         let key = arrayKey.filter((el) => {
@@ -143,10 +151,10 @@ export const updateProfile = (data: any, formName: string): ThunkAction<void, Ro
         console.log(key2);
         console.log(errorStack);
         //@ts-ignore
-        dispatch(stopSubmit(formName, errorStack))
+        dispatch(stopSubmit(formName, errorStack));
         dispatch(actions.setErrorData(response));
         dispatch(actions.setFetching(false));
-        setTimeout(()=>dispatch(actions.setErrorData(null)), 6000);
+        setTimeout(() => dispatch(actions.setErrorData(null)), 6000);
         return Promise.reject(response);
     }
 

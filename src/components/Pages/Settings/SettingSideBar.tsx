@@ -9,6 +9,9 @@ import Divider from "@material-ui/core/Divider";
 import {makeStyles} from "@material-ui/core/styles";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
+import {SamuraiType} from "../../../types/socials";
+import {Skeleton} from "@material-ui/lab";
+import {NavLink} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +34,12 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
     },
 }));
-const SettingSideBar = () => {
+
+
+type PropsType = {
+    user: SamuraiType | null,
+}
+const SettingSideBar: React.FC<PropsType> = ({user}) => {
     const classes = useStyles();
     return (
         <Drawer
@@ -46,11 +54,14 @@ const SettingSideBar = () => {
                 <List>
                     <ListItem alignItems="flex-start">
                         <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
+                            {!user ? <Skeleton animation="wave" variant="circle" width={40} height={40}/> :
+                                <Avatar alt="Remy Sharp" src={user.photos.small}/>
+                            }
                         </ListItemAvatar>
                         <ListItemText>
-                            <Typography variant={"caption"}> Robert Johnson</Typography>
-                            <Typography variant={"caption"}> Personal settings</Typography>
+                            {!user ? <Skeleton animation="wave" height={10} width="80%" style={{marginBottom: 6}}/> :
+                            <Typography variant={"body2"}> {user.fullName}</Typography> }
+                            <Typography variant={"caption"} color={"secondary"}> Personal settings</Typography>
                         </ListItemText>
                     </ListItem>
                 </List>
@@ -59,7 +70,7 @@ const SettingSideBar = () => {
                 </Typography>
                 <List>
                     {['Personal Info'].map((text) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text} component={NavLink} to={"/settings/profile"}>
                             <ListItemText primary={text}/>
                         </ListItem>
                     ))}
@@ -70,7 +81,7 @@ const SettingSideBar = () => {
                 </Typography>
                 <List>
                     {['Theme'].map((text) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text} component={NavLink} to={"/settings/theme"}>
                             <ListItemText primary={text}/>
                         </ListItem>
                     ))}

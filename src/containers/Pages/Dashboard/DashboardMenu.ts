@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardMenu from "../../../components/Pages/Dashboard/DashboardMenu";
+import DashboardMenu from "../../../components/Pages/components/DashboardMenu/DashboardMenu";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../redux/rootReducer";
 

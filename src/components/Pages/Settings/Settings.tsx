@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import SettingSideBar from "./SettingSideBar";
+import SettingSideBar from "./SettingSideBarContainer";
 import {HashRouter, Route, Switch} from "react-router-dom";
 import ProfileSettings from "./ProfileSettings/ProfileSettingsContainer";
 import ThemeSettings from "./ThemeSettings";

@@ -6,6 +6,7 @@ import SendMoneyTo from "../../../../containers/Pages/Dashboard/Crypto/SendMoney
 import Box from "@material-ui/core/Box";
 import CurrencyNews from "../../../../containers/Pages/Dashboard/Crypto/CurrencyNews";
 import CalculatorForm from "./CurrencyCalculator/CurrencyCalculator";
+import {withAuthRedirect} from "../../../../hoc/AuthRedirect";
 
 type PropsType = {
     currencyExchange: (from: string, to: string, amount: number) => void
@@ -34,4 +35,4 @@ const Crypto: React.FC<PropsType> = ({currencyExchange}) => {
     );
 };
 
-export default Crypto;
+export default withAuthRedirect(Crypto);

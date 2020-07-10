@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import Grid from "@material-ui/core/Grid";
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useRouteMatch} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import SettingsIcon from "@material-ui/icons/Settings";
 import {CircularProgress} from "@material-ui/core";
@@ -12,7 +12,6 @@ const useStyle = makeStyles((theme) => ({
     container: {
         background: "#333",
         minHeight: 200,
-        //justifyContent: "space-between",
         padding: theme.spacing(3),
         [theme.breakpoints.down("md")]: {
             justifyContent: "center",
@@ -43,7 +42,6 @@ type PropsType = {
     getFollowLoading: boolean
 }
 
-
 const ButtonsBar: React.FC<PropsType> = ({profile_info, userId, getFollowLoading, isCurrentUserFollowed}) => {
     const classes = useStyle();
     return (
@@ -64,8 +62,10 @@ const ButtonsBar: React.FC<PropsType> = ({profile_info, userId, getFollowLoading
                     <Grid item>
                         <Button
                             startIcon={<SettingsIcon/>}
+                            component={NavLink}
+                            to={"/settings/profile"}
                         >
-                            <NavLink to={"/settings/profile"}>Settings</NavLink>
+                            Settings
                         </Button>
                     </Grid>
                 </Grid>

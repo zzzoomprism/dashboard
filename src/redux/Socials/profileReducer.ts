@@ -9,6 +9,7 @@ import {Omit} from "@material-ui/core";
 const initialState = {
     loading: false as boolean,
     user: null as SamuraiType | null,
+    currentUser: null as SamuraiType | null,
     isCurrentUserFollowed: false,
     isFetching: false,
     isSuccess: false,
@@ -27,7 +28,6 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
             if (action.user) {
                 newState.user = Object.assign({}, action.user);
             }
-            console.log(newState.user);
             break;
         case "SET_ERROR_MESSAGE":
             if(action.error)
@@ -54,6 +54,11 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
                 newState.user.photos = {...action.image};
             }
             break;
+        case "SET_CURRENT_USER":
+            newState.currentUser = {...action.user};
+            newState.currentUser.contacts = {...action.user.contacts};
+            newState.currentUser.photos = {...action.user.photos};
+            break;
     }
     return newState;
 };
@@ -65,6 +70,7 @@ export const actions = {
     setErrorData: (error: ErrorType | null) => ({type: "SET_ERROR_MESSAGE", error: error} as const),
     setFormData: (dataForm: Omit<SamuraiType, 'photos'>) => ({type: "SET_FORM_DATA", dataForm} as const),
     setPhotos: (image: PhotoType) => ({type: "SET_PROFILE_PHOTO", image} as const),
+    setCurrentUser: (user: SamuraiType) => ({type: "SET_CURRENT_USER", user} as const),
 };
 
 type ActionType = InferActionTypes<typeof actions>
@@ -74,11 +80,13 @@ type ActionType = InferActionTypes<typeof actions>
 //     extraArgument: E
 // ) => R;
 
-export const getUserByIdThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch) => {
+export const getUserByIdThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch, getState) => {
     dispatch(actions.setUser(null));
     serverAPI.getUserById(userId)
         .then((user: SamuraiType) => {
             dispatch(actions.setUser(user));
+            if(user.userId === getState().app.user)
+                dispatch(actions.setCurrentUser(user));
         })
 };
 export const updatePhoto = (image: any): ThunkAction<Promise<void>, RootStateType, any, ActionType> => (dispatch) => {

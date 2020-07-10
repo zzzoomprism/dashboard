@@ -69,14 +69,6 @@ const AppBarNavigation: React.FC<PropsType> = ({sidebarToggle}) => {
                             <NotificationsIcon/>
                         </Badge>
                     </IconButton>
-                    <IconButton
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        <AccountCircle/>
-                    </IconButton>
                 </div>
 
                 {/*<Message menuOpen={isMenuOpen} funcOnClose={(event)=>{setMenuOpen(!isMenuOpen); setAnchorEl(event.currentTarget)}} anchor={anchorEl}/>*/}

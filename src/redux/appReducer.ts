@@ -45,7 +45,6 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
             newState.themeOptions = {...action.theme};
             const themeColorOption = createMuiTheme(action.theme);
             newState.theme = {...themeColorOption};
-            console.log(newState.themeOptions);
             break;
 
         case "SET_THEME_BACKGROUND":
@@ -86,7 +85,6 @@ export const loginThunk = (email: string, password: string): ThunkType => (dispa
 
 export const settingAppThemeColor = (themeName: string): ThunkType => (dispatch, getState) => {
     let option = Object.assign({}, getState().app.themeOptions);
-
     switch (themeName) {
         case 'default':
             option.palette = Object.assign(option.palette, themePrimaryColor.default);
@@ -97,7 +95,6 @@ export const settingAppThemeColor = (themeName: string): ThunkType => (dispatch,
             dispatch(actions.setThemeColor(option, themeName));
             break;
     }
-    console.log(option);
 };
 
 export const settingAppThemeBackground = (backgroundName: string): ThunkType => (dispatch, getState) => {

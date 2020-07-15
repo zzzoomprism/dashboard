@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import Biography from "../Biography/BiographyContainer";
-import Following from "../Following/Following";
+import Following from "./../Following/Following";
 import ProfileAppBar from "../../../../../containers/Pages/Socials/ProfileAppBar";
 import {withAuthRedirect} from "../../../../../hoc/AuthRedirect";
 import {compose} from "redux";
@@ -32,16 +32,17 @@ type PropsType = {
     user: SamuraiType | null,
     match: any,
     location: any,
+    isFetching: boolean,
     getUserByIdThunk: (id: number) => void
 }
 
-const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk}) => {
+const Profile: React.FC<PropsType> = ({user, isFetching, match, getUserByIdThunk}) => {
     const classes = useStyle();
     let id = match.params.id;
     useEffect(() => {
         getUserByIdThunk(id);
     }, [id]);
-    if (!user)
+    if (!user || isFetching)
         return <Loaded/>;
     return <Fragment>
         <ProfileAppBar/>
@@ -65,7 +66,7 @@ const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk}
             </Grid>
         </Grid>
     </Fragment>
-});
+};
 
 
 export default compose(withAuthRedirect)(Profile);

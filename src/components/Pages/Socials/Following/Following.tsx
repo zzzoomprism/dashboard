@@ -26,13 +26,14 @@ const useStyles = makeStyles({
 });
 
 type PropsType = {
+    totalCount: number
     followingUsers: Array<PeopleType> | null,
     isFetching: boolean,
     setFollowingUsersThunk: (page: number) => void
     unFollowFriend: (id: number, page: number) => void
 }
 
-const Following: React.FC<PropsType> = ({setFollowingUsersThunk, isFetching, followingUsers, unFollowFriend}) => {
+const Following: React.FC<PropsType> = React.memo(({totalCount, setFollowingUsersThunk, isFetching, followingUsers, unFollowFriend}) => {
     const classes = useStyles();
     const [pageNumber, setPageNumber] = useState(1);
     useEffect(() => {
@@ -65,20 +66,18 @@ const Following: React.FC<PropsType> = ({setFollowingUsersThunk, isFetching, fol
         );
     return (
         <Fragment>
-            {
-                isFetching && <Loaded/>
-            }
+            { isFetching && <Loaded/> }
             <Box m={3}>
                 {cardBreadcrumbs("Following", "App", "Socials", "Following")}
                 <Box mt={1}>
                     <Grid container spacing={1}>
                         {followingP}
                     </Grid>
-                    <Pagination count={10} onChange={(e, page) => setPageNumber(page)}/>
+                    <Pagination count={Math.ceil(totalCount/10)} onChange={(e, page) => setPageNumber(page)}/>
                 </Box>
             </Box>
         </Fragment>
     );
-};
+});
 
 export default withAuthRedirect(Following);

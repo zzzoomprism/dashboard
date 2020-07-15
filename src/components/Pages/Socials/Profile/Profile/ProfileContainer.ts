@@ -6,12 +6,14 @@ import {SamuraiType} from "../../../../../types/socials";
 import {RootStateType} from "../../../../../redux/rootReducer";
 
 type ProfilePropsType = {
-    user: SamuraiType | null
+    user: SamuraiType | null,
+    isFetching: boolean
 }
 
 
 const mapStateToProps = (store: RootStateType): ProfilePropsType => ({
     user: store.profile.user,
+    isFetching: store.profile.isFetching
 });
 
 

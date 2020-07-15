@@ -11,9 +11,6 @@ const initialState = {
     user: null as number | null,
     loginErrorMessage: "" as Array<string> | null | string,
     loading: false as boolean,
-<<<<<<< HEAD
-
-=======
     theme: {
         ...defaultTheme
     },
@@ -22,7 +19,6 @@ const initialState = {
     },
     themeName: 'default',
     backgroundName: 'default',
->>>>>>> theme_feature
 };
 
 export type InitialStateType = typeof initialState;
@@ -44,9 +40,6 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
         case "LOADING":
             newState.loading = action.data;
             break;
-<<<<<<< HEAD
-
-=======
         case "SET_THEME_COLOR":
             newState.themeName = action.themeName;
             newState.themeOptions = {...action.theme};
@@ -60,7 +53,6 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
             const themeBackgroundOption = createMuiTheme(action.theme);
             newState.theme = {...themeBackgroundOption};
             break;
->>>>>>> theme_feature
     }
     return newState;
 };
@@ -71,16 +63,12 @@ export default reducer;
 export const actions = {
     setLogin: (data: ErrorType) => ({type: "LOGIN", data} as const),
     setLoading: (loading: boolean) => ({type: "LOADING", data: loading} as const),
-<<<<<<< HEAD
-
-=======
     setThemeColor: (theme: any, themeName: string) => ({type: "SET_THEME_COLOR", theme, themeName} as const),
     setThemeBackground: (theme: any, backgroundName: string) => ({
         type: "SET_THEME_BACKGROUND",
         theme,
         backgroundName
     } as const)
->>>>>>> theme_feature
 };
 
 type ActionType = InferActionTypes<typeof actions>
@@ -95,9 +83,6 @@ export const loginThunk = (email: string, password: string): ThunkType => (dispa
         );
 };
 
-<<<<<<< HEAD
-
-=======
 export const settingAppThemeColor = (themeName: string): ThunkType => (dispatch, getState) => {
     let option = Object.assign({}, getState().app.themeOptions);
     switch (themeName) {
@@ -125,4 +110,3 @@ export const settingAppThemeBackground = (backgroundName: string): ThunkType => 
             break;
     }
 };
->>>>>>> theme_feature

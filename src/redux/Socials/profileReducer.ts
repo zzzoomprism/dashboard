@@ -86,6 +86,7 @@ type ActionType = InferActionTypes<typeof actions>
 // ) => R;
 type ThunkType =  ThunkAction<void, RootStateType, any, ActionType>;
 export const getUserByIdThunk = (userId: number):ThunkType => (dispatch, getState) => {
+    dispatch(actions.setFetching(true));
     dispatch(actions.setUser(null));
     Promise.all([
         serverAPI.getUserById(userId),
@@ -97,6 +98,7 @@ export const getUserByIdThunk = (userId: number):ThunkType => (dispatch, getStat
                 dispatch(actions.setCurrentUser(user));
             }
             dispatch(actions.followCount(countInfo.totalCount, countInfo.items));
+            dispatch(actions.setFetching(false));
         })
 };
 export const updatePhoto = (image: any): ThunkAction<Promise<void>, RootStateType, any, ActionType> => (dispatch) => {

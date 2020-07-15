@@ -45,7 +45,7 @@ const AvatarSetting: React.FC<PropsType> = ({user, updatePhoto}) => {
             })
     };
     if (!user)
-        return <Loaded/>
+        return <Loaded/>;
     return (
         <Badge color={"default"}
                anchorOrigin={{

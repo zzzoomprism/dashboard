@@ -6,7 +6,10 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-const CardBreadcrumbs = () => {
+
+
+export const cardBreadcrumbs = (title: string, ...args: Array<string>) => {
+    let breadCrumbs = args.map((el: string) => <Typography variant="overline">{el}</Typography>)
     return (
         <Card>
             <CardContent>
@@ -18,17 +21,13 @@ const CardBreadcrumbs = () => {
                                 color="textSecondary"
                                 fontFamily="Monospace"
                             >
-                                Crypto
+                                {title}
                             </Box>
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
                         <Breadcrumbs>
-                            <Typography variant="overline">App</Typography>
-                            <Typography variant="overline">Dashboard</Typography>
-                            <Typography variant="overline" color="secondary">
-                                Crypto
-                            </Typography>
+                            {breadCrumbs}
                         </Breadcrumbs>
                     </Grid>
                 </Grid>
@@ -36,5 +35,3 @@ const CardBreadcrumbs = () => {
         </Card>
     );
 };
-
-export default CardBreadcrumbs;

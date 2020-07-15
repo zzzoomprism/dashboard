@@ -33,7 +33,6 @@ export type PeopleType = {
     followed: boolean
 }
 
-
 export type NewsType = {
     source: {
         id: string,

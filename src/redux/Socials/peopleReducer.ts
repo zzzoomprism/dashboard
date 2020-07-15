@@ -1,5 +1,4 @@
 import {PeopleType} from "../../types/socials";
-import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootStateType} from "../rootReducer";
 import {serverAPI} from "../../api/api";
@@ -58,7 +57,9 @@ export const reducer = (state = initialState, action: ActionType): InitialStateT
                 return el !== action.id;
             });
             break;
-
+        case "SET_CURRENT_USER_FOLLOW_DATA":
+            newState.isCurrentUserFollowed = action.follow;
+            break;
     }
 
     return newState;
@@ -76,36 +77,52 @@ export const actions = {
     getUserById: (userId: number) => ({type: "GET_USER_BY_ID", userId} as const),
     setFollowQueue: (id: number) => ({type: "SET_FOLLOW_QUEUE", id} as const),
     deleteFollowQueue: (id: number) => ({type: "DELETE_FOLLOW_QUEUE", id} as const),
+    currentFollow: (follow: boolean) => ({type: "SET_CURRENT_USER_FOLLOW_DATA", follow} as const)
 }
 
 type ActionType = InferActionTypes<typeof actions>;
+type ThunkType = ThunkAction<void, RootStateType, any, ActionType>
 
-
-export const setPeopleThunk = (page: number): ThunkAction<void, RootStateType, any, ActionType> => async (dispatch) => {
+export const setPeopleThunk = (page: number): ThunkType => async (dispatch) => {
     dispatch(actions.setPeopleLoading(true));
     let people = await serverAPI.users(page);
     dispatch(actions.setPeopleToState(people.items));
     dispatch(actions.setPeopleLoading(false));
 }
 
-export const followingThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
+export const followingThunk = (userId: number): ThunkType => (dispatch) => {
     dispatch(actions.setFollowQueue(userId));
     serverAPI.follow(userId)
         .then(() => {
             dispatch(actions.followAction(userId));
-            dispatch(actions.deleteFollowQueue(userId));
+            serverAPI.isFollow(userId)
+                .then(res => {
+                    dispatch(actions.currentFollow(res));
+                    dispatch(actions.deleteFollowQueue(userId));
+                });
         });
 }
 
-export const unfollowingThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
+export const unfollowingThunk = (userId: number): ThunkType => (dispatch) => {
     dispatch(actions.setFollowQueue(userId));
     serverAPI.unfollow(userId)
         .then(() => {
             dispatch(actions.unfollowAction(userId));
-            dispatch(actions.deleteFollowQueue(userId));
+            serverAPI.isFollow(userId)
+                .then(res => {
+                    dispatch(actions.currentFollow(res));
+                    dispatch(actions.deleteFollowQueue(userId));
+                });
         })
 }
 
-export const getCurrentUserFollow = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch: Dispatch<ActionType>) => {
+export const getCurrentUserFollow = (userId: number): ThunkType => (dispatch) => {
     dispatch(actions.getUserById(userId));
+}
+
+export const getUserFollowingInfo = (userId: number): ThunkType => (dispatch) => {
+    serverAPI.isFollow(userId)
+        .then(res => {
+            dispatch(actions.currentFollow(res));
+        });
 }

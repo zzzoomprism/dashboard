@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
-import ListOfPeople from "../../../components/Pages/Socials/People/ListOfPeople";
+import ListOfPeople from "./ListOfPeople";
 import {
     setPeopleThunk,
-} from "../../../redux/Socials/peopleReducer";
-import {PeopleType} from "../../../types/socials";
-import {RootStateType} from "../../../redux/rootReducer";
+} from "../../../../redux/Socials/peopleReducer";
+import {PeopleType} from "../../../../types/socials";
+import {RootStateType} from "../../../../redux/rootReducer";
 
 type MapStateType = {
     people: Array<PeopleType>,

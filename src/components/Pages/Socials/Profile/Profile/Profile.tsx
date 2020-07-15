@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import Biography from "../Biography/BiographyContainer";
-import Friends from "../Friends";
+import Following from "../Following/Following";
 import ProfileAppBar from "../../../../../containers/Pages/Socials/ProfileAppBar";
 import {withAuthRedirect} from "../../../../../hoc/AuthRedirect";
 import {compose} from "redux";
@@ -60,7 +60,7 @@ const Profile: React.FC<PropsType> = React.memo(({user, match, getUserByIdThunk}
                     <Contact/>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
-                    <Friends/>
+                    <Following/>
                 </Grid>
             </Grid>
         </Grid>

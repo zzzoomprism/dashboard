@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import ListOfPeople from "../../../../containers/Pages/Socials/ListOfPeople";
+import ListOfPeople from "./ListOfPeopleContainer";
 
 
 const People = () => {

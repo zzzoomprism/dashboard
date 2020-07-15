@@ -14,6 +14,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import {NavLink} from "react-router-dom";
 import ProfileButton from "./ProfileButtonContainer";
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
 const useStyles = makeStyles((theme) => ({
     list_components: {
@@ -69,6 +70,12 @@ const DashboardMenu = (props: any) => {
                     <PersonIcon/>
                 </ListItemIcon>
                 <ListItemText>Profile</ListItemText>
+            </ListItem>
+            <ListItem button component={NavLink} to={"/socials/following"}>
+                <ListItemIcon>
+                    <EmojiEmotionsIcon/>
+                </ListItemIcon>
+                <ListItemText>Following</ListItemText>
             </ListItem>
             <ListItem button component={NavLink} to={"/socials/people"}>
                 <ListItemIcon>

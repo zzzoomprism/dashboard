@@ -1,4 +1,4 @@
-import {PhotoType, SamuraiType} from "../../types/socials";
+import {PeopleType, PhotoType, SamuraiType} from "../../types/socials";
 import {ResultCodeEnum, serverAPI} from "../../api/api";
 import {InferActionTypes, RootStateType} from "../rootReducer";
 import {ThunkAction} from "redux-thunk";
@@ -10,12 +10,12 @@ const initialState = {
     loading: false as boolean,
     user: null as SamuraiType | null,
     currentUser: null as SamuraiType | null,
-    isCurrentUserFollowed: false,
     isFetching: false,
     isSuccess: false,
     error: null as ErrorType | null,
     dataForm: null as Omit<SamuraiType, 'photos'> | null,
     followingCount: 0,
+    followingPeople: null as Array<PeopleType>| null,
 };
 
 export type InitialStateType = typeof initialState;
@@ -61,6 +61,7 @@ const reducer = (state = initialState, action: ActionType): InitialStateType => 
             break;
         case "SET_FOLLOW_COUNT":
             newState.followingCount = action.count;
+            newState.followingPeople = [...action.items];
             break;
     }
     return newState;
@@ -74,7 +75,7 @@ export const actions = {
     setFormData: (dataForm: Omit<SamuraiType, 'photos'>) => ({type: "SET_FORM_DATA", dataForm} as const),
     setPhotos: (image: PhotoType) => ({type: "SET_PROFILE_PHOTO", image} as const),
     setCurrentUser: (user: SamuraiType) => ({type: "SET_CURRENT_USER", user} as const),
-    followCount: (count: number) => ({type: "SET_FOLLOW_COUNT", count} as const),
+    followCount: (count: number, items: Array<PeopleType>) => ({type: "SET_FOLLOW_COUNT", count, items} as const),
 };
 
 type ActionType = InferActionTypes<typeof actions>
@@ -83,19 +84,19 @@ type ActionType = InferActionTypes<typeof actions>
 //     getState: () => S,
 //     extraArgument: E
 // ) => R;
-
-export const getUserByIdThunk = (userId: number): ThunkAction<void, RootStateType, any, ActionType> => (dispatch, getState) => {
+type ThunkType =  ThunkAction<void, RootStateType, any, ActionType>;
+export const getUserByIdThunk = (userId: number):ThunkType => (dispatch, getState) => {
     dispatch(actions.setUser(null));
     Promise.all([
         serverAPI.getUserById(userId),
-        serverAPI.followingCount(),
+        serverAPI.followingCount(3, 1),
     ])
-
         .then(([user, countInfo]) => {
             dispatch(actions.setUser(user));
-            if (user.userId === getState().app.user)
+            if (user.userId === getState().app.user) {
                 dispatch(actions.setCurrentUser(user));
-            dispatch(actions.followCount(countInfo.totalCount));
+            }
+            dispatch(actions.followCount(countInfo.totalCount, countInfo.items));
         })
 };
 export const updatePhoto = (image: any): ThunkAction<Promise<void>, RootStateType, any, ActionType> => (dispatch) => {
@@ -113,7 +114,7 @@ export const updatePhoto = (image: any): ThunkAction<Promise<void>, RootStateTyp
             setTimeout(() => dispatch(actions.setErrorData(null)), 6000);
         });
 };
-export const updateProfile = (data: any, formName: string): ThunkAction<void, RootStateType, any, ActionType> => async (dispatch, getState: any) => {
+export const updateProfile = (data: any, formName: string): ThunkType => async (dispatch, getState: any) => {
     dispatch(actions.setFetching(true));
     dispatch(actions.setFormData(data));
     let response = await serverAPI.updateProfile(getState().profile.dataForm);
@@ -157,6 +158,4 @@ export const updateProfile = (data: any, formName: string): ThunkAction<void, Ro
         setTimeout(() => dispatch(actions.setErrorData(null)), 6000);
         return Promise.reject(response);
     }
-
 };
-

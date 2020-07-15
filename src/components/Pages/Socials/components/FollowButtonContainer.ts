@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import FollowButton from "./FollowButton";
 import {RootStateType} from "../../../../redux/rootReducer";
-import {followingThunk, unfollowingThunk} from "../../../../redux/Socials/peopleReducer";
+import {followingThunk, getUserFollowingInfo, unfollowingThunk} from "../../../../redux/Socials/peopleReducer";
 
 
 type MapStateType = {
@@ -12,6 +12,7 @@ type MapStateType = {
 type MapDispatchtype = {
     followingThunk: (userId: number) => void
     unfollowingThunk: (userId: number) => void
+    getUserFollowingInfo: (userId: number) => void
 }
 type OwnPropsType = {
     followed: boolean
@@ -20,12 +21,13 @@ type OwnPropsType = {
 
 const mapStateToProps = (store: RootStateType) => ({
     peopleSetLoading: store.people.loading,
-    followQueue: store.people.followQueue
+    followQueue: store.people.followQueue,
 });
 
 
 //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState>
 export default connect<MapStateType, MapDispatchtype, OwnPropsType, RootStateType>(mapStateToProps, {
     followingThunk,
-    unfollowingThunk
+    unfollowingThunk,
+    getUserFollowingInfo
 })(FollowButton);

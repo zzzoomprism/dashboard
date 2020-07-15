@@ -1,5 +1,5 @@
 import React from "react";
-import CardBreadcrumbs from "../../../CardBreadcrumbs";
+import  {cardBreadcrumbs} from "../../../../utils/helpers/cardBreadcrumbs";
 import CryptoPrice from "./CryptoPrice";
 import PortfolioBalance from "./PortfolioBalance";
 import SendMoneyTo from "../../../../containers/Pages/Dashboard/Crypto/SendMoneyTo";
@@ -25,7 +25,7 @@ const Crypto: React.FC<PropsType> = ({currencyExchange}) => {
 
     return (
         <Box m={3}>
-            <CardBreadcrumbs/>
+            {cardBreadcrumbs("Crypto", "App", "Dashboard", "Crypto")}
             <CryptoPrice/>
             <PortfolioBalance/>
             <SendMoneyTo/>

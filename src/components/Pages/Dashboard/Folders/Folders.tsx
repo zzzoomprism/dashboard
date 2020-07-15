@@ -1,52 +1,14 @@
-import React, {Fragment, useEffect} from "react";
-import axios from "axios";
-import TreeView from '@material-ui/lab/TreeView';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import TreeItem from '@material-ui/lab/TreeItem';
-import {Paper} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import AboutPaper from "./AboutPaper";
-
-
-const useStyle = makeStyles((theme) => ({
-    paper: {
-        padding: theme.spacing(2),
-        margin: theme.spacing(3),
-    }
-}))
-
+import React, {Fragment} from "react";
+import {Grid, Paper, Typography} from "@material-ui/core";
 
 const Folders = () => {
-    useEffect(() => {
-        axios.get("https://api.github.com/users/zzzoomprism")
-            .then(response => console.log(response.data))
-            .catch(e => console.log(e))
-    }, [])
-    const classes = useStyle();
     return (
         <Fragment>
-            <AboutPaper/>
-            <Paper className={classes.paper}>
-                <TreeView
-                    defaultCollapseIcon={<ExpandMoreIcon/>}
-                    defaultExpandIcon={<ChevronRightIcon/>}
-                >
-                    <TreeItem nodeId="0" label="node_modules"/>
-                    <TreeItem nodeId="1" label="public">
-                        <TreeItem nodeId="2" label="index.html"/>
-                    </TreeItem>
-                    <TreeItem nodeId="5" label="src">
-                        <TreeItem nodeId="3" label="api"/>
-                        <TreeItem nodeId="3" label="components"/>
-                        <TreeItem nodeId="3" label="containers"/>
-                        <TreeItem nodeId="3" label="hoc"/>
-                        <TreeItem nodeId="3" label="redux"/>
-                        <TreeItem nodeId="3" label="types"/>
-                        <TreeItem nodeId="3" label="utils"/>
-                    </TreeItem>
-                </TreeView>
-            </Paper>
+            <Grid container justify={"center"} alignContent={"center"}>
+                <Paper style={{margin: 20, minHeight: 100, padding: 20}}>
+                    <Typography variant={"h2"}>We are on a stage of developing this tools :) </Typography>
+                </Paper>
+            </Grid>
         </Fragment>
 
     );

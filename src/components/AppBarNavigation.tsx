@@ -71,8 +71,6 @@ const AppBarNavigation: React.FC<PropsType> = ({sidebarToggle}) => {
                     </IconButton>
                 </div>
 
-                {/*<Message menuOpen={isMenuOpen} funcOnClose={(event)=>{setMenuOpen(!isMenuOpen); setAnchorEl(event.currentTarget)}} anchor={anchorEl}/>*/}
-                {/*<Notification/>*/}
             </Toolbar>
 
         </AppBar>

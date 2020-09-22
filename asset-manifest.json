@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.js": "/github.com/dashboard/static/js/main.d6b182cd.chunk.js",
-    "main.js.map": "/github.com/dashboard/static/js/main.d6b182cd.chunk.js.map",
-    "runtime-main.js": "/github.com/dashboard/static/js/runtime-main.67768269.js",
-    "runtime-main.js.map": "/github.com/dashboard/static/js/runtime-main.67768269.js.map",
-    "static/js/2.1be9e99f.chunk.js": "/github.com/dashboard/static/js/2.1be9e99f.chunk.js",
-    "static/js/2.1be9e99f.chunk.js.map": "/github.com/dashboard/static/js/2.1be9e99f.chunk.js.map",
-    "static/js/3.9bbfb74e.chunk.js": "/github.com/dashboard/static/js/3.9bbfb74e.chunk.js",
-    "static/js/3.9bbfb74e.chunk.js.map": "/github.com/dashboard/static/js/3.9bbfb74e.chunk.js.map",
-    "static/js/4.40d43888.chunk.js": "/github.com/dashboard/static/js/4.40d43888.chunk.js",
-    "static/js/4.40d43888.chunk.js.map": "/github.com/dashboard/static/js/4.40d43888.chunk.js.map",
-    "static/js/5.a8cc7a77.chunk.js": "/github.com/dashboard/static/js/5.a8cc7a77.chunk.js",
-    "static/js/5.a8cc7a77.chunk.js.map": "/github.com/dashboard/static/js/5.a8cc7a77.chunk.js.map",
-    "index.html": "/github.com/dashboard/index.html",
-    "precache-manifest.8e1db2a04578f875c5c6f9580a17c98b.js": "/github.com/dashboard/precache-manifest.8e1db2a04578f875c5c6f9580a17c98b.js",
-    "service-worker.js": "/github.com/dashboard/service-worker.js",
-    "static/js/2.1be9e99f.chunk.js.LICENSE.txt": "/github.com/dashboard/static/js/2.1be9e99f.chunk.js.LICENSE.txt"
+    "main.js": "/github.io/dashboard/static/js/main.d6b182cd.chunk.js",
+    "main.js.map": "/github.io/dashboard/static/js/main.d6b182cd.chunk.js.map",
+    "runtime-main.js": "/github.io/dashboard/static/js/runtime-main.dab38f1b.js",
+    "runtime-main.js.map": "/github.io/dashboard/static/js/runtime-main.dab38f1b.js.map",
+    "static/js/2.1be9e99f.chunk.js": "/github.io/dashboard/static/js/2.1be9e99f.chunk.js",
+    "static/js/2.1be9e99f.chunk.js.map": "/github.io/dashboard/static/js/2.1be9e99f.chunk.js.map",
+    "static/js/3.9bbfb74e.chunk.js": "/github.io/dashboard/static/js/3.9bbfb74e.chunk.js",
+    "static/js/3.9bbfb74e.chunk.js.map": "/github.io/dashboard/static/js/3.9bbfb74e.chunk.js.map",
+    "static/js/4.40d43888.chunk.js": "/github.io/dashboard/static/js/4.40d43888.chunk.js",
+    "static/js/4.40d43888.chunk.js.map": "/github.io/dashboard/static/js/4.40d43888.chunk.js.map",
+    "static/js/5.a8cc7a77.chunk.js": "/github.io/dashboard/static/js/5.a8cc7a77.chunk.js",
+    "static/js/5.a8cc7a77.chunk.js.map": "/github.io/dashboard/static/js/5.a8cc7a77.chunk.js.map",
+    "index.html": "/github.io/dashboard/index.html",
+    "precache-manifest.b8d231eb54599518822c4ed519b9e8a6.js": "/github.io/dashboard/precache-manifest.b8d231eb54599518822c4ed519b9e8a6.js",
+    "service-worker.js": "/github.io/dashboard/service-worker.js",
+    "static/js/2.1be9e99f.chunk.js.LICENSE.txt": "/github.io/dashboard/static/js/2.1be9e99f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.67768269.js",
+    "static/js/runtime-main.dab38f1b.js",
     "static/js/2.1be9e99f.chunk.js",
     "static/js/main.d6b182cd.chunk.js"
   ]

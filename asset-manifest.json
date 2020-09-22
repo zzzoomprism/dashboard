@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/github.io/dashboard/static/js/main.d6b182cd.chunk.js",
-    "main.js.map": "/github.io/dashboard/static/js/main.d6b182cd.chunk.js.map",
+    "main.js": "/github.io/dashboard/static/js/main.0e4897cf.chunk.js",
+    "main.js.map": "/github.io/dashboard/static/js/main.0e4897cf.chunk.js.map",
     "runtime-main.js": "/github.io/dashboard/static/js/runtime-main.dab38f1b.js",
     "runtime-main.js.map": "/github.io/dashboard/static/js/runtime-main.dab38f1b.js.map",
     "static/js/2.1be9e99f.chunk.js": "/github.io/dashboard/static/js/2.1be9e99f.chunk.js",
@@ -13,13 +13,13 @@
     "static/js/5.a8cc7a77.chunk.js": "/github.io/dashboard/static/js/5.a8cc7a77.chunk.js",
     "static/js/5.a8cc7a77.chunk.js.map": "/github.io/dashboard/static/js/5.a8cc7a77.chunk.js.map",
     "index.html": "/github.io/dashboard/index.html",
-    "precache-manifest.b8d231eb54599518822c4ed519b9e8a6.js": "/github.io/dashboard/precache-manifest.b8d231eb54599518822c4ed519b9e8a6.js",
+    "precache-manifest.4382c5f70a5a905a25fae4ac204cbefe.js": "/github.io/dashboard/precache-manifest.4382c5f70a5a905a25fae4ac204cbefe.js",
     "service-worker.js": "/github.io/dashboard/service-worker.js",
     "static/js/2.1be9e99f.chunk.js.LICENSE.txt": "/github.io/dashboard/static/js/2.1be9e99f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.dab38f1b.js",
     "static/js/2.1be9e99f.chunk.js",
-    "static/js/main.d6b182cd.chunk.js"
+    "static/js/main.0e4897cf.chunk.js"
   ]
 }
